@@ -10,7 +10,7 @@ John Berger’s <code>Ways of Seeing</code> is an engaging exploration of how we
 I found the book to be transformative, often prompting deep contemplation about the ways visual culture influences my daily life. After reading, I began to notice how the concepts Berger outlines, such as the dynamics of power, gender, and capitalism in visual representation, manifest in the imagery we encounter every day, from advertisements to grocery stores or public spaces.
 
 <div style="text-align: center;">
-  <img src="https://images.mubicdn.net/images/film/106821/cache-76908-1568827130/image-w1280.jpg?size=1280x" alt="John Berger" style="width:100%;">
+  <img src="https://images.mubicdn.net/images/film/106821/cache-76908-1568827130/image-w1280.jpg?size=1280x" alt="John Berger" style="width:50%;">
   <p><em>Ways of Seeing Documentary: John Berger (1972)</em></p>
 </div>
 
@@ -20,7 +20,7 @@ One sentence that particularly stood out to me encapsulates the poetic depth of 
 
 
 <div style="text-align: center;">
-  <img src="https://live-production.wcms.abc-cdn.net.au/900962e2a2b50d0209f9f403f8963e8c?impolicy=wcms_crop_resize&cropH=960&cropW=960&xPos=317&yPos=0&width=862&height=862" alt="John Berger" style="width:70%;">
+  <img src="https://live-production.wcms.abc-cdn.net.au/900962e2a2b50d0209f9f403f8963e8c?impolicy=wcms_crop_resize&cropH=960&cropW=960&xPos=317&yPos=0&width=862&height=862" alt="John Berger" style="width:50%;">
   <p><em>National Gallery of Australia, Canberra</em></p>
 </div>
 
@@ -28,7 +28,7 @@ On my next visit to the National Gallery of Australia, I found myself applying t
 Berger emphasises that art doesn’t exist in a vacuum; it is shaped by the social, economic, and historical forces of its time. When looking at the pieces I began to interrogate, asking myself: What was happening in the world when this was created? Who commissioned the artwork, and why? How does its placement in this gallery influence how I see it?
 
 <div style="text-align: center;">
-  <img src="https://searchthecollection.nga.gov.au/stcapi/service/ngacd/asset/preview?contentInfo=/2016/8/12/14/38/7b1d8dd8-8db9-4724-9e76-43869e5cb657.bin" alt="John Berger" style="width:100%;">
+  <img src="https://searchthecollection.nga.gov.au/stcapi/service/ngacd/asset/preview?contentInfo=/2016/8/12/14/38/7b1d8dd8-8db9-4724-9e76-43869e5cb657.bin" alt="John Berger" style="width:50%;">
   <p><em>Jackson Pollock's Blue Poles (1952)</em></p>
 </div>
 
@@ -37,7 +37,7 @@ I began to reflect on Berger’s discussion of power and ownership in art. In th
 As I wrapped up my gallery visit, I passed through the gift shop on my way out. Berger’s insights about how reproductions alter the meaning and accessibility of art came to mind as I saw the artwork replicated on cheap mugs, posters, and t-shirts. The commercialisation shifted my perception of the art, it felt less unique, less sacred. I couldn’t help but wonder: Is this how the artist envisioned the work being experienced?
 
 <div style="text-align: center;">
-  <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRvAzQZ3AWfAH2ACA72zBZ6tbKtR4ljSF9eONWq71Qlh9dnCPVPRp4kTOSktRLeXzroxl1dhdk" alt="John Berger" style="width:70%;">
+  <img src="https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcRvAzQZ3AWfAH2ACA72zBZ6tbKtR4ljSF9eONWq71Qlh9dnCPVPRp4kTOSktRLeXzroxl1dhdk" alt="John Berger" style="width:50%;">
   <p><em>Cheap Cups (2024)</em></p>
 </div>
 
