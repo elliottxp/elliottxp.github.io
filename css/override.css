@@ -51,3 +51,7 @@ body {
   background-color: #222222; /* Replace with your desired color */
   color: #424040; /* Replace with your desired text color */
 }
+
+.site-title {
+  color: var(--title-color);
+}

@@ -51,6 +51,4 @@ defaults:
       tags: Other
 
 colors:
-  text: "#bebbbb"
-  heading: "#bebbbb"
-  paragraph: "#bebbbb"
+  title: "a5a5a5"
