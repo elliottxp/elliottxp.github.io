@@ -23,27 +23,37 @@ theme: "minima"
 
 minima:
   skin: dark
+  
+
 
 #Dark mode colours
-colors:
-  dark:
-    background: "#121212"
-    text: "#ffffff"
-    accent: "#bb86fc"
-  light:
-    background: "#ffffff" 
-    text: "#121212"
-    accent: "#6200ee"
+#colors:
+#  dark:
+#    background: "#121212"
+#    text: "#ffffff"
+#    accent: "#bb86fc"
+#  light:
+#    background: "#ffffff" 
+#    text: "#121212"
+#    accent: "#6200ee"
 
 rss: rss
 
 kramdown:
   syntax_highlighter_opts:
     disable: true
+
     
 plugins:
   - jekyll-feed
   - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - jekyll-archives
+  - jekyll-redirect-from
+  - jekyll-gist
+  - jekyll-include-cache
+  - jekyll-remote-theme
 
 titles_from_headings:
   strip_title: true
