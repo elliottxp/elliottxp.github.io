@@ -16,11 +16,11 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 
 .hljs,
 .hljs-subst {
-  color: #444;
+  color: #f7caca;
 }
 
 .hljs-comment {
-  color: #888888;
+  color: #ffe2e2;
 }
 
 .hljs-keyword,

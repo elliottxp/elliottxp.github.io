@@ -43,9 +43,9 @@
 
 .language-tsql .hljs-meta {
     background: #cdcdcd;
-    color: #727171;
+    color: #a1a0a0;
 }
 
 .language-tsql .hljs-literal {
-    color: #808080;
+    color: #c6c6c6;
 }
