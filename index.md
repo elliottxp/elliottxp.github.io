@@ -1,6 +1,6 @@
 <div style="display: flex; justify-content: center;">
     <iframe 
-    width="400" 
+    width="370" 
     height="200" 
     src="https://www.youtube.com/embed/5uZa3-RMFos?rel=0&modestbranding=1&autohide=1&mute=1&showinfo=0&controls=0&autoplay=1" 
     title="White House Cam"
