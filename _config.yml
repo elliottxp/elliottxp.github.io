@@ -20,7 +20,18 @@ soundcloud_username: "live405"
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
 theme: "minima"
+  skin: auto
 
+#Dark mode colours
+colors:
+  background: "#121212"
+    text: "#ffffff"
+    accent: "#bb86fc"
+  light:
+    background: "#ffffff" 
+    text: "#121212"
+    accent: "#6200ee"
+    
 rss: rss
 
 kramdown:
