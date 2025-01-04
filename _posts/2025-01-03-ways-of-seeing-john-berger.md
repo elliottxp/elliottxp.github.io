@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/override.css">
-</head>
-
 ## Seeing Beyond the Surface: How John Berger Transformed the Way I Experience Art
+### Ways of Seeing by John Berger
 
 Imagine standing before a masterpiece, captivated by its originality and depth, only to find its image plastered on a coffee mug in the gift shop moments later. Does the art lose its magic, or does it gain something new?
 
