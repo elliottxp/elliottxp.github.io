@@ -5,7 +5,7 @@
 
 Imagine standing before a masterpiece, captivated by its originality and depth, only to find its image plastered on a coffee mug in the gift shop moments later. Does the art lose its magic, or does it gain something new?
 
-John Berger’s <code>Ways of Seeing</code> is an engaging exploration of how we perceive art and imagery in the context of society, culture, and history. The essays are thoughtfully structured, blending provocative ideas with illustrative images that provide natural pauses for reflection. These visual breaks not only enhance comprehension but also gave me time to digest and practice Berger’s insights before moving forward.
+John Berger’s **Ways of Seeing** is an engaging exploration of how we perceive art and imagery in the context of society, culture, and history. The essays are thoughtfully structured, blending provocative ideas with illustrative images that provide natural pauses for reflection. These visual breaks not only enhance comprehension but also gave me time to digest and practice Berger’s insights before moving forward.
 
 I found the book to be transformative, often prompting deep contemplation about the ways visual culture influences my daily life. After reading, I began to notice how the concepts Berger outlines, such as the dynamics of power, gender, and capitalism in visual representation, manifest in the imagery we encounter every day, from advertisements to grocery stores or public spaces.
 
@@ -14,9 +14,13 @@ I found the book to be transformative, often prompting deep contemplation about 
   <p><em>Ways of Seeing Documentary: John Berger (1972)</em></p>
 </div>
 
-As someone new to art and art theory, <code>Ways of Seeing</code> felt like an accessible yet intellectually stimulating entry point. Berger’s articulateness and clarity make complex ideas feel approachable, yet his writing challenges the reader to rethink their assumptions about visual culture.
+As someone new to art and art theory, **Ways of Seeing** felt like an accessible yet intellectually stimulating entry point. Berger’s articulateness and clarity make complex ideas feel approachable, yet his writing challenges the reader to rethink their assumptions about visual culture.
 
-One sentence that particularly stood out to me encapsulates the poetic depth of Berger’s observations: “The sky has no surface and is intangible; the sky cannot be turned into a thing or given a quantity. And landscape painting begins with the problem of painting sky and distance.” This line captures the tension between the infinite and the material, a recurring theme in the book, and exemplifies Berger’s ability to articulate the thoughtful challenges artists face when attempting to represent the world in their art. This left an impact on me. 
+One sentence that particularly stood out to me encapsulates the poetic depth of Berger’s observations: 
+
+> “The sky has no surface and is intangible; the sky cannot be turned into a thing or given a quantity. And landscape painting begins with the problem of painting sky and distance.” 
+
+This line captures the tension between the infinite and the material, a recurring theme in the book, and exemplifies Berger’s ability to articulate the thoughtful challenges artists face when attempting to represent the world in their art. This left an impact on me. 
 
 
 <div style="text-align: center;">
@@ -24,7 +28,7 @@ One sentence that particularly stood out to me encapsulates the poetic depth of 
   <p><em>National Gallery of Australia, Canberra</em></p>
 </div>
 
-On my next visit to the National Gallery of Australia, I found myself applying the insights from <code>Ways of Seeing</code>. Knowledge of the book transformed the experience into something far more dynamic and reflective. John Berger encourages us to question not just the artwork itself but also the systems and contexts that shape how we view it. 
+On my next visit to the National Gallery of Australia, I found myself applying the insights from **Ways of Seeing**. Knowledge of the book transformed the experience into something far more dynamic and reflective. John Berger encourages us to question not just the artwork itself but also the systems and contexts that shape how we view it. 
 Berger emphasises that art doesn’t exist in a vacuum; it is shaped by the social, economic, and historical forces of its time. When looking at the pieces I began to interrogate, asking myself: What was happening in the world when this was created? Who commissioned the artwork, and why? How does its placement in this gallery influence how I see it?
 
 <div style="text-align: center;">
@@ -41,7 +45,7 @@ As I wrapped up my gallery visit, I passed through the gift shop on my way out. 
   <p><em>Cheap Cups (2024)</em></p>
 </div>
 
-But this is all my personal perspective. Berger reminds us that every viewer brings their own context to art. My experience is different from any other, I am the only one that has lived my life, I have also read <code>Ways of Seeing</code> so I consider how my background, experiences, and biases influence my interpretation of the things I see.
+But this is all my personal perspective. Berger reminds us that every viewer brings their own context to art. My experience is different from any other, I am the only one that has lived my life, I have also read **Ways of Seeing** so I consider how my background, experiences, and biases influence my interpretation of the things I see.
 
 I didn’t realise at the time, but Berger has now made my casual gallery visit an active dialogue with the artwork, the artist, and the systems that have shaped both. This approach transforms passive viewing into an enriched, critical, and deeply personal experience, aligning perfectly with what I perceive as Berger’s call for all to see beyond appearances.
 
