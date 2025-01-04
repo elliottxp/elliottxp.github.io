@@ -43,3 +43,7 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+body {
+  background-color: #2d2b2b; /* Replace with your desired color */
+}
