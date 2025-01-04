@@ -22,7 +22,7 @@ soundcloud_username: "live405"
 theme: "minima"
 
 minima:
-  skin: auto
+  skin: dark
 
 #Dark mode colours
 colors:
