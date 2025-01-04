@@ -46,8 +46,8 @@ hr {
 
 /* Define CSS variables for light mode */
 :root {
-  --background-color: #ffffff;
-  --text-color: #121212;
+  --background-color: #605e5e;
+  --text-color: #cdcccc;
   --accent-color: #6200ee;
 }
 
