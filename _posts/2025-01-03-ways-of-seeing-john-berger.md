@@ -1,4 +1,3 @@
-## The Impact of a Book
 ### Seeing Beyond the Surface: How John Berger Transformed the Way I Experience Art
 #### Ways of Seeing by John Berger
 
