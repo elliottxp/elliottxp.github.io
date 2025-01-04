@@ -43,3 +43,31 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+/* Define CSS variables for light mode */
+:root {
+  --background-color: #ffffff;
+  --text-color: #121212;
+  --accent-color: #6200ee;
+}
+
+/* Define CSS variables for dark mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #121212;
+    --text-color: #ffffff;
+    --accent-color: #bb86fc;
+  }
+}
+
+/* Apply the CSS variables */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+a {
+  color: var(--accent-color);
+}
+
+/* Add any other styles you need to override */
