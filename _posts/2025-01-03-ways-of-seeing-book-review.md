@@ -28,7 +28,7 @@ On my next visit to the National Gallery of Australia, I found myself applying t
 Berger emphasises that art doesn’t exist in a vacuum; it is shaped by the social, economic, and historical forces of its time. When looking at the pieces I began to interrogate, asking myself: What was happening in the world when this was created? Who commissioned the artwork, and why? How does its placement in this gallery influence how I see it?
 
 <div style="text-align: center;">
-  <img src="https://searchthecollection.nga.gov.au/stcapi/service/ngacd/asset/preview?contentInfo=/2016/8/12/14/38/7b1d8dd8-8db9-4724-9e76-43869e5cb657.bin" alt="John Berger" style="width:80%;">
+  <img src="https://searchthecollection.nga.gov.au/stcapi/service/ngacd/asset/preview?contentInfo=/2016/8/12/14/38/7b1d8dd8-8db9-4724-9e76-43869e5cb657.bin" alt="John Berger" style="width:90%;">
   <p><em>Jackson Pollock's Blue Poles (1952)</em></p>
 </div>
 
