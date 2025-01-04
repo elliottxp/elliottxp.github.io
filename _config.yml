@@ -49,3 +49,8 @@ defaults:
       type: post
       values:
       tags: Other
+
+colors:
+  text: "#bebbbb"
+  heading: "#bebbbb"
+  paragraph: "#bebbbb"
