@@ -6,6 +6,7 @@ hr {
 /* Post navigation links */
 .post_navi {
   display: flex;
+  background-color: #383838;
 }
 
 .post_navi-label {
@@ -42,9 +43,10 @@ hr {
   transform: translateY(-50%);
   font-size: 2.5em;
   opacity: 0.3;
+  color: #a5a5a5;
 }
 
 body {
   background-color: #222222; /* Replace with your desired color */
-  color: #bebbbb; /* Replace with your desired text color */
+  color: #424040; /* Replace with your desired text color */
 }
