@@ -7,7 +7,7 @@
 }
 
 .language-tsql .hljs-keyword {
-    color: #ddddeb;
+    color: #0000ff;
     font-weight: normal;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .language-tsql .hljs-number {
-    color: #808080;
+    color: #000000;
 }
 
 .language-tsql .hljs-string {
@@ -33,7 +33,7 @@
 }
 
 .language-tsql .hljs-symbol {
-    color: #808080;
+    color: #000000;
 }
 
 .language-tsql .hljs-comment {
@@ -43,9 +43,9 @@
 
 .language-tsql .hljs-meta {
     background: #cdcdcd;
-    color: #a1a0a0;
+    color: #000000;
 }
 
 .language-tsql .hljs-literal {
-    color: #c6c6c6;
+    color: #808080;
 }

@@ -8,7 +8,7 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
   display: block;
   overflow-x: auto;
   padding: 0.5em;
-  background: #211c37;
+  background: #F0F0F0;
 }
 
 
@@ -16,11 +16,11 @@ Original highlight.js style (c) Ivan Sagalaev <maniac@softwaremaniacs.org>
 
 .hljs,
 .hljs-subst {
-  color: #f7caca;
+  color: #444;
 }
 
 .hljs-comment {
-  color: #ffe2e2;
+  color: #888888;
 }
 
 .hljs-keyword,
