@@ -49,6 +49,3 @@ defaults:
       type: post
       values:
       tags: Other
-
-colors:
-  title: "a5a5a5"
