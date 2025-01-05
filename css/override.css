@@ -6,7 +6,7 @@ hr {
 /* Post navigation links */
 .post_navi {
   display: flex;
-  background-color: #383838;
+  background-color: #d7cece;
 }
 
 .post_navi-label {
@@ -48,8 +48,8 @@ hr {
 }
 
 body {
-  background-color: #222222; /* Replace with your desired color */
-  color: #424040; /* Replace with your desired text color */
+  background-color: #5f5c5c; /* Replace with your desired color */
+  color: #dfdede; /* Replace with your desired text color */
 }
 
 .site-title {
