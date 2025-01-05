@@ -19,7 +19,7 @@ hr {
   padding: 0 2.2em;
   width: 50%;
   position: relative;
-  color: inherit !important;
+  color: #7e7e7f;
 }
 
 .post_navi .nav_prev {
@@ -53,5 +53,5 @@ body {
 }
 
 .site-title {
-  color: var(--title-color);
+  color: #dfdede;
 }
