@@ -6,20 +6,18 @@ hr {
 /* Post navigation links */
 .post_navi {
   display: flex;
-  background-color: #d7cece;
 }
 
 .post_navi-label {
   font-size: 0.8em;
   opacity: 0.5;
-  color: #7e7e7f;
 }
 
 .post_navi .post_navi-item {
   padding: 0 2.2em;
   width: 50%;
   position: relative;
-  color: #7e7e7f;
+  color: inherit !important;
 }
 
 .post_navi .nav_prev {
@@ -44,14 +42,4 @@ hr {
   transform: translateY(-50%);
   font-size: 2.5em;
   opacity: 0.3;
-  color: #a5a5a5;
-}
-
-body {
-  background-color: #5f5c5c; /* Replace with your desired color */
-  color: #dfdede; /* Replace with your desired text color */
-}
-
-.site-title {
-  color: #dfdede;
 }
