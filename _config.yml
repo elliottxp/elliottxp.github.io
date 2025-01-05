@@ -7,7 +7,6 @@ description: "notes and discoveries" # This will show up in places like twitter,
 email: "info@elliottxp.com"
 #twitter_username: "twitteruser"
 github_username: "elliottxp"
-#soundcloud_username: "live405"
 #linkedin_username: "linkedinuser"
 #facebook_username: username
 #flickr_username: username
@@ -19,7 +18,7 @@ github_username: "elliottxp"
 #########################################################################################
 ######### Nothing below needs to be changed (unless you know what you're doing) #########
 #########################################################################################
-#theme: "minima"
+theme: "minima"
 
 rss: rss
 
@@ -31,13 +30,6 @@ kramdown:
 plugins:
   - jekyll-feed
   - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-paginate
-  - jekyll-archives
-  - jekyll-redirect-from
-  - jekyll-gist
-  - jekyll-include-cache
-  - jekyll-remote-theme
 
 titles_from_headings:
   strip_title: true

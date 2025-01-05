@@ -2,7 +2,7 @@
     display: block;
     overflow-x: auto;
     padding: 0.5em;
-    background: rgb(163, 226, 255);
+    background: white;
     color: #808080;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .language-tsql .hljs-meta {
-    background: #fcfcfc;
+    background: #cdcdcd;
     color: #000000;
 }
 

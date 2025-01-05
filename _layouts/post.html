@@ -2,13 +2,9 @@
 layout: default
 ---
 <link href="/css/override.css" rel="stylesheet" type="text/css">
-<link rel="icon" href="/img/favicon.ico" type="image/x-icon">
-<article class="post h-entry" itemscope itemtype="https://schema.org/BlogPosting">
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/override.css">
     <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
     <p class="post-meta">
       <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
