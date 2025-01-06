@@ -43,3 +43,14 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+/*works html formatting */
+.scaled-image {
+  width: 50%; /* Adjust the width as needed */
+  height: auto; /* Maintain the aspect ratio */
+}
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px; /* Adjust the gap between images as needed */
+}
