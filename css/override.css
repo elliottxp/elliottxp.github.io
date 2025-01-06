@@ -57,6 +57,14 @@ hr {
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px; /* Adjust the gap between images as needed */
 }
+
+.scaled-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover; /* Optional: ensures images cover the grid cell */
+  cursor: pointer; /* Change cursor to pointer to indicate clickability */
+}
+
 figure {
   margin: 0;
   padding: 0;
