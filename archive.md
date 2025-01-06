@@ -1,6 +1,7 @@
 ---
 layout: page
 title: archive
+order: 3
 ---
 
 {% for tag in site.tags %}
