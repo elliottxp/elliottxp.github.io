@@ -6,10 +6,10 @@
   </a>
   {%- else -%}
   {% assign sorted_pages = site.pages | sort: 'order' %}
-  {% for page in sorted_pages %}
-    {% if page.url %}
-      <a class="post_navi-item" href="{{ page.url }}" title="{{ page.title }}">
-        <div class="post_navi-label">{{ page.title }}</div>
+  {% for sorted_page in sorted_pages %}
+    {% if sorted_page.url %}  
+      <a class="post_navi-item" href="{{ sorted_page.url }}" title="{{ sorted_page.title }}">
+        <div class="post_navi-label">{{ sorted_page.title }}</div>
       </a>
     {% endif %}
   {% endfor %}
