@@ -44,13 +44,28 @@ hr {
   opacity: 0.3;
 }
 
+
+
+
 /*works html formatting */
 .scaled-image {
-  width: 50%; /* Adjust the width as needed */
+  width: 60%; /* Adjust the width as needed */
   height: auto; /* Maintain the aspect ratio */
 }
 .image-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 16px; /* Adjust the gap between images as needed */
+}
+figure {
+  margin: 0;
+  padding: 0;
+  text-align: center; /* Center the caption text */
+}
+
+figcaption {
+  margin-top: 8px; /* Space between the image and the caption */
+  font-size: 0.9em;
+  color: #555; /* Adjust the caption color as needed */
+  text-align: center; /* Ensure the caption text is centered */
 }
