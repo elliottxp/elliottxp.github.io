@@ -46,6 +46,3 @@ As I wrapped up my gallery visit, I passed through the gift shop on my way out. 
 But this is all my personal perspective. Berger reminds us that every viewer brings their own context to art. My experience is different from any other, I am the only one that has lived my life, I have also read **Ways of Seeing** so I consider how my background, experiences, and biases influence my interpretation of the things I see.
 
 I didn’t realise at the time, but Berger has now made my casual gallery visit an active dialogue with the artwork, the artist, and the systems that have shaped both. This approach transforms passive viewing into an enriched, critical, and deeply personal experience, aligning perfectly with what I perceive as Berger’s call for all to see beyond appearances.
-
-
----
