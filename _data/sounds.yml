@@ -1,0 +1,12 @@
+sounds:
+  - name: song1
+    description: made on the op-1
+    link: <iframe style="border-radius:12px" src="https://open.spotify.com/embed/album/1Cj5Hr77buqiZz43OT3mZn?utm_source=generator" width="80%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+
+  - name: SQL Server Updates
+    description: The Most Recent Updates for Microsoft SQL Server
+    link: https://sqlserverupdates.com
+
+  - name: SQLShack - SQL Server wait types
+    description: Database of SQL Server wait types and recommended actions
+    link: https://www.sqlshack.com/sql-server-wait-types
