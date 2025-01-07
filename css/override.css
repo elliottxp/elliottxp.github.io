@@ -161,7 +161,7 @@ h1 {
   border: 2px solid #000;
   border-radius: 50%;
   background-color: rgba( 0, 0, 0, 0.5 );
-  background-image: url(https://www.coothead.co.uk/playlist/images/play-stop-src.png);
+  background-image: url(/img/play-stop-src.png);
   background-size: 100% auto;
   box-shadow: 0 0 0.75em rgba( 0, 0, 0, 0.75 );
   vertical-align: middle;
