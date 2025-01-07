@@ -137,7 +137,9 @@ figcaption {
 /*sounds buying music button*/
 .buy-music-button {
   display: inline-block;
-  padding: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #fff;
   background-color: #007bff;
   border: none;
   border-radius: 5px;
@@ -149,10 +151,4 @@ figcaption {
 
 .buy-music-button:hover {
   background-color: #0056b3;
-}
-
-.apple-logo {
-  width: 24px; /* Adjust the size as needed */
-  height: auto;
-  vertical-align: middle;
 }
