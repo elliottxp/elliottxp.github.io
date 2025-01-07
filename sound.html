@@ -5,17 +5,35 @@ description: "a collection of sounds."
 order: 2
 ---
 
-<!-- LostMySpace Player -->
-<div class="player-container">
-    <iframe 
-        src="https://music.apple.com/au/album/simoom-single/1734727435" 
-        width="350" 
-        height="170" 
-        frameborder="0" 
-        allowtransparency="true">
-    </iframe>
-</div>
+<html lang="en">
+<head>
 
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,height=device-height,initial-scale=1">
+<meta name="keywords" content="Audio, player, source, change, button">
+<meta name="description" content="A JavaScript audio start and stop button using a custom made image and source change button">
 
-<a href="https://music.apple.com/au/album/simoom-single/1734727435" class="buy-music-button">Buy Music Now</a>
+<title>JavaScript audio play button</title>
 
+<link rel="icon" sizes="144x144" href="../images/favicon.png">
+<link rel="stylesheet" href="css/override.css" media="screen">
+
+</head>
+<body> 
+
+ <h1>Audio player with source change button</h1>
+
+ <div id="button-container" class="hide">
+  <div id="info">Leadbelly Goodnight Irene</div>
+  <span id="swap-src">1</span>
+  <span id="button"></span>
+ </div>
+ 
+ <audio id="player" controls preload>
+  <source src="../audio/Leadbelly-Goodnight-Irene.mp3" type="audio/mpeg">
+ </audio>
+
+<script src="scripts/play-audio.js"></script>  
+
+</body>
+</html>
