@@ -134,59 +134,18 @@ figcaption {
 
 
 
-/*sounds buying music button*/
-
 body {
   background-color: #f9f9f9;
-  font: 100% / 162% BlinkMacSystemFont, -apple-system, 'Segoe UI', roboto, helvetica, arial, sans-serif;
+  font: normal 1em / 1.5em BlinkMacSystemFont, -apple-system, 'Segoe UI', roboto, helvetica, arial, sans-serif;
 }
 
 h1 {
-  line-height: 1em;
-  font-size: 1.25em;
-  color: #444;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-#button-container { 
+  font-size: 1.5em;
+  color: #555;
   text-align: center;
 }
 
-#button, #swap-src {
-  display: inline-block;
-  width: 4.5em;
-  height: 4.5em;
-  margin: 0.25em;
-  border: 2px solid #000;
-  border-radius: 50%;
-  background-color: rgba( 0, 0, 0, 0.5 );
-  background-image: url(/img/play-stop-src.png);
-  background-size: 100% auto;
-  box-shadow: 0 0 0.75em rgba( 0, 0, 0, 0.75 );
-  vertical-align: middle;
-  cursor: pointer;
-}
-#swap-src {
-  font-weight: bold; line-height:4.5em;
-  color: #fff;
-  background-position: 0 -9em;
-
-}
-#info {
-  font-size: 1.25em;
-  padding: 1em 0;
-}
-
-.pause {
-  background-position: 0 -4.5em;
-}
-
-.hide { 
-  display: none;
-}
-
-.remove {
-  position: absolute;
-  left: -999em;
+audio {
+  display:block;
+  margin: auto;
 }
