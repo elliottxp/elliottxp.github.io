@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
   <url>
     <loc>https://www.elliottxp.com/</loc>
-		<loc>https://www.elliottxp.com/2025/01/03/ways-of-seeing-john-berger.html</loc>
-		<loc>https://www.elliottxp.com/archive.html</loc>
-    <loc>https://youtu.be/5uZa3-RMFos</loc>
-    <loc>https://github.com/elliottxp</loc>
-    <lastmod>2022-06-04</lastmod>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
+  
+  <url>
+    <loc>https://www.elliottxp.com/archive.html</loc>
+  </url>
+
+  <url>
+    <loc>https://www.elliottxp.com/sound.html</loc>
+  </url>
+
+  <url>  
+    <loc>https://www.elliottxp.com/works.html</loc>
+    <lastmod>2025-01-10</lastmod>
+    <changefreq>monthly</changefreq>
+	</url>
+
+  <url>
+    <loc>https://www.elliottxp.com/2025/01/03/ways-of-seeing-john-berger.html</loc>
+    <lastmod>2025-01-05</lastmod>
+  </url>
+
 </urlset>
