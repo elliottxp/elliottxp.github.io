@@ -1,0 +1,62 @@
+<div class="epub-reader">
+    <div class="controls">
+        <input type="file" id="fileInput" accept=".epub"/>
+        <button id="prev">Previous</button>
+        <button id="next">Next</button>
+    </div>
+    <div id="viewer"></div>
+</div>
+
+<style>
+.epub-reader {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#viewer {
+    height: 600px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+.controls {
+    margin: 20px 0;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    let book;
+    let rendition;
+    
+    const fileInput = document.getElementById('fileInput');
+    const viewer = document.getElementById('viewer');
+    const prev = document.getElementById('prev');
+    const next = document.getElementById('next');
+
+    fileInput.addEventListener('change', (e) => {
+        const file = e.target.files[0];
+        if (window.FileReader) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                book = ePub(e.target.result);
+                rendition = book.renderTo('viewer', {
+                    width: '100%',
+                    height: '100%'
+                });
+                rendition.display();
+            }
+            reader.readAsArrayBuffer(file);
+        }
+    });
+
+    prev.addEventListener('click', () => {
+        if (rendition) rendition.prev();
+    });
+
+    next.addEventListener('click', () => {
+        if (rendition) rendition.next();
+    });
+});
+</script>
