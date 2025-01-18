@@ -8,11 +8,14 @@
     {% endif %}
     <p>{{ site.description | escape }}</p>
     {% endif %}
+    {% if site.description %}
+    <p>{{ site.description | escape }}</p>
+    {% endif %}
     {% if site.email %}
     <p><a href="mailto:{{ site.email | escape }}">{{ site.email | escape }}</a></p>
     {% endif %}
     <div class="social-links">
-      {%- include social.html -%}
+      {%- include sharelinks.html -%}
     </div>
   </div>
 </footer>
@@ -25,18 +28,22 @@
   window.onscroll = function() {scrollFunction()};
 
   function scrollFunction() {
-    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
       mybutton.style.display = "block";
     } else {
       mybutton.style.display = "none";
     }
   }
 
-  // When the user clicks on the button, scroll to the top of the document
+  // Custom smooth scroll to top function
   function topFunction() {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    let scrollToTop = window.setInterval(function() {
+      let pos = window.pageYOffset;
+      if (pos > 0) {
+        window.scrollTo(0, pos - 50); // Adjust the value '50' to control the speed
+      } else {
+        window.clearInterval(scrollToTop);
+      }
+    }, 16); // The interval in milliseconds (16ms for ~60fps)
   }
 </script>
