@@ -1,39 +1,37 @@
 <button onclick="topFunction()" id="backToTopBtn" title="Go to top">↑</button>
 
 <footer class="site-footer">
-  <!-- ...existing footer code... -->
-  <div class="wrapper">
-      <div class="footer-col-wrapper">
-          {% if site.author %}
-          <div class="footer-col">
-              {{ site.author | escape }}
-          </div>
-          {% endif %}
-          <div class="social-links">
-              {%- include social.html -%}
-          </div>
-      </div>
-  </div>
+    <!-- ...existing footer code... -->
+    <div class="wrapper">
+        <div class="footer-col-wrapper">
+            {% if site.author %}
+            <div class="footer-col">
+                {{ site.author | escape }}
+            </div>
+            {% endif %}
+            <div class="social-links">
+                {%- include social.html -%}
+            </div>
+        </div>
+    </div>
 </footer>
 
 <script>
-// Get the button
 let mybutton = document.getElementById("backToTopBtn");
-
-// When the user scrolls down 20px from the top, show the button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
-    mybutton.style.display = "block";
-  } else {
-    mybutton.style.display = "none";
-  }
+    if (window.pageYOffset > 20) {
+        mybutton.style.display = "block";
+    } else {
+        mybutton.style.display = "none";
+    }
 }
 
-// When clicked, scroll to top
 function topFunction() {
-  document.body.scrollTop = 0;
-  document.documentElement.scrollTop = 0;
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
 }
 </script>
