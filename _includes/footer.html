@@ -7,7 +7,10 @@
     <h2 class="footer-heading">{{ site.title | escape }}</h2>
     {% endif %}
     <p>{{ site.description | escape }}</p>
-    <p>{{ site.email | escape }}</p>
+    {% endif %}
+    {% if site.email %}
+    <p><a href="mailto:{{ site.email | escape }}">{{ site.email | escape }}</a></p>
+    {% endif %}
     <div class="social-links">
       {%- include social.html -%}
     </div>
