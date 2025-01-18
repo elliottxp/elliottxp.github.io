@@ -15,20 +15,9 @@ github_username: "elliottxp"
 #youtube_username: username
 #googleplus_username: +username
 
-# Footer settings
-footer:
-  show: true
-  show_title: true
-  show_description: true
-  show_email: true
-
 theme: "minima"
-minima:
-  skin: classic
-  social_links:
-    github: elliottxp
-    email: info@elliottxp.com
-    rss: rss
+    
+rss: rss
 
 kramdown:
   syntax_highlighter_opts:

@@ -1,28 +1,5 @@
 <button id="backToTopBtn" title="Go to top">↑</button>
 
-<footer class="site-footer">
-    <!-- ...existing footer code... -->
-    <div class="wrapper">
-        <div class="footer-col-wrapper">
-            {% if site.author %}
-            <div class="footer-col">
-                {{ site.author | escape }}
-            </div>
-            {% endif %}
-            <div class="social-links">
-                {% include social.html %}
-            </div>
-            <h1 class="footer-heading">{{ site.title | escape }}</h1>
-            {% if site.footer.show_description %}
-            <p>{{ site.description | escape }}</p>
-            {% endif %}
-            {% if site.footer.show_email %}
-            <p>{{ site.email | escape }}</p>
-            {% endif %}
-        </div>
-    </div>
-</footer>
-
 <script>
 let mybutton = document.getElementById("backToTopBtn");
 mybutton.addEventListener("click", topFunction);
