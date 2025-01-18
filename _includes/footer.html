@@ -26,23 +26,23 @@
   window.onscroll = function() {scrollFunction()};
 
   function scrollFunction() {
-    if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
       mybutton.style.display = "block";
     } else {
       mybutton.style.display = "none";
     }
   }
 
-  // Custom smooth scroll to top function
-  function topFunction() {
-    const scrollSpeed = 100; // Adjust this value to control the speed
-    let scrollToTop = window.setInterval(function() {
-      let pos = window.pageYOffset;
-      if (pos > 0) {
-        window.scrollTo(0, pos - scrollSpeed); // Use the scrollSpeed variable
-      } else {
-        window.clearInterval(scrollToTop);
+   // Custom smooth scroll to top function using requestAnimationFrame
+   function topFunction() {
+    const scrollSpeed = 50; // Increase this value to speed up the scroll
+    function scrollStep() {
+      if (window.pageYOffset === 0) {
+        return;
       }
-    }, 16); // The interval in milliseconds (16ms for ~60fps)
+      window.scroll(0, window.pageYOffset - scrollSpeed);
+      requestAnimationFrame(scrollStep);
+    }
+    requestAnimationFrame(scrollStep);
   }
 </script>
