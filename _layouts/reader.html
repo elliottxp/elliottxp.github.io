@@ -37,13 +37,17 @@ layout: default
     margin: 20px 0;
     border: 1px solid #ddd;
     max-width: 800px;
-    width: 100%; 
+    width: 100%;
+    overflow: hidden;
+    position: relative; 
 }
 
 #viewer iframe {
     width: 100% !important;
     padding: 0 20px;  /* Add padding to content */
     box-sizing: border-box;
+    left: 0;
+    top: 0;
 }
 
 .reader-controls {
@@ -130,6 +134,8 @@ layout: default
                     height: "100%",
                     spread: "none",
                     flow: "paginated"
+                    minSpreadWidth: 800,
+                    maxSpreadWidth: 800 
                 });
     
                 rendition.display()
