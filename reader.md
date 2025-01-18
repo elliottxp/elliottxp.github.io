@@ -1,5 +1,5 @@
 ---
 layout: reader
-title: EPUB Reader
+title: reader
 permalink: /reader/
 ---

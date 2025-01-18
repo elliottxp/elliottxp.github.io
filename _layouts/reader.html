@@ -3,6 +3,14 @@ layout: default
 ---
 
 <div class="epub-container">
+    <div class="instructions">
+        <h2>EPUB Reader</h2>
+        <ol>
+            <li>Click "Choose File" to select an EPUB file from your device</li>
+            <li>The book will load automatically</li>
+            <li>Use "Previous" and "Next" buttons to navigate between pages</li>
+        </ol>
+    </div>
     <div class="reader-controls">
         <input type="file" id="book-input" accept=".epub"/>
         <div class="navigation">
@@ -38,6 +46,22 @@ layout: default
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+.instructions {
+    background: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.instructions h2 {
+    margin-top: 0;
+}
+
+.instructions ol {
+    margin: 0;
+    padding-left: 20px;
 }
 </style>
 
