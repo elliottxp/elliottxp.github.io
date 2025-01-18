@@ -14,7 +14,7 @@
     {% endif %}
   {% endfor %}
   <a class="post_navi-item nav_prev" href="{{ 'archive.html' | absolute_url }}" title="archive">
-    <div class="post_navi-arrow">&lt;</div><div class="post_navi-label">blog archive</div><div><span>archive of all previous blog posts</span></div>
+    <div class="post_navi-arrow">&lt;</div><div class="post_navi-label">blog archive</div><div><span>previous blog posts</span></div>
   </a>
   {%- endif -%}
   {%- if page.next.url -%}
@@ -23,7 +23,7 @@
   </a>
   {%- else -%}
   <a class="post_navi-item nav_next" href="{{ 'archive.html' | absolute_url }}" title="archive">
-    <div class="post_navi-arrow">&gt;</div><div class="post_navi-label">blog archive</div><div><span>archive of all previous blog posts</span></div>
+    <div class="post_navi-arrow">&gt;</div><div class="post_navi-label">blog archive</div><div><span>previous blog posts</span></div>
   </a>
   {%- endif -%}
 </div>
