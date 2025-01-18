@@ -91,62 +91,58 @@ layout: default
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const currentBook = null;
-        const rendition = null;
+        const viewer = document.getElementById('viewer');
+        const bookInput = document.getElementById('book-input');
+        const prevButton = document.getElementById('prev');
+        const nextButton = document.getElementById('next');
         
-        // Dark mode detection
-        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
-        
-        function updateTheme(isDark) {
-            if (rendition) {
-                rendition.themes.register('dark', {
-                    body: {
-                        color: '#ffffff',
-                        background: '#222222',
-                        'font-family': 'system-ui, -apple-system, sans-serif'
-                    }
-                });
-                
-                rendition.themes.register('light', {
-                    body: {
-                        color: '#000000',
-                        background: '#ffffff',
-                        'font-family': 'Georgia, serif'
-                    }
-                });
-                
-                rendition.themes.select(isDark ? 'dark' : 'light');
-            }
-        }
-        
-        // Listen for dark mode changes
-        darkModeQuery.addEventListener('change', (e) => updateTheme(e.matches));
-        
-        document.getElementById('book-input').addEventListener('change', function(e) {
+        let book = null;
+        let rendition = null;
+    
+        bookInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
-            if (!file) {
-                alert('Please select a file first.');
-                return;
-            }
+            if (!file) return;
+    
             const reader = new FileReader();
             
-            reader.onload = function(e) {
-                currentBook = ePub(e.target.result);
-                rendition = currentBook.renderTo('viewer', {
-                    width: '100%',
-                    height: '100%'
+            reader.onload = function(event) {
+                if (book) {
+                    book.destroy();
+                }
+    
+                // Initialize new book
+                book = ePub(event.target.result);
+                
+                // Initialize rendition
+                rendition = book.renderTo("viewer", {
+                    width: "100%",
+                    height: "100%",
+                    spread: "none",
+                    flow: "paginated"
                 });
-                rendition.display();
-                
-                // Apply initial theme
-                updateTheme(darkModeQuery.matches);
-                
+    
+                // Display the book
+                rendition.display().then(function() {
+                    console.log("Book loaded successfully");
+                }).catch(function(err) {
+                    console.error("Error loading book:", err);
+                });
+    
                 // Navigation controls
-                document.getElementById('prev').onclick = () => rendition.prev();
-                document.getElementById('next').onclick = () => rendition.next();
-            }
-            
+                prevButton.addEventListener('click', () => {
+                    if (rendition) rendition.prev();
+                });
+    
+                nextButton.addEventListener('click', () => {
+                    if (rendition) rendition.next();
+                });
+            };
+    
+            reader.onerror = function(err) {
+                console.error("Error reading file:", err);
+            };
+    
             reader.readAsArrayBuffer(file);
         });
-
+    });
     </script>
