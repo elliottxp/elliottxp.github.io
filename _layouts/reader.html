@@ -2,6 +2,7 @@
 layout: default
 ---
 
+<!-- Container for the EPUB reader interface -->
 <div class="epub-container">
     <div class="instructions">
         <h2>epub reader</h2>
@@ -15,7 +16,7 @@ layout: default
         <input type="file" id="book-input" accept=".epub"/>
         <div class="navigation">
             <button id="prev">previous</button>
-            <span id="current-page"></span>
+            <span></span>
             <button id="next">next</button>
         </div>
     </div>
@@ -43,8 +44,8 @@ layout: default
 }
 
 #viewer iframe {
-    width: 100% !important;
-    height: 100% !important;
+    width: 100%;
+    height: 100%;
     padding: 0 20px;
     box-sizing: border-box;
     margin: 0;
@@ -107,8 +108,13 @@ layout: default
         console.error('EPUB.js not loaded');
         return;
     }
+    const bookInput = document.getElementById('book-input');
     const prevButton = document.getElementById('prev');
     const nextButton = document.getElementById('next');
+    const viewer = document.getElementById('viewer');
+    
+    let book = null;
+    let rendition = null;
 
     // Navigation functions
     function prev() {
@@ -136,18 +142,6 @@ layout: default
     });
 
     bookInput.addEventListener('change', function(e) {
-        // ...existing code...
-
-        reader.onload = function(event) {
-
-
-    const viewer = document.getElementById('viewer');
-    const bookInput = document.getElementById('book-input');
-    
-    let book = null;
-    let rendition = null;
-
-    bookInput.addEventListener('change', function(e) {
         const file = e.target.files[0];
         console.log('File selected:', file);
         
@@ -171,8 +165,7 @@ layout: default
                 height: "100%",
                 spread: "none",
                 flow: "paginated",
-                minSpreadWidth: 800,
-                maxSpreadWidth: 800
+                spreadWidth: 800
             });
 
             // Display with error handling
