@@ -33,6 +33,13 @@ layout: default
     height: 80vh;
     margin: 20px 0;
     border: 1px solid #ddd;
+    max-width: 800px; 
+}
+
+#viewer iframe {
+    width: 100% !important;
+    padding: 0 20px;  /* Add padding to content */
+    box-sizing: border-box;
 }
 
 .reader-controls {
@@ -72,6 +79,12 @@ layout: default
     .instructions {
         background: #333;
         color: #fff;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #viewer {
+        max-width: 100%;
     }
 }
 </style>
@@ -130,6 +143,16 @@ layout: default
             }
             
             reader.readAsArrayBuffer(file);
+        });
+
+        reader.onload = function(e) {
+        currentBook = ePub(e.target.result);
+        rendition = currentBook.renderTo('viewer', {
+            width: '100%',
+            height: '100%',
+            spread: 'none',  // Prevent two-page spread
+            flow: 'paginated',
+            maxSpreadColumns: 1  // Force single column
         });
     });
     </script>
