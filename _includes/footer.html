@@ -1,11 +1,10 @@
 <button onclick="topFunction()" id="backToTopBtn" title="Go to top">↑</button>
 
 <footer class="site-footer h-card">
-  <data class="u-url" value="{{ "/" | relative_url }}"></data>
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
   <div class="wrapper">
     {% if site.title %}
     <h2 class="footer-heading">{{ site.title | escape }}</h2>
-    <p>{{ site.description | escape }}</p>
     {% endif %}
     {% if site.description %}
     <p>{{ site.description | escape }}</p>
@@ -14,7 +13,7 @@
     <p><a href="mailto:{{ site.email | escape }}">{{ site.email | escape }}</a></p>
     {% endif %}
     <div class="social-links">
-      {%- include sharelinks.html -%}
+      {%- include social.html -%}
     </div>
   </div>
 </footer>
@@ -36,7 +35,7 @@
 
   // Custom smooth scroll to top function
   function topFunction() {
-    const scrollSpeed = 20; // Adjust this value to control the speed
+    const scrollSpeed = 50; // Adjust this value to control the speed
     let scrollToTop = window.setInterval(function() {
       let pos = window.pageYOffset;
       if (pos > 0) {
