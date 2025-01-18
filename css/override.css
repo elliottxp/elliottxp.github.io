@@ -54,15 +54,18 @@ hr {
 }
 .image-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 16px; /* Adjust the gap between images as needed */
+  grid-template-columns: 1fr; /* Single column */
+  gap: 32px; /* Space between images */
+  max-width: 800px; /* Maximum width of container */
+  margin: 0 auto; /* Center the grid container */
+  padding: 20px;
 }
 
 .scaled-image {
-  width: 100%;
+  width: 60%; /* Adjust width of images */
   height: auto;
-  object-fit: cover; /* Optional: ensures images cover the grid cell */
-  cursor: pointer; /* Change cursor to pointer to indicate clickability */
+  display: block;
+  margin: 0 auto; /* Center each image */
 }
 
 figure {
@@ -75,9 +78,9 @@ figcaption {
   margin-top: 8px; /* Space between the image and the caption */
   font-size: 0.9em;
   color: #555; /* Adjust the caption color as needed */
-  text-align: justify; /* Justify the caption text */
+  text-align: center; /* Justify the caption text */
   width: 100%; /* Ensure the caption matches the width of the image */
-  display: inline-block; /* Ensure the caption respects the width */
+  display: block; /* Ensure the caption respects the width */
 }
 
 /* Modal styles */
