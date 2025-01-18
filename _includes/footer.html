@@ -1,5 +1,21 @@
 <button onclick="topFunction()" id="backToTopBtn" title="Go to top">↑</button>
 
+<footer class="site-footer">
+  <!-- ...existing footer code... -->
+  <div class="wrapper">
+      <div class="footer-col-wrapper">
+          {% if site.author %}
+          <div class="footer-col">
+              {{ site.author | escape }}
+          </div>
+          {% endif %}
+          <div class="social-links">
+              {%- include social.html -%}
+          </div>
+      </div>
+  </div>
+</footer>
+
 <script>
 // Get the button
 let mybutton = document.getElementById("backToTopBtn");
@@ -8,7 +24,7 @@ let mybutton = document.getElementById("backToTopBtn");
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
-  if (document.body.scrollTop > 3 || document.documentElement.scrollTop > 3) {
+  if (document.body.scrollTop > 0 || document.documentElement.scrollTop > 0) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
