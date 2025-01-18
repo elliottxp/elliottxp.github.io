@@ -134,7 +134,10 @@ figcaption {
 }
 
 
-
+/* Smooth scrolling for the entire document */
+html {
+  scroll-behavior: smooth;
+}
 
 
 body {
