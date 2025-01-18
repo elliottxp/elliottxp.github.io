@@ -17,12 +17,14 @@ github_username: "elliottxp"
 
 # Footer settings
 footer:
+  show: true
   show_title: true
   show_description: true
   show_email: true
 
 theme: "minima"
 minima:
+  skin: classic
   social_links:
     github: elliottxp
     email: info@elliottxp.com

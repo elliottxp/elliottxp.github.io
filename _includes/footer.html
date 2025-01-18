@@ -35,3 +35,21 @@ function topFunction() {
     });
 }
 </script>
+
+<footer class="site-footer h-card">
+  <data class="u-url" href="{{ "/" | relative_url }}"></data>
+  <div class="wrapper">
+    {% if site.footer.show_title %}
+    <h2 class="footer-heading">{{ site.title | escape }}</h2>
+    {% endif %}
+    {% if site.footer.show_description %}
+    <p>{{ site.description | escape }}</p>
+    {% endif %}
+    {% if site.footer.show_email %}
+    <p>{{ site.email | escape }}</p>
+    {% endif %}
+    <div class="social-links">
+      {%- include social.html -%}
+    </div>
+  </div>
+</footer>
