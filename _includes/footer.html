@@ -19,11 +19,14 @@
 </footer>
 
 <script>
-  // Get the button
   let mybutton = document.getElementById("backToTopBtn");
+  let isScrolling = false;
 
-  // When the user scrolls down 20px from the top of the document, show the button
-  window.onscroll = function() {scrollFunction()};
+  window.onscroll = function() {
+    if (!isScrolling) {
+      scrollFunction();
+    }
+  };
 
   function scrollFunction() {
     if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
@@ -33,16 +36,25 @@
     }
   }
 
-   // Custom smooth scroll to top function using requestAnimationFrame
-   function topFunction() {
-    const scrollSpeed = 100; // Increase this value to speed up the scroll
-    function scrollStep() {
-      if (window.pageYOffset === 0) {
-        return;
-      }
-      window.scroll(0, -scrollSpeed);
-      requestAnimationFrame(scrollStep);
-    }
-    requestAnimationFrame(scrollStep);
+  function topFunction() {
+    isScrolling = true;
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Reset isScrolling after animation completes
+    setTimeout(() => {
+      isScrolling = false;
+    }, 1000);
   }
+
+  // Allow manual scroll interrupt
+  document.addEventListener('wheel', function() {
+    isScrolling = false;
+  }, { passive: true });
+  
+  document.addEventListener('touchmove', function() {
+    isScrolling = false;
+  }, { passive: true });
 </script>
