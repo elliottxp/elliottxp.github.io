@@ -27,13 +27,17 @@ layout: default
     max-width: 1000px;
     margin: 0 auto;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #viewer {
     height: 80vh;
     margin: 20px 0;
     border: 1px solid #ddd;
-    max-width: 800px; 
+    max-width: 800px;
+    width: 100%; 
 }
 
 #viewer iframe {
@@ -91,6 +95,11 @@ layout: default
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        if (typeof ePub === 'undefined') {
+            console.error('EPUB.js not loaded');
+            return;
+        }
+    
         const viewer = document.getElementById('viewer');
         const bookInput = document.getElementById('book-input');
         const prevButton = document.getElementById('prev');
@@ -101,19 +110,21 @@ layout: default
     
         bookInput.addEventListener('change', function(e) {
             const file = e.target.files[0];
+            console.log('File selected:', file);
+            
             if (!file) return;
     
             const reader = new FileReader();
             
             reader.onload = function(event) {
+                console.log('File loaded');
+                
                 if (book) {
                     book.destroy();
                 }
     
-                // Initialize new book
                 book = ePub(event.target.result);
                 
-                // Initialize rendition
                 rendition = book.renderTo("viewer", {
                     width: "100%",
                     height: "100%",
@@ -121,21 +132,9 @@ layout: default
                     flow: "paginated"
                 });
     
-                // Display the book
-                rendition.display().then(function() {
-                    console.log("Book loaded successfully");
-                }).catch(function(err) {
-                    console.error("Error loading book:", err);
-                });
-    
-                // Navigation controls
-                prevButton.addEventListener('click', () => {
-                    if (rendition) rendition.prev();
-                });
-    
-                nextButton.addEventListener('click', () => {
-                    if (rendition) rendition.next();
-                });
+                rendition.display()
+                    .then(() => console.log("Book loaded successfully"))
+                    .catch(err => console.error("Error loading book:", err));
             };
     
             reader.onerror = function(err) {
@@ -144,5 +143,8 @@ layout: default
     
             reader.readAsArrayBuffer(file);
         });
+    
+        prevButton.onclick = () => rendition && rendition.prev();
+        nextButton.onclick = () => rendition && rendition.next();
     });
     </script>
