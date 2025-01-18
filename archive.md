@@ -1,6 +1,7 @@
 ---
 layout: page
 title: archive
+permalink: /archive/
 order: 3
 ---
 
