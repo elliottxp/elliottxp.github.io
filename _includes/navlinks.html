@@ -2,25 +2,18 @@
 <div class="post_navi">
   {%- if page.previous.url -%}
   <a class="post_navi-item nav_prev" href="{{ page.previous.url }}" title="{{ page.previous.title }}">
-    <div class="post_navi-arrow">&lt;</div><div class="post_navi-label">Previous Post</div><div><span>{{ page.previous.title }}</span></div>
+    <div class="post_navi-arrow">&lt;</div>
+    <div class="post_navi-label">Previous Post</div>
+    <div><span>{{ page.previous.title }}</span></div>
   </a>
   {%- endif -%}
 
   {%- if page.next.url -%}
   <a class="post_navi-item nav_next" href="{{ page.next.url }}" title="{{ page.next.title }}">
-    <div class="post_navi-arrow">&gt;</div><div class="post_navi-label">Next Post</div><div><span>{{ page.next.title }}</span></div>
+    <div class="post_navi-arrow">&gt;</div>
+    <div class="post_navi-label">Next Post</div>
+    <div><span>{{ page.next.title }}</span></div>
   </a>
   {%- endif -%}
 </div>
-
 <hr>
-<div class="archive_navi">
-  {% assign sorted_pages = site.pages | sort: 'order' %}
-  {% for sorted_page in sorted_pages %}
-    {% if sorted_page.url %}
-      <a class="archive_navi-item" href="{{ sorted_page.url }}" title="{{ sorted_page.title }}">
-        <div class="archive_navi-label">{{ sorted_page.title }}</div>
-      </a>
-    {% endif %}
-  {% endfor %}
-</div>

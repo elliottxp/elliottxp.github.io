@@ -4,27 +4,31 @@ hr {
 }
 
 /* Post navigation links */
-.post_navi, .archive_navi {
+.post_navi {
+  display: flex;
+  justify-content: space-between;
   margin: 20px 0;
-  text-align: center;
 }
 
-.post_navi-item, .archive_navi-item {
-  display: inline-block;
-  margin: 0 10px;
+.post_navi-item {
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color: #333;
 }
 
-.post_navi-arrow, .post_navi-label, .archive_navi-label {
-  display: inline-block;
-  margin: 0 5px;
+.post_navi-arrow {
+  font-size: 1.5em;
+  margin-right: 10px;
 }
 
-.post_navi-item:hover, .archive_navi-item:hover {
+.post_navi-label {
+  font-size: 1em;
+}
+
+.post_navi-item:hover .post_navi-label {
   text-decoration: underline;
 }
-
 
 /*works html formatting */
 .scaled-image {
