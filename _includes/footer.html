@@ -9,9 +9,7 @@ window.onscroll = function() {
         clearTimeout(scrollTimeout);
     }
     scrollTimeout = setTimeout(scrollFunction, 100);
-};
-    window.onscroll = function() {scrollFunction()};
-}
+window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
     if (window.pageYOffset > 20) {
