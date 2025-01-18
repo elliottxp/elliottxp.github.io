@@ -15,12 +15,18 @@ github_username: "elliottxp"
 #youtube_username: username
 #googleplus_username: +username
 
-#########################################################################################
-######### Nothing below needs to be changed (unless you know what you're doing) #########
-#########################################################################################
-theme: "minima"
+# Footer settings
+footer:
+  show_title: true
+  show_description: true
+  show_email: true
 
-rss: rss
+theme: "minima"
+minima:
+  social_links:
+    github: elliottxp
+    email: info@elliottxp.com
+    rss: rss
 
 kramdown:
   syntax_highlighter_opts:
