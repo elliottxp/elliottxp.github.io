@@ -4,19 +4,19 @@ layout: default
 
 <div class="epub-container">
     <div class="instructions">
-        <h2>EPUB Reader</h2>
+        <h2>epub reader</h2>
         <ol>
-            <li>Click "Choose File" to select an EPUB file from your device</li>
-            <li>The book will load automatically</li>
-            <li>Use "Previous" and "Next" buttons to navigate between pages</li>
+            <li>click "choose file" to select an epub file from your device</li>
+            <li>the epub will load automatically</li>
+            <li>use "previous" and "next" buttons to navigate between pages</li>
         </ol>
     </div>
     <div class="reader-controls">
         <input type="file" id="book-input" accept=".epub"/>
         <div class="navigation">
-            <button id="prev">Previous</button>
+            <button id="prev">previous</button>
             <span id="current-page"></span>
-            <button id="next">Next</button>
+            <button id="next">next</button>
         </div>
     </div>
     <div id="viewer"></div>
@@ -63,29 +63,73 @@ layout: default
     margin: 0;
     padding-left: 20px;
 }
+
+@media (prefers-color-scheme: dark) {
+    #viewer {
+        border-color: #444;
+    }
+    
+    .instructions {
+        background: #333;
+        color: #fff;
+    }
+}
 </style>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    let currentBook = null;
-    
-    document.getElementById('book-input').addEventListener('change', function(e) {
-        const file = e.target.files[0];
-        const reader = new FileReader();
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentBook = null;
+        let rendition = null;
         
-        reader.onload = function(e) {
-            currentBook = ePub(e.target.result);
-            const rendition = currentBook.renderTo('viewer', {
-                width: '100%',
-                height: '100%'
-            });
-            rendition.display();
-
-            document.getElementById('prev').onclick = () => rendition.prev();
-            document.getElementById('next').onclick = () => rendition.next();
+        // Dark mode detection
+        const darkModeQuery = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        function updateTheme(isDark) {
+            if (rendition) {
+                rendition.themes.register('dark', {
+                    body: {
+                        color: '#ffffff',
+                        background: '#222222',
+                        'font-family': 'system-ui, -apple-system, sans-serif'
+                    }
+                });
+                
+                rendition.themes.register('light', {
+                    body: {
+                        color: '#000000',
+                        background: '#ffffff',
+                        'font-family': 'Georgia, serif'
+                    }
+                });
+                
+                rendition.themes.select(isDark ? 'dark' : 'light');
+            }
         }
         
-        reader.readAsArrayBuffer(file);
+        // Listen for dark mode changes
+        darkModeQuery.addEventListener('change', (e) => updateTheme(e.matches));
+        
+        document.getElementById('book-input').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+            
+            reader.onload = function(e) {
+                currentBook = ePub(e.target.result);
+                rendition = currentBook.renderTo('viewer', {
+                    width: '100%',
+                    height: '100%'
+                });
+                rendition.display();
+                
+                // Apply initial theme
+                updateTheme(darkModeQuery.matches);
+                
+                // Navigation controls
+                document.getElementById('prev').onclick = () => rendition.prev();
+                document.getElementById('next').onclick = () => rendition.next();
+            }
+            
+            reader.readAsArrayBuffer(file);
+        });
     });
-});
-</script>
+    </script>
