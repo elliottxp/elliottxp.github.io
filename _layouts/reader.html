@@ -107,6 +107,39 @@ layout: default
         console.error('EPUB.js not loaded');
         return;
     }
+    const prevButton = document.getElementById('prev');
+    const nextButton = document.getElementById('next');
+
+    // Navigation functions
+    function prev() {
+        if (rendition) {
+            rendition.prev()
+                .catch(err => console.error('Error navigating previous:', err));
+        }
+    }
+    
+    function next() {
+        if (rendition) {
+            rendition.next()
+                .catch(err => console.error('Error navigating next:', err));
+        }
+    }
+
+    // Button listeners
+    prevButton.addEventListener('click', prev);
+    nextButton.addEventListener('click', next);
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+    });
+
+    bookInput.addEventListener('change', function(e) {
+        // ...existing code...
+
+        reader.onload = function(event) {
+
 
     const viewer = document.getElementById('viewer');
     const bookInput = document.getElementById('book-input');
@@ -146,10 +179,21 @@ layout: default
             rendition.display()
                 .then(() => {
                     console.log("Book displayed successfully");
+                    
+                    // Enable navigation buttons
+                    prevButton.disabled = false;
+                    nextButton.disabled = false;
+
+                    // Update button states on location change
+                    book.locations.generate()
+                        .then(() => {
+                            rendition.on('relocated', (location) => {
+                                prevButton.disabled = location.atStart;
+                                nextButton.disabled = location.atEnd;
+                            });
+                        });
                 })
-                .catch(err => {
-                    console.error("Error displaying book:", err);
-                });
+                .catch(err => console.error("Error displaying book:", err));
         };
 
         reader.onerror = function(err) {
