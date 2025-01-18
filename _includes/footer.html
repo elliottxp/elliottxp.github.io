@@ -35,12 +35,12 @@
 
    // Custom smooth scroll to top function using requestAnimationFrame
    function topFunction() {
-    const scrollSpeed = 50; // Increase this value to speed up the scroll
+    const scrollSpeed = 100; // Increase this value to speed up the scroll
     function scrollStep() {
       if (window.pageYOffset === 0) {
         return;
       }
-      window.scroll(0, window.pageYOffset - scrollSpeed);
+      window.scroll(0, -scrollSpeed);
       requestAnimationFrame(scrollStep);
     }
     requestAnimationFrame(scrollStep);
