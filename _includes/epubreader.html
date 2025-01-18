@@ -1,0 +1,48 @@
+
+---
+layout: page
+title: EPUB Reader
+permalink: /epub-reader/
+---
+
+{% include epub-reader.html %}
+
+<div class="epub-container">
+    <input type="file" id="epub-upload" accept=".epub" />
+    <div id="epub-viewer"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
+
+<style>
+    .epub-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    #epub-viewer {
+        width: 100%;
+        height: 600px;
+        border: 1px solid #ccc;
+        margin-top: 20px;
+    }
+</style>
+
+<script>
+document.getElementById('epub-upload').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file.type !== 'application/epub+zip') {
+        alert('Please upload an EPUB file');
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        const book = ePub(e.target.result);
+        book.renderTo('epub-viewer');
+    };
+    reader.readAsArrayBuffer(file);
+});
+</script>
