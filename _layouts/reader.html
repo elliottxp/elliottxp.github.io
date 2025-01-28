@@ -47,14 +47,20 @@ layout: default
 }
 
 #viewer iframe {
-    width: 100%;
-    height: 100%;
-    padding: 0 20px;
-    box-sizing: border-box;
+    width: 100% !important;
+    height: 100% !important;
+    overflow-y: auto !important;
+}
+
+/* Ensure epub.js content fits properly */
+#viewer iframe body {
     margin: 0;
-    position: absolute;
-    left: 0;
-    top: 0;
+    padding: 20px;
+}
+
+.epub-view > iframe {
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .reader-controls {
@@ -182,6 +188,14 @@ layout: default
         max-width: 100%;
     }
 }
+
+/* Add specific styling for epub.js rendered content */
+.epub-view {
+    width: 100% !important;
+    height: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
 </style>
 
 <script>
@@ -247,8 +261,9 @@ layout: default
                 width: "100%",
                 height: "100%",
                 spread: "none",
-                flow: "paginated",
-                spreadWidth: 800
+                flow: "scrolled-doc",
+                minSpreadWidth: 800,
+                resizeOnOrientationChange: true
             });
 
             // Display with error handling
@@ -278,6 +293,11 @@ layout: default
 
         // Start reading the file
         reader.readAsArrayBuffer(file);
+    });
+
+    // Add resize handler
+    window.addEventListener('resize', function() {
+        rendition.resize();
     });
 });
 </script>
