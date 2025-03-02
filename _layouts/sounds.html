@@ -4,27 +4,10 @@ title: sounds
 description: "a collection of sounds."
 order: 2
 ---
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Webamp</title>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" type="text/css" href="src/styles.css" />
-  </head>
-
-  <body>
-    <div id="app">
-      <!-- Webamp will try to center within this diff -->
-    </div>
-    <marquee id="current-track"></marquee>
-    <div id="controls">
-      <button id="prev">Previous</button>
-      <button id="play">Play</button>
-      <button id="pause">Pause</button>
-      <button id="stop">Stop</button>
-      <button id="next">Next</button>
-      <button id="close">Close</button>
-    </div>
-    <script src="src/index.js"></script>
-  </body>
-</html>
+<div id="app"></div>
+<script src="https://unpkg.com/webamp"></script>
+<script>
+    const app = document.getElementById("app")
+    const webamp = new Webamp();
+    webamp.renderWhenReady(app);
+</script>
