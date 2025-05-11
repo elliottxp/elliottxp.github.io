@@ -5,52 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>3d gallery</title>
     <style>
-    body {
-        margin: 0;
-        font-family: Arial, sans-serif;
-        background-image: url('https://png.pngtree.com/thumb_back/fh260/background/20221130/pngtree-floodlights-gallery-hall-image_1478682.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-    }
-    canvas { display: block; }
-    #error { color: red; position: absolute; top: 10px; left: 10px; }
-    #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; background: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px; }
-    .instruction-overlay {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba(0, 0, 0, 0.8);
-        color: white;
-        padding: 20px;
-        border-radius: 10px;
-        text-align: center;
-        z-index: 1000;
-        max-width: 400px;
-        font-size: 1.2em;
-        transition: opacity 0.3s ease;
-        opacity: 1;
-    }
-    .instruction-overlay.hidden { opacity: 0; pointer-events: none; }
-    .instruction-overlay button {
-        background-color: white;
-        color: black;
-        border: none;
-        padding: 10px 20px;
-        margin: 5px;
-        cursor: pointer;
-        border-radius: 5px;
-        transition: background-color 0.2s ease;
-    }
-    .instruction-overlay button:hover { background-color: #ddd; }
-    #help-btn { position: fixed; top: 10px; right: 10px; }
-    @media (max-width: 600px) {
-        .instruction-overlay { max-width: 90%; font-size: 1em; padding: 15px; }
-        .instruction-overlay button { padding: 8px 16px; }
-    }
-</style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-image: url('path/to/your/image.jpg'); /* Replace with your image path */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }
+        canvas { display: block; }
+        #error { color: red; position: absolute; top: 10px; left: 10px; }
+        #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; background: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px; }
+        .instruction-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+            max-width: 400px;
+            font-size: 1.2em;
+            transition: opacity 0.3s ease;
+            opacity: 1;
+        }
+        .instruction-overlay.hidden { opacity: 0; pointer-events: none; }
+        .instruction-overlay button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+        }
+        .instruction-overlay button:hover { background-color: #ddd; }
+        #help-btn { position: fixed; top: 10px; right: 10px; }
+        @media (max-width: 600px) {
+            .instruction-overlay { max-width: 90%; font-size: 1em; padding: 15px; }
+            .instruction-overlay button { padding: 8px 16px; }
+        }
+    </style>
 
     <script src="https://unpkg.com/three@0.134.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
