@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3d space</title>
+    <title>3d gallery</title>
     <style>
     body {
         margin: 0;
@@ -51,212 +51,151 @@
         .instruction-overlay button { padding: 8px 16px; }
     }
 </style>
+
     <script src="https://unpkg.com/three@0.134.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.6.4/tween.min.js"></script>
-</head>
-<body>
-    <div id="error" aria-live="polite"></div>
-    <div id="loading" class="hidden">Loading...</div>
-    <script>
+    
+    <script type="text/javascript">
+        // Initialize Three.js components
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer();
-        const loadingManager = new THREE.LoadingManager();
-        const textureLoader = new THREE.TextureLoader(loadingManager);
-        const audioLoader = new THREE.AudioLoader(loadingManager);
+        const textureLoader = new THREE.TextureLoader();
+        
+        // Audio setup
         const listener = new THREE.AudioListener();
+        const audioLoader = new THREE.AudioLoader();
         const sounds = ['/snd/simoom.mp3', '/snd/mona.mp3'];
         const audioObjects = sounds.map(() => new THREE.Audio(listener));
+
+        // Raycaster setup for interaction
         const raycaster = new THREE.Raycaster();
         const mouse = new THREE.Vector2();
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Setup renderer
             renderer.setSize(window.innerWidth, window.innerHeight);
             document.body.appendChild(renderer.domElement);
-            camera.add(listener);
 
+            // Add audio listener to camera
+            camera.add(listener);
+            
+            // Setup OrbitControls
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
             controls.enableDamping = true;
-            controls.enableZoom = true;
-            controls.enablePan = true;
-            controls.zoomSpeed = 0.5;
-            controls.rotateSpeed = 0.5;
+            
+            // Set initial camera position
             camera.position.z = 5;
 
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
-            scene.add(ambientLight);
-            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-            directionalLight.position.set(0, 1, 1);
-            scene.add(directionalLight);
-
+            // Instructions setup
             const instructions = [
-                "Welcome to the 3D Gallery!",
-                "Use your mouse to orbit around the space or scroll to zoom.",
-                "Click on paintings to hear associated audio.",
-                "Press 'H' to revisit these instructions. Enjoy!"
+                "welcome to the space!",
+                "you can orbit around the space",
+                "click on works to hear associated sounds",
+                "enjoy exploring!"
             ];
             let currentInstruction = 0;
 
+            // Create instruction overlay
             const overlay = document.createElement('div');
             overlay.className = 'instruction-overlay';
-            overlay.setAttribute('role', 'dialog');
-            overlay.setAttribute('aria-modal', 'true');
+            
             const text = document.createElement('p');
-            text.id = 'instruction-text';
             text.textContent = instructions[0];
-            const nextButton = document.createElement('button');
-            nextButton.id = 'next-btn';
-            nextButton.textContent = 'next';
-            nextButton.setAttribute('aria-label', 'Next instruction');
-            const skipButton = document.createElement('button');
-            skipButton.id = 'skip-btn';
-            skipButton.textContent = 'skip';
-            skipButton.setAttribute('aria-label', 'Skip instructions');
+            
+            const button = document.createElement('button');
+            button.textContent = 'next';
+            
             overlay.appendChild(text);
-            overlay.appendChild(nextButton);
-            overlay.appendChild(skipButton);
+            overlay.appendChild(button);
             document.body.appendChild(overlay);
 
-            const helpButton = document.createElement('button');
-            helpButton.id = 'help-btn';
-            helpButton.textContent = 'Help';
-            helpButton.classList.add('hidden');
-            helpButton.setAttribute('aria-label', 'Show instructions');
-            document.body.appendChild(helpButton);
-
-            let lastFocusedElement = document.activeElement;
-            nextButton.focus();
-
-            nextButton.addEventListener('click', () => {
+            // Handle instruction navigation
+            button.addEventListener('click', () => {
                 currentInstruction++;
                 if (currentInstruction < instructions.length) {
                     text.textContent = instructions[currentInstruction];
-                    nextButton.textContent = currentInstruction === instructions.length - 1 ? 'start viewing' : 'next';
+                    if (currentInstruction === instructions.length - 1) {
+                        button.textContent = 'start viewing';
+                    }
                 } else {
                     overlay.classList.add('hidden');
-                    helpButton.classList.remove('hidden');
-                    lastFocusedElement.focus();
-                }
-            });
-            skipButton.addEventListener('click', () => {
-                overlay.classList.add('hidden');
-                helpButton.classList.remove('hidden');
-                lastFocusedElement.focus();
-            });
-            helpButton.addEventListener('click', () => {
-                overlay.classList.remove('hidden');
-                helpButton.classList.add('hidden');
-                currentInstruction = 0;
-                text.textContent = instructions[0];
-                nextButton.textContent = 'next';
-                nextButton.focus();
-            });
-            document.addEventListener('keydown', (event) => {
-                if (event.key === 'Escape' && !overlay.classList.contains('hidden')) {
-                    skipButton.click();
-                } else if (event.key === 'h' || event.key === 'H') {
-                    helpButton.click();
                 }
             });
 
+            // Setup paintings
             const positions = [[-3, 0, -5], [0, 0, -5], [3, 0, -5]];
             const imagePaths = ['/img/works/waverock.jpeg', '/img/works/naan.jpeg'];
             const paintings = [];
 
-            loadingManager.onStart = () => document.getElementById('loading').classList.remove('hidden');
-            loadingManager.onLoad = () => document.getElementById('loading').classList.add('hidden');
-            loadingManager.onError = () => document.getElementById('error').textContent = 'Failed to load assets.';
-
+            // Load and add paintings to scene
             imagePaths.forEach((path, index) => {
                 textureLoader.load(path, (texture) => {
                     const geometry = new THREE.PlaneGeometry(2, 2);
-                    const material = new THREE.MeshStandardMaterial({ map: texture });
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
                     const plane = new THREE.Mesh(geometry, material);
                     plane.position.set(...positions[index]);
                     scene.add(plane);
                     paintings.push(plane);
-                }, undefined, () => {
-                    document.getElementById('error').textContent = `Failed to load image: ${path}`;
+                }, undefined, (error) => {
+                    console.error('Texture load error:', error);
                 });
             });
-
-            sounds.forEach((sound, index) => {
-                audioLoader.load(sound, (buffer) => {
-                    audioObjects[index].setBuffer(buffer);
-                }, undefined, () => {
-                    document.getElementById('error').textContent = `Failed to load audio: ${sound}`;
-                });
-            });
-
-            let activePainting = null;
-            function onClick(event) {
-                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
-                raycaster.setFromCamera(mouse, camera);
-                const intersects = raycaster.intersectObjects(paintings);
-                if (intersects.length > 0) {
-                    const painting = intersects[0].object;
-                    const index = paintings.indexOf(painting);
-                    if (index >= 0 && index < audioObjects.length) {
-                        if (activePainting) activePainting.material.emissive.set(0x000000);
-                        painting.material.emissive.set(0x555555);
-                        activePainting = painting;
-                        painting.material.color.set(0xffff00);
-                        setTimeout(() => painting.material.color.set(0xffffff), 200);
-                        audioObjects.forEach((audio, i) => {
-                            if (i !== index && audio.isPlaying) audio.stop();
-                        });
-                        if (audioObjects[index].hasBuffer) {
-                            audioObjects[index].play();
-                        }
-                    }
-                }
-            }
-
-            window.addEventListener('click', onClick);
-            window.addEventListener('touchstart', (event) => {
-                const touch = event.touches[0];
-                onClick({ clientX: touch.clientX, clientY: touch.clientY });
-            });
-
+            // Add mousemove event listener for hover effect
             window.addEventListener('mousemove', (event) => {
                 mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
                 mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
                 raycaster.setFromCamera(mouse, camera);
                 const intersects = raycaster.intersectObjects(paintings);
-                paintings.forEach(p => {
-                    p.scale.set(1, 1, 1);
-                    if (p !== activePainting) p.material.emissive.set(0x000000);
-                });
+                paintings.forEach(p => p.scale.set(1, 1, 1));
                 if (intersects.length > 0) {
-                    const painting = intersects[0].object;
-                    painting.scale.set(1.1, 1.1, 1);
-                    if (painting !== activePainting) painting.material.emissive.set(0x333333);
-                }
-            });
+                    intersects[0].object.scale.set(1.05, 1.05, 1);
+            }
+        });
 
+            // Click handler for sound interaction
+            function onClick(event) {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                raycaster.setFromCamera(mouse, camera);
+                
+                const intersects = raycaster.intersectObjects(scene.children);
+                if (intersects.length > 0) {
+                    const index = scene.children.indexOf(intersects[0].object) - 1;
+                    if (index >= 0 && index < audioObjects.length) {
+                        // Stop other playing audio before playing new one
+                        audioObjects.forEach((audio, i) => {
+                            if (i !== index && audio.isPlaying) audio.stop();
+                        });
+                        audioLoader.load(sounds[index], (buffer) => {
+                            audioObjects[index].setBuffer(buffer);
+                            audioObjects[index].play();
+                        });
+                    }
+                }
+            }
+
+            // Add click event listener
+            window.addEventListener('click', onClick);
+            
+            // Animation loop
             function animate() {
                 requestAnimationFrame(animate);
-                TWEEN.update();
                 controls.update();
                 renderer.render(scene, camera);
             }
+            
             animate();
+        });
 
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
-            window.addEventListener('unload', () => {
-                window.removeEventListener('click', onClick);
-                window.removeEventListener('mousemove', onMouseMove);
-                window.removeEventListener('resize', onResize);
-                renderer.dispose();
-            });
+        // Handle window resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
         });
     </script>
+</head>
+<body>
 </body>
 </html>
