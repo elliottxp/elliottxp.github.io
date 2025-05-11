@@ -1,0 +1,106 @@
+.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Art Gallery with Audio</title>
+    <style>
+        body { margin: 0; }
+        canvas { display: block; }
+        #error { color: red; position: absolute; top: 10px; left: 10px; }
+    </style>
+    <script src="https://unpkg.com/three@0.134.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
+    
+    <script type="text/javascript">
+        // Initialize Three.js components
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        const renderer = new THREE.WebGLRenderer();
+        const textureLoader = new THREE.TextureLoader();
+        
+        // Audio setup
+        const listener = new THREE.AudioListener();
+        const audioLoader = new THREE.AudioLoader();
+        const sounds = ['./public/sound1.ogg', './public/sound2.ogg', './public/sound3.ogg'];
+        const audioObjects = sounds.map(() => new THREE.Audio(listener));
+
+        // Raycaster setup for interaction
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Setup renderer
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            document.body.appendChild(renderer.domElement);
+
+            // Add audio listener to camera
+            camera.add(listener);
+            
+            // Setup OrbitControls
+            const controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            
+            // Set initial camera position
+            camera.position.z = 5;
+
+            // Setup paintings
+            const positions = [[-3, 0, -5], [0, 0, -5], [3, 0, -5]];
+            const imagePaths = ['/img/works/waverock.jpeg', '/img/works/naan.jpeg'];
+            
+            // Load and add paintings to scene
+            imagePaths.forEach((path, index) => {
+                textureLoader.load(path, (texture) => {
+                    const geometry = new THREE.PlaneGeometry(2, 2);
+                    const material = new THREE.MeshBasicMaterial({ map: texture });
+                    const plane = new THREE.Mesh(geometry, material);
+                    plane.position.set(...positions[index]);
+                    scene.add(plane);
+                }, undefined, (error) => {
+                    console.error('Texture load error:', error);
+                });
+            });
+
+            // Click handler for sound interaction
+            function onClick(event) {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                raycaster.setFromCamera(mouse, camera);
+                
+                const intersects = raycaster.intersectObjects(scene.children);
+                if (intersects.length > 0) {
+                    const index = scene.children.indexOf(intersects[0].object) - 1;
+                    if (index >= 0 && index < audioObjects.length) {
+                        audioLoader.load(sounds[index], (buffer) => {
+                            audioObjects[index].setBuffer(buffer);
+                            audioObjects[index].play();
+                        });
+                    }
+                }
+            }
+
+            // Add click event listener
+            window.addEventListener('click', onClick);
+            
+            // Animation loop
+            function animate() {
+                requestAnimationFrame(animate);
+                controls.update();
+                renderer.render(scene, camera);
+            }
+            
+            animate();
+        });
+
+        // Handle window resizing
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
