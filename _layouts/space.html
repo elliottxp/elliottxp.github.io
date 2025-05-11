@@ -87,7 +87,7 @@
             text.textContent = instructions[0];
             
             const button = document.createElement('button');
-            button.textContent = 'Next';
+            button.textContent = 'next';
             
             overlay.appendChild(text);
             overlay.appendChild(button);
@@ -99,7 +99,7 @@
                 if (currentInstruction < instructions.length) {
                     text.textContent = instructions[currentInstruction];
                     if (currentInstruction === instructions.length - 1) {
-                        button.textContent = 'Start Experience';
+                        button.textContent = 'start viewing';
                     }
                 } else {
                     overlay.classList.add('hidden');
@@ -109,7 +109,8 @@
             // Setup paintings
             const positions = [[-3, 0, -5], [0, 0, -5], [3, 0, -5]];
             const imagePaths = ['/img/works/waverock.jpeg', '/img/works/naan.jpeg'];
-            
+            const paintings = [];
+
             // Load and add paintings to scene
             imagePaths.forEach((path, index) => {
                 textureLoader.load(path, (texture) => {
@@ -118,10 +119,22 @@
                     const plane = new THREE.Mesh(geometry, material);
                     plane.position.set(...positions[index]);
                     scene.add(plane);
+                    paintings.push(plane);
                 }, undefined, (error) => {
                     console.error('Texture load error:', error);
                 });
             });
+            // Add mousemove event listener for hover effect
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+                mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
+                raycaster.setFromCamera(mouse, camera);
+                const intersects = raycaster.intersectObjects(paintings);
+                paintings.forEach(p => p.scale.set(1, 1, 1));
+                if (intersects.length > 0) {
+                    intersects[0].object.scale.set(1.05, 1.05, 1);
+            }
+        });
 
             // Click handler for sound interaction
             function onClick(event) {
@@ -133,6 +146,10 @@
                 if (intersects.length > 0) {
                     const index = scene.children.indexOf(intersects[0].object) - 1;
                     if (index >= 0 && index < audioObjects.length) {
+                        // Stop other playing audio before playing new one
+                        audioObjects.forEach((audio, i) => {
+                            if (i !== index && audio.isPlaying) audio.stop();
+                        });
                         audioLoader.load(sounds[index], (buffer) => {
                             audioObjects[index].setBuffer(buffer);
                             audioObjects[index].play();
