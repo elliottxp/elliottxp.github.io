@@ -1,14 +1,39 @@
-.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>enjoy this</title>
+    <title>3D Gallery Experience</title>
     <style>
         body { margin: 0; }
         canvas { display: block; }
         #error { color: red; position: absolute; top: 10px; left: 10px; }
+        .instruction-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000;
+        }
+
+        .instruction-overlay button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            margin-top: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
     <script src="https://unpkg.com/three@0.134.0/build/three.min.js"></script>
     <script src="https://unpkg.com/three@0.134.0/examples/js/controls/OrbitControls.js"></script>
@@ -44,6 +69,42 @@
             
             // Set initial camera position
             camera.position.z = 5;
+
+            // Instructions setup
+            const instructions = [
+                "Welcome to the 3D Gallery!",
+                "Use your mouse to orbit around the space",
+                "Click on images to hear associated sounds",
+                "Enjoy exploring!"
+            ];
+            let currentInstruction = 0;
+
+            // Create instruction overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'instruction-overlay';
+            
+            const text = document.createElement('p');
+            text.textContent = instructions[0];
+            
+            const button = document.createElement('button');
+            button.textContent = 'Next';
+            
+            overlay.appendChild(text);
+            overlay.appendChild(button);
+            document.body.appendChild(overlay);
+
+            // Handle instruction navigation
+            button.addEventListener('click', () => {
+                currentInstruction++;
+                if (currentInstruction < instructions.length) {
+                    text.textContent = instructions[currentInstruction];
+                    if (currentInstruction === instructions.length - 1) {
+                        button.textContent = 'Start Experience';
+                    }
+                } else {
+                    overlay.classList.add('hidden');
+                }
+            });
 
             // Setup paintings
             const positions = [[-3, 0, -5], [0, 0, -5], [3, 0, -5]];
