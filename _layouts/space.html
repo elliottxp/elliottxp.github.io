@@ -8,19 +8,13 @@
         body {
             margin: 0;
             font-family: Arial, sans-serif;
-            background-image: url('/img/background.jpg');
+            background-image: url('path/to/your/image.jpg'); /* Replace with your image path */
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            background-color: #f0f0f0;
         }
-        canvas { display: block; 
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
+        canvas { display: block; }
         #error { color: red; position: absolute; top: 10px; left: 10px; }
         #loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; background: rgba(0, 0, 0, 0.8); padding: 10px; border-radius: 5px; }
         .instruction-overlay {
@@ -65,10 +59,7 @@
         // Initialize Three.js components
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        const renderer = new THREE.WebGLRenderer({ aplha: true });
-        renderer.setClearColor(0x000000, 0); // Transparent
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+        const renderer = new THREE.WebGLRenderer();
         const textureLoader = new THREE.TextureLoader();
         
         // Audio setup
@@ -160,7 +151,7 @@
                 if (intersects.length > 0) {
                     intersects[0].object.scale.set(1.05, 1.05, 1);
                 }
-            });
+        });
 
             // Click handler for sound interaction
             function onClick(event) {
