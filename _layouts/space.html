@@ -48,7 +48,7 @@
         // Audio setup
         const listener = new THREE.AudioListener();
         const audioLoader = new THREE.AudioLoader();
-        const sounds = ['https://music.apple.com/au/song/mona/1769386273'];
+        const sounds = ['/snd/simoom.mp3', '/snd/mona.mp3'];
         const audioObjects = sounds.map(() => new THREE.Audio(listener));
 
         // Raycaster setup for interaction
@@ -72,10 +72,10 @@
 
             // Instructions setup
             const instructions = [
-                "Welcome to the 3D Gallery!",
-                "Use your mouse to orbit around the space",
-                "Click on images to hear associated sounds",
-                "Enjoy exploring!"
+                "welcome to the space!",
+                "you can orbit around the space",
+                "click on works to hear associated sounds",
+                "enjoy exploring!"
             ];
             let currentInstruction = 0;
 
