@@ -1,5 +1,7 @@
 ## Seeing Beyond the Surface: How John Berger Transformed the Way I Experience Art
-### Ways of Seeing by John Berger
+### Ways of Seeing by John Burger
+
+🤖🚫 Note: No generative AI was used to create this content. This page is only intended for human consumption and is NOT allowed to be used for machine training including but not limited to LLMs.
 
 Imagine standing before a masterpiece, captivated by its originality and depth, only to find its image plastered on a coffee mug in the gift shop moments later. Does the art lose its magic, or does it gain something new?
 
