@@ -1,287 +1,34 @@
 ---
 layout: default
-title: test
-description: "a collection of sounds."
+title: factory seconds
+description: "stool."
 order: 3
 ---
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Endless Giraffe Neck</title>
-<style>
-  :root{
-    --bg:#f8f6ef;
-    --giraffe:#f2c46b;
-    --spots:#b8853a;
-    --accent:#e6a94d;
-  }
-  html,body{
-    height:100%;
-    margin:0;
-    background: linear-gradient(180deg,var(--bg),#fff 60%);
-    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-y:auto;
-  }
-
-  /* Page layout */
-  .page {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    width:100%;
-    min-height:100vh;
-  }
-
-  /* Head area: fills the initial viewport nicely */
-  .head-viewport {
-    width:100%;
-    height:75vh;            /* head visible on load */
-    max-height:900px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-    overflow:hidden;
-    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.02) 100%);
-  }
-
-  /* The giraffe head SVG scales responsively */
-  svg.giraffe-head {
-    width:48vmin;
-    max-width:600px;
-    height:auto;
-    display:block;
-    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.12));
-  }
-
-  /* Neck container is immediately below the head and will grow */
-  #neck-container {
-    width:100%;
-    max-width: 600px;
-    display:block;
-    margin:0 auto;
-  }
-
-  /* Each neck segment */
-  .neck-segment {
-    height:200px;          /* height of each appended segment */
-    width:100%;
-    display:block;
-  }
-
-  /* subtle footer so scroll bar can extend beyond if you want */
-  .end-note {
-    padding:40px 20px;
-    color:#666;
-    text-align:center;
-    font-size:14px;
-  }
-
-  /* small UI hint */
-  .hint {
-    position: absolute;
-    bottom:18px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(255,255,255,0.85);
-    padding:8px 14px;
-    border-radius:18px;
-    box-shadow:0 6px 12px rgba(0,0,0,0.06);
-    font-size:13px;
-    color:#333;
-    backdrop-filter: blur(4px);
-  }
-
-  @media (max-width:420px){
-    .head-viewport { height:62vh; }
-    .neck-segment { height:160px; }
-  }
-</style>
+    <title>factory seconds</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background: black;
+        }
+        img {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            min-width: 100%;
+            min-height: 100%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+            transition: all 0.2s ease-in-out; /* smooth resize */
+        }
+    </style>
 </head>
 <body>
-  <div class="page">
-    <header class="head-viewport" id="headViewport" aria-hidden="false">
-      <!-- Giraffe head as an inline SVG (stylized) -->
-      <svg class="giraffe-head" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Giraffe head">
-        <defs>
-          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
-            <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.12"/>
-          </filter>
-        </defs>
-
-        <!-- neck join area (so neck aligns visually) -->
-        <rect x="240" y="440" width="120" height="120" fill="transparent"/>
-
-        <!-- head main -->
-        <g transform="translate(0,0)" filter="url(#soft)">
-          <ellipse cx="320" cy="290" rx="160" ry="140" fill="#f2c46b"/>
-          <!-- snout -->
-          <ellipse cx="320" cy="340" rx="110" ry="70" fill="#f7d897"/>
-          <!-- nostrils -->
-          <ellipse cx="295" cy="350" rx="9" ry="6" fill="#6b3f24"/>
-          <ellipse cx="345" cy="350" rx="9" ry="6" fill="#6b3f24"/>
-          <!-- eyes -->
-          <ellipse cx="260" cy="260" rx="22" ry="18" fill="#fff"/>
-          <circle cx="260" cy="260" r="8" fill="#2b2723"/>
-          <ellipse cx="380" cy="260" rx="22" ry="18" fill="#fff"/>
-          <circle cx="380" cy="260" r="8" fill="#2b2723"/>
-          <!-- spots on face -->
-          <g fill="#b8853a" opacity="0.95">
-            <ellipse cx="320" cy="235" rx="24" ry="18"/>
-            <ellipse cx="240" cy="305" rx="20" ry="14" transform="rotate(-18 240 305)"/>
-            <ellipse cx="390" cy="305" rx="22" ry="16" transform="rotate(14 390 305)"/>
-          </g>
-          <!-- ears -->
-          <path d="M220 180 q-40 -18 -40 16 q6 36 36 36 q10 -26 4 -52z" fill="#f2c46b"/>
-          <path d="M420 180 q40 -18 40 16 q-6 36 -36 36 q-10 -26 -4 -52z" fill="#f2c46b"/>
-          <!-- ossicones -->
-          <rect x="270" y="120" rx="10" ry="10" width="18" height="60" fill="#6b3f24"/>
-          <circle cx="279" cy="112" r="12" fill="#6b3f24"/>
-          <rect x="360" y="120" rx="10" ry="10" width="18" height="60" fill="#6b3f24"/>
-          <circle cx="369" cy="112" r="12" fill="#6b3f24"/>
-          <!-- decorative collar (where neck begins) -->
-          <path d="M200 420 q120 50 200 10 q80 -40 160 0 q-40 70 -220 70 q-180 0 -340 -80z" fill="#f2c46b" opacity="0.5"/>
-        </g>
-      </svg>
-
-      <div class="hint">Scroll down — the neck keeps coming.</div>
-    </header>
-
-    <!-- Neck container where segments will be appended -->
-    <div id="neck-container" aria-live="polite"></div>
-
-    <div class="end-note">
-      Tip: Keep scrolling — the giraffe's neck extends endlessly. (This demo appends segments dynamically and trims off top segments to stay light on memory.)
-    </div>
-  </div>
-
-<script>
-/*
-  Endless giraffe neck demo
-  - Appends SVG neck segments to #neck-container as you approach the bottom.
-  - Removes old segments above the viewport to avoid unlimited DOM growth.
-  - Each segment has randomized spots so the neck looks organic.
-*/
-
-const container = document.getElementById('neck-container');
-const SEGMENT_HEIGHT = 200;      // px (match CSS .neck-segment)
-const INITIAL_SEGMENTS = 6;      // how many segments to create at load
-const BUFFER_SEGMENTS = 8;       // how many ahead to keep
-const MAX_DOM_SEGMENTS = 40;     // max segments to keep in DOM for performance
-let totalSegmentsAppended = 0;
-
-// utility: build one neck segment SVG element (string)
-function createNeckSegmentSVG(index) {
-  // random spots for this segment
-  function randomInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
-  const spots = [];
-  const numSpots = randomInt(3,7);
-  for(let i=0;i<numSpots;i++){
-    const cx = randomInt(60, 540);
-    const cy = randomInt(20, 180);
-    const rx = randomInt(16,38);
-    const ry = Math.max(8, Math.floor(rx * (0.5 + Math.random()*0.6)));
-    const rot = randomInt(-25,25);
-    spots.push({cx,cy,rx,ry,rot});
-  }
-
-  // build svg markup
-  const svg = document.createElement('div');
-  svg.className = 'neck-segment';
-  svg.style.height = SEGMENT_HEIGHT + 'px';
-  svg.innerHTML = `
-    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      <defs>
-        <linearGradient id="g${index}" x1="0" x2="0" y1="0" y2="1">
-          <stop offset="0" stop-color="#f5c876"/>
-          <stop offset="1" stop-color="#eecb78"/>
-        </linearGradient>
-      </defs>
-      <!-- neck base -->
-      <rect x="0" y="0" width="600" height="200" rx="20" fill="url(#g${index})"/>
-      <!-- vertical borders to align under the head -->
-      <rect x="70" y="0" width="460" height="200" rx="20" fill="transparent"/>
-      <!-- spots -->
-      ${spots.map(s => `<ellipse cx="${s.cx}" cy="${s.cy}" rx="${s.rx}" ry="${s.ry}" transform="rotate(${s.rot} ${s.cx} ${s.cy})" fill="#b8853a"/>`).join('')}
-      <!-- slight shadow line for depth -->
-      <path d="M70 0 q120 20 230 0 q120 -18 230 0 v10 q-80 -10 -230 0 q-150 8 -230 0z" fill="#000" opacity="0.03"/>
-    </svg>
-  `;
-  return svg;
-}
-
-// append N segments
-function appendSegments(n) {
-  for(let i=0;i<n;i++){
-    const seg = createNeckSegmentSVG(totalSegmentsAppended);
-    container.appendChild(seg);
-    totalSegmentsAppended++;
-  }
-  trimSegmentsIfNeeded();
-}
-
-// remove top segments if DOM grows too much
-function trimSegmentsIfNeeded(){
-  const children = container.children;
-  while(children.length > MAX_DOM_SEGMENTS){
-    // remove the first child
-    container.removeChild(children[0]);
-  }
-}
-
-// ensure there's enough height so user can scroll immediately
-function ensureInitialHeight() {
-  appendSegments(INITIAL_SEGMENTS);
-  // add a few more so you can scroll a bit
-  appendSegments(BUFFER_SEGMENTS - INITIAL_SEGMENTS);
-}
-
-// When near bottom, append more
-function onScroll() {
-  const scrolledFromTop = window.scrollY + window.innerHeight;
-  const docHeight = document.documentElement.scrollHeight;
-  const remaining = docHeight - scrolledFromTop;
-
-  // if we are within ~1200px or within BUFFER_SEGMENTS heights, add segments
-  if (remaining < SEGMENT_HEIGHT * (BUFFER_SEGMENTS)) {
-    appendSegments(3);  // add a few at a time
-  }
-}
-
-// also append as you resize smaller screens
-window.addEventListener('scroll', throttle(onScroll, 150));
-window.addEventListener('resize', throttle(onScroll, 300));
-
-// small throttle helper
-function throttle(fn, wait){
-  let last = 0;
-  return function(...args){
-    const now = Date.now();
-    if(now - last >= wait){
-      last = now;
-      fn.apply(this,args);
-    }
-  };
-}
-
-// start
-ensureInitialHeight();
-
-// Accessibility: focus on the head so screen readers see initial content
-document.getElementById('headViewport').setAttribute('tabindex', '-1');
-document.getElementById('headViewport').focus();
-
-// OPTIONAL: let user press space to append a bunch for fun
-window.addEventListener('keydown', (e) => {
-  if(e.code === 'Space'){
-    e.preventDefault();
-    appendSegments(6);
-  }
-});
-</script>
+    <img src="https://static.wikia.nocookie.net/simpsons/images/6/6f/Econo-Save.png/revision/latest?cb=20111221125426" 
+         alt="Econo-Save">
 </body>
 </html>
