@@ -4,3 +4,123 @@ title: sounds
 description: "a collection of sounds."
 order: 2
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Artwork Music Player</title>
+<style>
+  body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: #f4f4f4;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+  }
+  .artwork-container {
+    position: relative;
+    width: 250px;
+    cursor: pointer;
+  }
+  .artwork {
+    width: 100%;
+    display: block;
+    border: 4px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .artwork-container:hover .artwork {
+    transform: scale(1.05);
+    border-color: #ff5500;
+  }
+  .overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 48px;
+    color: white;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+    pointer-events: none; /* clicks pass through */
+    user-select: none;
+  }
+  iframe {
+    display: none; /* keep player hidden */
+  }
+</style>
+</head>
+<body>
+
+<div class="artwork-container" data-track="1730760735">
+  <img class="artwork" src="https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/naan.jpeg">
+  <div class="overlay">▶️</div>
+</div>
+
+<div class="artwork-container" data-track="832025014">
+  <img class="artwork" src="https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/people.jpeg">
+  <div class="overlay">▶️</div>
+</div>
+
+<div class="artwork-container" data-track="820638109">
+  <img class="artwork" src="https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/pink.jpeg">
+  <div class="overlay">▶️</div>
+</div>
+
+<div class="artwork-container" data-track="1323860767">
+  <img class="artwork" src="https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/maverock.jpeg">
+  <div class="overlay">▶️</div>
+</div>
+
+<!-- Hidden SoundCloud Player -->
+<iframe id="scPlayer" width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1730760735&auto_play=false">
+</iframe>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+const iframe = document.getElementById('scPlayer');
+const widget = SC.Widget(iframe);
+
+let currentTrack = null;
+let isPlaying = false;
+let currentOverlay = null;
+
+document.querySelectorAll('.artwork-container').forEach(container => {
+  container.addEventListener('click', () => {
+    const trackID = container.dataset.track;
+    const overlay = container.querySelector('.overlay');
+
+    if (trackID !== currentTrack) {
+      widget.load(`https://api.soundcloud.com/tracks/${trackID}`, {
+        auto_play: true
+      });
+      resetOverlays();
+      overlay.textContent = '⏸';
+      currentTrack = trackID;
+      currentOverlay = overlay;
+      isPlaying = true;
+    } else {
+      widget.toggle();
+    }
+  });
+});
+
+// Listen for play/pause events from SoundCloud
+widget.bind(SC.Widget.Events.PLAY, () => {
+  if (currentOverlay) currentOverlay.textContent = '⏸';
+  isPlaying = true;
+});
+widget.bind(SC.Widget.Events.PAUSE, () => {
+  if (currentOverlay) currentOverlay.textContent = '▶️';
+  isPlaying = false;
+});
+
+function resetOverlays() {
+  document.querySelectorAll('.overlay').forEach(o => o.textContent = '▶️');
+}
+</script>
+
+</body>
+</html>
