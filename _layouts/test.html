@@ -9,306 +9,278 @@ order: 3
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>test</title>
+<title>Endless Giraffe Neck</title>
 <style>
-:root {
-  /* Default skin: Classic Orange */
-  --bg1: #121212; --bg2: #0b0b0b;
-  --panel: #2f2f2f; --accent: #ff5500;
-  --text: #e9e9e9; --sub: #bdbdbd;
-}
-/* Retro Blue Skin */
-.skin-retro { --accent: #00bfff; --panel: #1a1a2e; }
-/* High-Contrast Green Skin */
-.skin-highcontrast { --accent: #39ff14; --panel: #111; }
-/* Other skins can be added similarly */
+  :root{
+    --bg:#f8f6ef;
+    --giraffe:#f2c46b;
+    --spots:#b8853a;
+    --accent:#e6a94d;
+  }
+  html,body{
+    height:100%;
+    margin:0;
+    background: linear-gradient(180deg,var(--bg),#fff 60%);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-y:auto;
+  }
 
-html,body { height:100%; margin:0; background:linear-gradient(var(--bg1),var(--bg2)); font-family: "Segoe UI", Roboto, sans-serif; color: var(--text); }
+  /* Page layout */
+  .page {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    width:100%;
+    min-height:100vh;
+  }
 
-.player-wrap { width:560px; margin:36px auto; border-radius:6px; overflow:hidden; background:linear-gradient(#333,#272727); box-shadow:0 10px 30px rgba(0,0,0,0.6); user-select:none; }
-.titlebar { height:36px; display:flex; align-items:center; padding:0 10px; background:linear-gradient(#1b1b1b,#141414); border-bottom:1px solid rgba(255,255,255,0.03); }
-.title-left { display:flex; align-items:center; gap:10px; }
-.logo-box { width:28px; height:20px; border-radius:3px; background: var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; color:#111; font-size:12px;}
-.title { font-weight:600; font-size:14px; }
-.title-sub { color: var(--sub); font-size:12px; margin-left:6px; }
-.main { display:flex; padding:16px; gap:16px; align-items:center; }
-.left { width:170px; height:170px; border-radius:4px; background:linear-gradient(120deg,#1e1e1e,#2a2a2a); box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
-.artwork-img { width:140px; height:140px; object-fit:cover; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
-.canvas-wrap { position:absolute; left:8px; bottom:8px; }
-.controls { flex:1; display:flex; flex-direction:column; gap:12px; }
-.track-info { display:flex; flex-direction:column; gap:4px; }
-.track-title { font-weight:700; font-size:16px; }
-.track-artist { font-size:13px; color: var(--sub); }
-.buttons { display:flex; gap:8px; align-items:center; }
-.btn { width:44px; height:36px; border-radius:4px; border:none; background: var(--panel); color: var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 2px 0 rgba(0,0,0,0.6); }
-.btn:active { transform: translateY(1px); }
-.btn:disabled { opacity:0.45; cursor:default; }
-.progress-wrap { display:flex; align-items:center; gap:10px; }
-.time { width:54px; font-size:12px; color: var(--sub); text-align:center; }
-.progress { flex:1; height:10px; background:rgba(255,255,255,0.03); border-radius:6px; position:relative; cursor:pointer; }
-.progress .bar { height:100%; width:0%; background: linear-gradient(90deg, var(--accent), #ff8b4a); border-radius:6px; }
-.vol { width:120px; display:flex; align-items:center; gap:8px; }
-.vol input[type=range] { width:86px; }
-.playlist { border-top:1px solid rgba(255,255,255,0.03); background:linear-gradient(#202020,#141414); padding:8px 12px; display:flex; gap:10px; align-items:center; }
-.plist { display:flex; gap:8px; flex-wrap:wrap; }
-.pitem { padding:6px 10px; border-radius:4px; background:rgba(255,255,255,0.02); font-size:13px; color: var(--sub); cursor:pointer; }
-.pitem.active { background: linear-gradient(90deg, var(--accent), #ff8b4a); color:#111; font-weight:700; }
-.small { font-size:11px; color: var(--sub); text-align:right; padding:6px 10px; }
-.skin-select { margin: 8px; display:flex; gap:8px; justify-content:center; }
-.skin-select button { padding:4px 8px; cursor:pointer; background:var(--panel); color:var(--text); border:none; border-radius:4px; }
-.skin-select button.active { background:var(--accent); font-weight:700; }
+  /* Head area: fills the initial viewport nicely */
+  .head-viewport {
+    width:100%;
+    height:75vh;            /* head visible on load */
+    max-height:900px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    overflow:hidden;
+    background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(0,0,0,0.02) 100%);
+  }
 
-@media (max-width:600px) {
-  .player-wrap { width:94%; }
-  .left { display:none; }
-}
+  /* The giraffe head SVG scales responsively */
+  svg.giraffe-head {
+    width:48vmin;
+    max-width:600px;
+    height:auto;
+    display:block;
+    filter: drop-shadow(0 12px 18px rgba(0,0,0,0.12));
+  }
 
+  /* Neck container is immediately below the head and will grow */
+  #neck-container {
+    width:100%;
+    max-width: 600px;
+    display:block;
+    margin:0 auto;
+  }
+
+  /* Each neck segment */
+  .neck-segment {
+    height:200px;          /* height of each appended segment */
+    width:100%;
+    display:block;
+  }
+
+  /* subtle footer so scroll bar can extend beyond if you want */
+  .end-note {
+    padding:40px 20px;
+    color:#666;
+    text-align:center;
+    font-size:14px;
+  }
+
+  /* small UI hint */
+  .hint {
+    position: absolute;
+    bottom:18px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,0.85);
+    padding:8px 14px;
+    border-radius:18px;
+    box-shadow:0 6px 12px rgba(0,0,0,0.06);
+    font-size:13px;
+    color:#333;
+    backdrop-filter: blur(4px);
+  }
+
+  @media (max-width:420px){
+    .head-viewport { height:62vh; }
+    .neck-segment { height:160px; }
+  }
 </style>
 </head>
 <body>
+  <div class="page">
+    <header class="head-viewport" id="headViewport" aria-hidden="false">
+      <!-- Giraffe head as an inline SVG (stylized) -->
+      <svg class="giraffe-head" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Giraffe head">
+        <defs>
+          <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="14" flood-color="#000" flood-opacity="0.12"/>
+          </filter>
+        </defs>
 
-<div class="player-wrap skin-classic">
-<div class="titlebar"></div>
-    <div class="title-left">
-        <div class="logo-box">AP</div>
-        <div>
-            <div class="title">Audio Player</div>
-            <div class="title-sub">Sounds + Visualiser + Skins</div>
-        </div>
+        <!-- neck join area (so neck aligns visually) -->
+        <rect x="240" y="440" width="120" height="120" fill="transparent"/>
+
+        <!-- head main -->
+        <g transform="translate(0,0)" filter="url(#soft)">
+          <ellipse cx="320" cy="290" rx="160" ry="140" fill="#f2c46b"/>
+          <!-- snout -->
+          <ellipse cx="320" cy="340" rx="110" ry="70" fill="#f7d897"/>
+          <!-- nostrils -->
+          <ellipse cx="295" cy="350" rx="9" ry="6" fill="#6b3f24"/>
+          <ellipse cx="345" cy="350" rx="9" ry="6" fill="#6b3f24"/>
+          <!-- eyes -->
+          <ellipse cx="260" cy="260" rx="22" ry="18" fill="#fff"/>
+          <circle cx="260" cy="260" r="8" fill="#2b2723"/>
+          <ellipse cx="380" cy="260" rx="22" ry="18" fill="#fff"/>
+          <circle cx="380" cy="260" r="8" fill="#2b2723"/>
+          <!-- spots on face -->
+          <g fill="#b8853a" opacity="0.95">
+            <ellipse cx="320" cy="235" rx="24" ry="18"/>
+            <ellipse cx="240" cy="305" rx="20" ry="14" transform="rotate(-18 240 305)"/>
+            <ellipse cx="390" cy="305" rx="22" ry="16" transform="rotate(14 390 305)"/>
+          </g>
+          <!-- ears -->
+          <path d="M220 180 q-40 -18 -40 16 q6 36 36 36 q10 -26 4 -52z" fill="#f2c46b"/>
+          <path d="M420 180 q40 -18 40 16 q-6 36 -36 36 q-10 -26 -4 -52z" fill="#f2c46b"/>
+          <!-- ossicones -->
+          <rect x="270" y="120" rx="10" ry="10" width="18" height="60" fill="#6b3f24"/>
+          <circle cx="279" cy="112" r="12" fill="#6b3f24"/>
+          <rect x="360" y="120" rx="10" ry="10" width="18" height="60" fill="#6b3f24"/>
+          <circle cx="369" cy="112" r="12" fill="#6b3f24"/>
+          <!-- decorative collar (where neck begins) -->
+          <path d="M200 420 q120 50 200 10 q80 -40 160 0 q-40 70 -220 70 q-180 0 -340 -80z" fill="#f2c46b" opacity="0.5"/>
+        </g>
+      </svg>
+
+      <div class="hint">Scroll down — the neck keeps coming.</div>
+    </header>
+
+    <!-- Neck container where segments will be appended -->
+    <div id="neck-container" aria-live="polite"></div>
+
+    <div class="end-note">
+      Tip: Keep scrolling — the giraffe's neck extends endlessly. (This demo appends segments dynamically and trims off top segments to stay light on memory.)
     </div>
-    <div style="flex:1"></div>
-    <a href="https://on.soundcloud.com/yMW9CDZLc4lmN4RIt8" target="_blank" rel="noopener" style="font-size:12px;color:var(--sub);text-decoration:none;">
-        https://on.soundcloud.com/yMW9CDZLc4lmN4RIt8
-    </a>
-</div>
-
-  <div class="skin-select">
-    <button data-skin="skin-classic" class="active">Classic</button>
-    <button data-skin="skin-retro">Retro Blue</button>
-    <button data-skin="skin-highcontrast">High-Contrast Green</button>
   </div>
 
-  <div class="main">
-    <div class="left" id="left">
-      <img id="artwork" class="artwork-img" src="" alt="Artwork">
-      <div class="canvas-wrap">
-        <canvas id="viz" width="154" height="28"></canvas>
-      </div>
-    </div>
-
-    <div class="controls">
-      <div class="track-info">
-        <div id="title" class="track-title">—</div>
-        <div id="artist" class="track-artist">live405</div>
-      </div>
-
-      <div class="buttons">
-        <button class="btn" id="prev">⏮</button>
-        <button class="btn" id="play">▶️</button>
-        <button class="btn" id="next">⏭</button>
-        <div style="flex:1"></div>
-        <div class="vol">
-          <div style="font-size:12px;color:var(--sub)">Vol</div>
-          <input id="volRange" type="range" min="0" max="100" value="80" />
-        </div>
-      </div>
-
-      <div class="progress-wrap">
-        <div id="curtime" class="time">0:00</div>
-        <div class="progress" id="progress">
-          <div class="bar" id="bar"></div>
-        </div>
-        <div id="durtime" class="time">0:00</div>
-      </div>
-    </div>
-  </div>
-
-  <div class="playlist">
-    <div class="plist" id="plist"></div>
-  </div>
-
-  <div class="small">Choose the track and press the play button</div>
-</div>
-
-<iframe id="scPlayer" style="display:none" allow="autoplay"
-        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1730760735&visual=false"></iframe>
-<script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-// == CONFIG ==
-const playlist = [
-  { id: '1730760735' },
-  { id: '832025014' },
-  { id: '820638109' },
-  { id: '1323860767' }
-];
-// == END CONFIG ==
+/*
+  Endless giraffe neck demo
+  - Appends SVG neck segments to #neck-container as you approach the bottom.
+  - Removes old segments above the viewport to avoid unlimited DOM growth.
+  - Each segment has randomized spots so the neck looks organic.
+*/
 
-const iframe = document.getElementById('scPlayer');
-const widget = SC.Widget(iframe);
-const artEl = document.getElementById('artwork');
-const titleEl = document.getElementById('title');
-const artistEl = document.getElementById('artist');
-const curtimeEl = document.getElementById('curtime');
-const durtimeEl = document.getElementById('durtime');
-const barEl = document.getElementById('bar');
-const playBtn = document.getElementById('play');
-const prevBtn = document.getElementById('prev');
-const nextBtn = document.getElementById('next');
-const volRange = document.getElementById('volRange');
-const plistEl = document.getElementById('plist');
-const vizCanvas = document.getElementById('viz');
-const vizCtx = vizCanvas.getContext('2d');
-const skinButtons = document.querySelectorAll('.skin-select button');
-const playerWrap = document.querySelector('.player-wrap');
+const container = document.getElementById('neck-container');
+const SEGMENT_HEIGHT = 200;      // px (match CSS .neck-segment)
+const INITIAL_SEGMENTS = 6;      // how many segments to create at load
+const BUFFER_SEGMENTS = 8;       // how many ahead to keep
+const MAX_DOM_SEGMENTS = 40;     // max segments to keep in DOM for performance
+let totalSegmentsAppended = 0;
 
-let currentIndex = -1, duration = 0, progressTimer = null, vizAnim = null, vizEnergy = 0;
-
-// Build playlist UI
-playlist.forEach((t,i) => {
-  const div = document.createElement('div');
-  div.className = 'pitem';
-  div.textContent = `Track ${i+1}`;
-  div.dataset.index = i;
-  div.addEventListener('click', () => playIndex(i));
-  plistEl.appendChild(div);
-});
-
-function setActiveList(){
-  document.querySelectorAll('.pitem').forEach((el,idx) => {
-    el.classList.toggle('active', idx === currentIndex);
-  });
-}
-
-// Skin selector behavior
-skinButtons.forEach(btn => {
-  btn.addEventListener('click', () => {
-    skinButtons.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    playerWrap.className = `player-wrap ${btn.dataset.skin}`;
-  });
-});
-
-// Time formatting
-function secToTime(ms){
-  if (!isFinite(ms)) return '0:00';
-  const s = Math.floor(ms/1000), m = Math.floor(s/60), sec = s % 60;
-  return m + ':' + (sec<10?'0'+sec:sec);
-}
-
-// Load and play by index
-function playIndex(i){
-  if (i<0||i>=playlist.length) return;
-  currentIndex = i;
-  widget.load(`https://api.soundcloud.com/tracks/${playlist[i].id}`, { auto_play: true });
-  titleEl.textContent = 'Loading...'; artistEl.textContent = 'live405';
-  setActiveList();
-}
-
-// Play/pause
-playBtn.addEventListener('click', () => {
-  if (currentIndex === -1) { playIndex(0); return; }
-  widget.isPaused(paused => paused ? widget.play() : widget.pause());
-});
-
-// Prev/Next
-prevBtn.addEventListener('click', () => playIndex((currentIndex<=0) ? playlist.length-1 : currentIndex-1));
-nextBtn.addEventListener('click', () => playIndex((currentIndex>=playlist.length-1)?0:currentIndex+1));
-
-// Volume
-volRange.addEventListener('input', () => widget.setVolume(Number(volRange.value)));
-
-// Seeking
-document.getElementById('progress').addEventListener('click', e => {
-  if (!duration) return;
-  const pct = (e.clientX - e.currentTarget.getBoundingClientRect().left) / e.currentTarget.offsetWidth;
-  widget.seekTo(Math.floor(pct * duration));
-});
-
-widget.bind(SC.Widget.Events.READY, () => widget.setVolume(Number(volRange.value)));
-
-widget.bind(SC.Widget.Events.PLAY, () => {
-  playBtn.textContent = '⏸';
-  startProgress();
-  widget.getCurrentSound(sound => {
-    if (sound.title) titleEl.textContent = sound.title;
-    if (sound.user?.username) artistEl.textContent = sound.user.username;
-    if (sound.artwork_url) {
-      artEl.src = sound.artwork_url.replace('-large', '-t500x500');
-    } else artEl.src = '';
-  });
-  widget.getDuration(d => { duration = d||0; durtimeEl.textContent = secToTime(duration); });
-  startViz();
-});
-
-widget.bind(SC.Widget.Events.PAUSE, () => {
-  playBtn.textContent = '▶️';
-  stopProgress();
-  vizEnergy = 0;
-});
-
-widget.bind(SC.Widget.Events.FINISH, () => nextBtn.click());
-
-function startProgress(){
-  stopProgress();
-  progressTimer = setInterval(() => {
-    widget.getPosition(pos => {
-      if (!isFinite(pos)) return;
-      curtimeEl.textContent = secToTime(pos);
-      barEl.style.width = `${Math.max(0, Math.min(100,(pos/duration)*100))}%`;
-      vizEnergy = 0.3 + 0.7*Math.abs(Math.sin(pos/1000));
-    });
-  }, 200);
-}
-function stopProgress(){
-  if (progressTimer) clearInterval(progressTimer);
-  progressTimer = null;
-}
-
-// Visualizer (simulated)
-function startViz(){
-  if (vizAnim) return;
-  function draw(){
-    widget.getPosition(pos => {
-      const base = vizEnergy;
-      const W = vizCanvas.width, H = vizCanvas.height, bars = 20, gap = 2;
-      vizCtx.clearRect(0,0,W,H);
-      for (let i=0;i<bars;i++){
-        const idx = i/bars * Math.PI * 2 + (pos||0)/1000;
-        const amp = Math.min(1, base*0.6 + Math.abs(Math.sin(idx))*0.8 + Math.random()*0.4);
-        const h = Math.max(2, amp * H);
-        const barW = (W - (bars-1)*gap)/bars;
-        const x = i * (barW + gap);
-        const grad = vizCtx.createLinearGradient(0, H-h, 0, H);
-        grad.addColorStop(0, 'rgba(255,200,80,0.9)');
-        grad.addColorStop(1, 'rgba(255,100,0,0.8)');
-        vizCtx.fillStyle = grad;
-        vizCtx.fillRect(x, H-h, barW, h);
-      }
-    });
-    vizAnim = requestAnimationFrame(draw);
+// utility: build one neck segment SVG element (string)
+function createNeckSegmentSVG(index) {
+  // random spots for this segment
+  function randomInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+  const spots = [];
+  const numSpots = randomInt(3,7);
+  for(let i=0;i<numSpots;i++){
+    const cx = randomInt(60, 540);
+    const cy = randomInt(20, 180);
+    const rx = randomInt(16,38);
+    const ry = Math.max(8, Math.floor(rx * (0.5 + Math.random()*0.6)));
+    const rot = randomInt(-25,25);
+    spots.push({cx,cy,rx,ry,rot});
   }
-  draw();
+
+  // build svg markup
+  const svg = document.createElement('div');
+  svg.className = 'neck-segment';
+  svg.style.height = SEGMENT_HEIGHT + 'px';
+  svg.innerHTML = `
+    <svg viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <defs>
+        <linearGradient id="g${index}" x1="0" x2="0" y1="0" y2="1">
+          <stop offset="0" stop-color="#f5c876"/>
+          <stop offset="1" stop-color="#eecb78"/>
+        </linearGradient>
+      </defs>
+      <!-- neck base -->
+      <rect x="0" y="0" width="600" height="200" rx="20" fill="url(#g${index})"/>
+      <!-- vertical borders to align under the head -->
+      <rect x="70" y="0" width="460" height="200" rx="20" fill="transparent"/>
+      <!-- spots -->
+      ${spots.map(s => `<ellipse cx="${s.cx}" cy="${s.cy}" rx="${s.rx}" ry="${s.ry}" transform="rotate(${s.rot} ${s.cx} ${s.cy})" fill="#b8853a"/>`).join('')}
+      <!-- slight shadow line for depth -->
+      <path d="M70 0 q120 20 230 0 q120 -18 230 0 v10 q-80 -10 -230 0 q-150 8 -230 0z" fill="#000" opacity="0.03"/>
+    </svg>
+  `;
+  return svg;
 }
-function stopViz(){
-  if (vizAnim) cancelAnimationFrame(vizAnim);
-  vizAnim = null;
+
+// append N segments
+function appendSegments(n) {
+  for(let i=0;i<n;i++){
+    const seg = createNeckSegmentSVG(totalSegmentsAppended);
+    container.appendChild(seg);
+    totalSegmentsAppended++;
+  }
+  trimSegmentsIfNeeded();
 }
 
-(function init(){
-  setActiveList();
-  artEl.src = '';
-})();
+// remove top segments if DOM grows too much
+function trimSegmentsIfNeeded(){
+  const children = container.children;
+  while(children.length > MAX_DOM_SEGMENTS){
+    // remove the first child
+    container.removeChild(children[0]);
+  }
+}
 
-// Keyboard shortcuts
-document.addEventListener('keydown', e => {
-  if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
-  else if (e.code==='ArrowRight') nextBtn.click();
-  else if (e.code==='ArrowLeft') prevBtn.click();
-});
+// ensure there's enough height so user can scroll immediately
+function ensureInitialHeight() {
+  appendSegments(INITIAL_SEGMENTS);
+  // add a few more so you can scroll a bit
+  appendSegments(BUFFER_SEGMENTS - INITIAL_SEGMENTS);
+}
 
-// Pause visualiser when hidden
-document.addEventListener('visibilitychange', () => {
-  document.hidden ? stopViz() : (vizAnim==null && playBtn.textContent==='⏸') && startViz();
+// When near bottom, append more
+function onScroll() {
+  const scrolledFromTop = window.scrollY + window.innerHeight;
+  const docHeight = document.documentElement.scrollHeight;
+  const remaining = docHeight - scrolledFromTop;
+
+  // if we are within ~1200px or within BUFFER_SEGMENTS heights, add segments
+  if (remaining < SEGMENT_HEIGHT * (BUFFER_SEGMENTS)) {
+    appendSegments(3);  // add a few at a time
+  }
+}
+
+// also append as you resize smaller screens
+window.addEventListener('scroll', throttle(onScroll, 150));
+window.addEventListener('resize', throttle(onScroll, 300));
+
+// small throttle helper
+function throttle(fn, wait){
+  let last = 0;
+  return function(...args){
+    const now = Date.now();
+    if(now - last >= wait){
+      last = now;
+      fn.apply(this,args);
+    }
+  };
+}
+
+// start
+ensureInitialHeight();
+
+// Accessibility: focus on the head so screen readers see initial content
+document.getElementById('headViewport').setAttribute('tabindex', '-1');
+document.getElementById('headViewport').focus();
+
+// OPTIONAL: let user press space to append a bunch for fun
+window.addEventListener('keydown', (e) => {
+  if(e.code === 'Space'){
+    e.preventDefault();
+    appendSegments(6);
+  }
 });
 </script>
 </body>
