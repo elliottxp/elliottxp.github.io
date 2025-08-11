@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Mini Winamp with Skins</title>
+<style>
+:root {
+  /* Default skin: Classic Orange */
+  --bg1: #121212; --bg2: #0b0b0b;
+  --panel: #2f2f2f; --accent: #ff5500;
+  --text: #e9e9e9; --sub: #bdbdbd;
+}
+/* Retro Blue Skin */
+.skin-retro { --accent: #00bfff; --panel: #1a1a2e; }
+/* High-Contrast Green Skin */
+.skin-highcontrast { --accent: #39ff14; --panel: #111; }
+/* Other skins can be added similarly */
+
+html,body { height:100%; margin:0; background:linear-gradient(var(--bg1),var(--bg2)); font-family: "Segoe UI", Roboto, sans-serif; color: var(--text); }
+
+.player-wrap { width:560px; margin:36px auto; border-radius:6px; overflow:hidden; background:linear-gradient(#333,#272727); box-shadow:0 10px 30px rgba(0,0,0,0.6); user-select:none; }
+.titlebar { height:36px; display:flex; align-items:center; padding:0 10px; background:linear-gradient(#1b1b1b,#141414); border-bottom:1px solid rgba(255,255,255,0.03); }
+.title-left { display:flex; align-items:center; gap:10px; }
+.logo-box { width:28px; height:20px; border-radius:3px; background: var(--accent); display:flex; align-items:center; justify-content:center; font-weight:700; color:#111; font-size:12px;}
+.title { font-weight:600; font-size:14px; }
+.title-sub { color: var(--sub); font-size:12px; margin-left:6px; }
+.main { display:flex; padding:16px; gap:16px; align-items:center; }
+.left { width:170px; height:170px; border-radius:4px; background:linear-gradient(120deg,#1e1e1e,#2a2a2a); box-shadow: inset 0 2px 6px rgba(0,0,0,0.6); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; }
+.artwork-img { width:140px; height:140px; object-fit:cover; border-radius:4px; box-shadow:0 6px 18px rgba(0,0,0,0.6); }
+.canvas-wrap { position:absolute; left:8px; bottom:8px; }
+.controls { flex:1; display:flex; flex-direction:column; gap:12px; }
+.track-info { display:flex; flex-direction:column; gap:4px; }
+.track-title { font-weight:700; font-size:16px; }
+.track-artist { font-size:13px; color: var(--sub); }
+.buttons { display:flex; gap:8px; align-items:center; }
+.btn { width:44px; height:36px; border-radius:4px; border:none; background: var(--panel); color: var(--text); cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; box-shadow:0 2px 0 rgba(0,0,0,0.6); }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity:0.45; cursor:default; }
+.progress-wrap { display:flex; align-items:center; gap:10px; }
+.time { width:54px; font-size:12px; color: var(--sub); text-align:center; }
+.progress { flex:1; height:10px; background:rgba(255,255,255,0.03); border-radius:6px; position:relative; cursor:pointer; }
+.progress .bar { height:100%; width:0%; background: linear-gradient(90deg, var(--accent), #ff8b4a); border-radius:6px; }
+.vol { width:120px; display:flex; align-items:center; gap:8px; }
+.vol input[type=range] { width:86px; }
+.playlist { border-top:1px solid rgba(255,255,255,0.03); background:linear-gradient(#202020,#141414); padding:8px 12px; display:flex; gap:10px; align-items:center; }
+.plist { display:flex; gap:8px; flex-wrap:wrap; }
+.pitem { padding:6px 10px; border-radius:4px; background:rgba(255,255,255,0.02); font-size:13px; color: var(--sub); cursor:pointer; }
+.pitem.active { background: linear-gradient(90deg, var(--accent), #ff8b4a); color:#111; font-weight:700; }
+.small { font-size:11px; color: var(--sub); text-align:right; padding:6px 10px; }
+.skin-select { margin: 8px; display:flex; gap:8px; justify-content:center; }
+.skin-select button { padding:4px 8px; cursor:pointer; background:var(--panel); color:var(--text); border:none; border-radius:4px; }
+.skin-select button.active { background:var(--accent); font-weight:700; }
+
+@media (max-width:600px) {
+  .player-wrap { width:94%; }
+  .left { display:none; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="player-wrap skin-classic">
+  <div class="titlebar">
+    <div class="title-left">
+      <div class="logo-box">WA</div>
+      <div>
+        <div class="title">Mini Winamp</div>
+        <div class="title-sub">SoundCloud + Visualiser + Skins</div>
+      </div>
+    </div>
+    <div style="flex:1"></div>
+    <div style="font-size:12px;color:var(--sub)">Power-line your tracks with skins!</div>
+  </div>
+
+  <div class="skin-select">
+    <button data-skin="skin-classic" class="active">Classic</button>
+    <button data-skin="skin-retro">Retro Blue</button>
+    <button data-skin="skin-highcontrast">High-Contrast Green</button>
+  </div>
+
+  <div class="main">
+    <div class="left" id="left">
+      <img id="artwork" class="artwork-img" src="" alt="Artwork">
+      <div class="canvas-wrap">
+        <canvas id="viz" width="154" height="28"></canvas>
+      </div>
+    </div>
+
+    <div class="controls">
+      <div class="track-info">
+        <div id="title" class="track-title">—</div>
+        <div id="artist" class="track-artist">live405</div>
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="prev">⏮</button>
+        <button class="btn" id="play">▶️</button>
+        <button class="btn" id="next">⏭</button>
+        <div style="flex:1"></div>
+        <div class="vol">
+          <div style="font-size:12px;color:var(--sub)">Vol</div>
+          <input id="volRange" type="range" min="0" max="100" value="80" />
+        </div>
+      </div>
+
+      <div class="progress-wrap">
+        <div id="curtime" class="time">0:00</div>
+        <div class="progress" id="progress">
+          <div class="bar" id="bar"></div>
+        </div>
+        <div id="durtime" class="time">0:00</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="playlist">
+    <div class="plist" id="plist"></div>
+  </div>
+
+  <div class="small">Artwork from SoundCloud • Visualiser is simulated • Skins powered by CSS vars</div>
+</div>
+
+<iframe id="scPlayer" style="display:none" allow="autoplay"
+        src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1730760735&visual=false"></iframe>
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+// == CONFIG ==
+const playlist = [
+  { id: '1730760735' },
+  { id: '832025014' },
+  { id: '820638109' },
+  { id: '1323860767' }
+];
+// == END CONFIG ==
+
+const iframe = document.getElementById('scPlayer');
+const widget = SC.Widget(iframe);
+const artEl = document.getElementById('artwork');
+const titleEl = document.getElementById('title');
+const artistEl = document.getElementById('artist');
+const curtimeEl = document.getElementById('curtime');
+const durtimeEl = document.getElementById('durtime');
+const barEl = document.getElementById('bar');
+const playBtn = document.getElementById('play');
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const volRange = document.getElementById('volRange');
+const plistEl = document.getElementById('plist');
+const vizCanvas = document.getElementById('viz');
+const vizCtx = vizCanvas.getContext('2d');
+const skinButtons = document.querySelectorAll('.skin-select button');
+const playerWrap = document.querySelector('.player-wrap');
+
+let currentIndex = -1, duration = 0, progressTimer = null, vizAnim = null, vizEnergy = 0;
+
+// Build playlist UI
+playlist.forEach((t,i) => {
+  const div = document.createElement('div');
+  div.className = 'pitem';
+  div.textContent = `Track ${i+1}`;
+  div.dataset.index = i;
+  div.addEventListener('click', () => playIndex(i));
+  plistEl.appendChild(div);
+});
+
+function setActiveList(){
+  document.querySelectorAll('.pitem').forEach((el,idx) => {
+    el.classList.toggle('active', idx === currentIndex);
+  });
+}
+
+// Skin selector behavior
+skinButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    skinButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    playerWrap.className = `player-wrap ${btn.dataset.skin}`;
+  });
+});
+
+// Time formatting
+function secToTime(ms){
+  if (!isFinite(ms)) return '0:00';
+  const s = Math.floor(ms/1000), m = Math.floor(s/60), sec = s % 60;
+  return m + ':' + (sec<10?'0'+sec:sec);
+}
+
+// Load and play by index
+function playIndex(i){
+  if (i<0||i>=playlist.length) return;
+  currentIndex = i;
+  widget.load(`https://api.soundcloud.com/tracks/${playlist[i].id}`, { auto_play: true });
+  titleEl.textContent = 'Loading...'; artistEl.textContent = 'live405';
+  setActiveList();
+}
+
+// Play/pause
+playBtn.addEventListener('click', () => {
+  if (currentIndex === -1) { playIndex(0); return; }
+  widget.isPaused(paused => paused ? widget.play() : widget.pause());
+});
+
+// Prev/Next
+prevBtn.addEventListener('click', () => playIndex((currentIndex<=0) ? playlist.length-1 : currentIndex-1));
+nextBtn.addEventListener('click', () => playIndex((currentIndex>=playlist.length-1)?0:currentIndex+1));
+
+// Volume
+volRange.addEventListener('input', () => widget.setVolume(Number(volRange.value)));
+
+// Seeking
+document.getElementById('progress').addEventListener('click', e => {
+  if (!duration) return;
+  const pct = (e.clientX - e.currentTarget.getBoundingClientRect().left) / e.currentTarget.offsetWidth;
+  widget.seekTo(Math.floor(pct * duration));
+});
+
+widget.bind(SC.Widget.Events.READY, () => widget.setVolume(Number(volRange.value)));
+
+widget.bind(SC.Widget.Events.PLAY, () => {
+  playBtn.textContent = '⏸';
+  startProgress();
+  widget.getCurrentSound(sound => {
+    if (sound.title) titleEl.textContent = sound.title;
+    if (sound.user?.username) artistEl.textContent = sound.user.username;
+    if (sound.artwork_url) {
+      artEl.src = sound.artwork_url.replace('-large', '-t500x500');
+    } else artEl.src = '';
+  });
+  widget.getDuration(d => { duration = d||0; durtimeEl.textContent = secToTime(duration); });
+  startViz();
+});
+
+widget.bind(SC.Widget.Events.PAUSE, () => {
+  playBtn.textContent = '▶️';
+  stopProgress();
+  vizEnergy = 0;
+});
+
+widget.bind(SC.Widget.Events.FINISH, () => nextBtn.click());
+
+function startProgress(){
+  stopProgress();
+  progressTimer = setInterval(() => {
+    widget.getPosition(pos => {
+      if (!isFinite(pos)) return;
+      curtimeEl.textContent = secToTime(pos);
+      barEl.style.width = `${Math.max(0, Math.min(100,(pos/duration)*100))}%`;
+      vizEnergy = 0.3 + 0.7*Math.abs(Math.sin(pos/1000));
+    });
+  }, 200);
+}
+function stopProgress(){
+  if (progressTimer) clearInterval(progressTimer);
+  progressTimer = null;
+}
+
+// Visualizer (simulated)
+function startViz(){
+  if (vizAnim) return;
+  function draw(){
+    widget.getPosition(pos => {
+      const base = vizEnergy;
+      const W = vizCanvas.width, H = vizCanvas.height, bars = 20, gap = 2;
+      vizCtx.clearRect(0,0,W,H);
+      for (let i=0;i<bars;i++){
+        const idx = i/bars * Math.PI * 2 + (pos||0)/1000;
+        const amp = Math.min(1, base*0.6 + Math.abs(Math.sin(idx))*0.8 + Math.random()*0.4);
+        const h = Math.max(2, amp * H);
+        const barW = (W - (bars-1)*gap)/bars;
+        const x = i * (barW + gap);
+        const grad = vizCtx.createLinearGradient(0, H-h, 0, H);
+        grad.addColorStop(0, 'rgba(255,200,80,0.9)');
+        grad.addColorStop(1, 'rgba(255,100,0,0.8)');
+        vizCtx.fillStyle = grad;
+        vizCtx.fillRect(x, H-h, barW, h);
+      }
+    });
+    vizAnim = requestAnimationFrame(draw);
+  }
+  draw();
+}
+function stopViz(){
+  if (vizAnim) cancelAnimationFrame(vizAnim);
+  vizAnim = null;
+}
+
+(function init(){
+  setActiveList();
+  artEl.src = '';
+})();
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') { e.preventDefault(); playBtn.click(); }
+  else if (e.code==='ArrowRight') nextBtn.click();
+  else if (e.code==='ArrowLeft') prevBtn.click();
+});
+
+// Pause visualiser when hidden
+document.addEventListener('visibilitychange', () => {
+  document.hidden ? stopViz() : (vizAnim==null && playBtn.textContent==='⏸') && startViz();
+});
+</script>
+</body>
+</html>
