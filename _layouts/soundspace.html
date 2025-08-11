@@ -48,7 +48,7 @@
 
 <div class="scene" id="scene"></div>
 
-<button class="control-btn" id="playPauseBtn">⏸</button>
+<button class="control-btn" id="playPauseBtn">▶️</button>
 
 <!-- Hidden SoundCloud player -->
 <iframe id="scPlayer" width="100%" height="166" scrolling="no" frameborder="no"
@@ -58,38 +58,23 @@
 
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-const artworkImages = [
-  'work1.jpg',
-  'work2.jpg',
-  'work3.jpg',
-  'work4.jpg',
-  'work5.jpg',
-  'work6.jpg'
-]; // Replace with real filenames from your GitHub img/works folder
-
-const trackIDs = [
-  '1730760735',
-  '832025014',
-  '820638109',
-  '1323860767'
+const artworks = [
+  { file: 'naan.jpeg',     track: '1730760735', left: 300,  bottom: 120 },
+  { file: 'people.jpeg',   track: '832025014',  left: 1100, bottom: 140 },
+  { file: 'pink.jpeg',     track: '820638109',  left: 1900, bottom: 100 },
+  { file: 'maverock.jpeg', track: '1323860767', left: 2700, bottom: 130 }
 ];
 
 const scene = document.getElementById('scene');
 
-// Create artworks in random positions along hillside
-artworkImages.forEach((img, index) => {
+artworks.forEach(artData => {
   const art = document.createElement('img');
-  art.src = `https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/${img}`;
+  art.src = `https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/${artData.file}`;
   art.className = 'artwork';
-  
-  // Random-ish placement
-  art.style.left = `${300 + index * 700}px`;
-  art.style.bottom = `${100 + (Math.sin(index) * 50)}px`;
+  art.style.left = `${artData.left}px`;
+  art.style.bottom = `${artData.bottom}px`;
   art.style.width = '200px';
-
-  // Assign track
-  const trackIndex = index % trackIDs.length;
-  art.dataset.track = trackIDs[trackIndex];
+  art.dataset.track = artData.track;
 
   art.addEventListener('click', () => {
     loadTrack(art.dataset.track);
@@ -130,8 +115,8 @@ function updateBtn() {
 window.addEventListener('scroll', () => {
   document.querySelectorAll('.artwork').forEach(art => {
     const rect = art.getBoundingClientRect();
-    const scale = 1 + (0.2 * (window.innerWidth/2 - rect.left) / window.innerWidth);
-    art.style.transform = `scale(${Math.max(0.8, scale)})`;
+    const scale = 1 + (0.15 * (window.innerWidth/2 - rect.left) / window.innerWidth);
+    art.style.transform = `scale(${Math.max(0.85, scale)})`;
   });
 });
 </script>
