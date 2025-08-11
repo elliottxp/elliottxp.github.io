@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hillside Gallery</title>
+<style>
+  body {
+    margin: 0;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    background: #87ceeb; /* sky color */
+  }
+  .scene {
+    position: relative;
+    height: 100vh;
+    width: 5000px; /* panoramic width */
+    background: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?ixlib=rb-4.0.3&auto=format&fit=crop&w=5000&q=80') no-repeat center bottom;
+    background-size: cover;
+  }
+  .artwork {
+    position: absolute;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .artwork:hover {
+    transform: scale(1.05);
+  }
+  .control-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(0,0,0,0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  iframe {
+    display: none; /* hide player */
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" id="scene"></div>
+
+<button class="control-btn" id="playPauseBtn">⏸</button>
+
+<!-- Hidden SoundCloud player -->
+<iframe id="scPlayer" width="100%" height="166" scrolling="no" frameborder="no"
+  allow="autoplay"
+  src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1730760735&auto_play=false">
+</iframe>
+
+<script src="https://w.soundcloud.com/player/api.js"></script>
+<script>
+const artworkImages = [
+  'work1.jpg',
+  'work2.jpg',
+  'work3.jpg',
+  'work4.jpg',
+  'work5.jpg',
+  'work6.jpg'
+]; // Replace with real filenames from your GitHub img/works folder
+
+const trackIDs = [
+  '1730760735',
+  '832025014',
+  '820638109',
+  '1323860767'
+];
+
+const scene = document.getElementById('scene');
+
+// Create artworks in random positions along hillside
+artworkImages.forEach((img, index) => {
+  const art = document.createElement('img');
+  art.src = `https://raw.githubusercontent.com/elliottxp/elliottxp.github.io/main/img/works/${img}`;
+  art.className = 'artwork';
+  
+  // Random-ish placement
+  art.style.left = `${300 + index * 700}px`;
+  art.style.bottom = `${100 + (Math.sin(index) * 50)}px`;
+  art.style.width = '200px';
+
+  // Assign track
+  const trackIndex = index % trackIDs.length;
+  art.dataset.track = trackIDs[trackIndex];
+
+  art.addEventListener('click', () => {
+    loadTrack(art.dataset.track);
+  });
+
+  scene.appendChild(art);
+});
+
+// SoundCloud Widget API
+const iframe = document.getElementById('scPlayer');
+const widget = SC.Widget(iframe);
+let isPlaying = false;
+
+function loadTrack(trackID) {
+  widget.load(`https://api.soundcloud.com/tracks/${trackID}`, {
+    auto_play: true
+  });
+  isPlaying = true;
+  updateBtn();
+}
+
+document.getElementById('playPauseBtn').addEventListener('click', () => {
+  if (isPlaying) {
+    widget.pause();
+    isPlaying = false;
+  } else {
+    widget.play();
+    isPlaying = true;
+  }
+  updateBtn();
+});
+
+function updateBtn() {
+  document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸' : '▶️';
+}
+
+// Parallax scaling effect
+window.addEventListener('scroll', () => {
+  document.querySelectorAll('.artwork').forEach(art => {
+    const rect = art.getBoundingClientRect();
+    const scale = 1 + (0.2 * (window.innerWidth/2 - rect.left) / window.innerWidth);
+    art.style.transform = `scale(${Math.max(0.8, scale)})`;
+  });
+});
+</script>
+
+</body>
+</html>
