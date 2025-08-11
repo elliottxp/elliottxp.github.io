@@ -1,6 +1,6 @@
 ---
 layout: factory seconds
 title: factory seconds
-permalink: /factory seconds/
+permalink: /factoryseconds/
 order: 4
 ---
