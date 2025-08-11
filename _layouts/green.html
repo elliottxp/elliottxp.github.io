@@ -1,3 +1,9 @@
+---
+layout: default
+title: greenbox
+description: "green."
+order: 5
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,6 +19,9 @@
     --accent-color: #75896b; /* muted green */
     --button-bg: #d7d9d5;
     --button-hover-bg: #c3c6be;
+    --clear-btn-bg: #f2dede;
+    --clear-btn-text: #a94442;
+    --clear-btn-border: #ebccd1;
   }
 
   body {
@@ -109,6 +118,21 @@
     color: var(--text-color);
   }
 
+  #clearIdeasBtn {
+    margin-top: 0.8rem;
+    background-color: var(--clear-btn-bg);
+    color: var(--clear-btn-text);
+    border: 1px solid var(--clear-btn-border);
+    padding: 0.4rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  #clearIdeasBtn:hover {
+    background-color: #e6b8b8;
+  }
+
   .footer-note {
     margin-top: 2rem;
     font-size: 0.85rem;
@@ -156,6 +180,7 @@
       width: 100%;
       margin: 0 0 1rem 0;
       border-radius: 6px;
+      margin-right: 0;
     }
 
     .actions {
@@ -175,6 +200,11 @@
       max-height: 150px;
       font-size: 0.95rem;
       padding: 0.75rem 0.5rem;
+    }
+
+    #clearIdeasBtn {
+      width: 100%;
+      margin-top: 0;
     }
 
     .footer-note {
@@ -209,6 +239,7 @@
   <div class="idea-list" id="ideaList" aria-label="List of your ideas">
     <strong>Your ideas:</strong>
     <ul id="ideasUl" style="padding-left: 1.2rem; margin-top: 0;"></ul>
+    <button id="clearIdeasBtn">Clear Ideas</button>
   </div>
 
   <p class="footer-note">Ideas are stored locally in your browser. Refreshing will keep your list.</p>
@@ -240,10 +271,11 @@
   const addToCalendarBtn = document.getElementById('addToCalendarBtn');
   const shareIdeaBtn = document.getElementById('shareIdeaBtn');
   const ideasUl = document.getElementById('ideasUl');
+  const clearIdeasBtn = document.getElementById('clearIdeasBtn');
 
   function updateIdeaList() {
     ideasUl.innerHTML = '';
-    ideas.forEach((idea, i) => {
+    ideas.forEach((idea) => {
       const li = document.createElement('li');
       li.textContent = idea;
       ideasUl.appendChild(li);
@@ -336,6 +368,16 @@ END:VCALENDAR`;
       }, () => {
         alert('Failed to copy idea.');
       });
+    }
+  });
+
+  clearIdeasBtn.addEventListener('click', () => {
+    if (confirm("Are you sure you want to clear all your ideas? This action cannot be undone.")) {
+      ideas = [...suggestedIdeas]; // reset to original suggestions
+      saveIdeas();
+      updateIdeaList();
+      ideaDisplay.textContent = '';
+      ideaActions.style.display = 'none';
     }
   });
 
