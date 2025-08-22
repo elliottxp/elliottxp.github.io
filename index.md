@@ -3,7 +3,7 @@
     <img 
         src="img/dragon.gif" 
         alt="sydney" 
-        width="350" 
+        width="198" 
         height="198"
         style="display: block;"
     />
