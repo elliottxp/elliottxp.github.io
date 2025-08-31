@@ -1,6 +1,6 @@
 ---
 layout: recipes
 title: recipes
-permalink: /rodsrecipes/
+permalink: /recipes/
 order: 5
 ---
