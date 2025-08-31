@@ -10,7 +10,7 @@
 </style>
 
 <img 
-    src="img/dragon.gif" 
-    alt="Animated dragon illustration" 
+    src="img/air.GIF" 
+    alt="Animated air illustration" 
     class="center-img"
 />
