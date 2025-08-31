@@ -1,0 +1,299 @@
+---
+layout: default
+title: rod's recipes
+description: 
+order: 5
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rod's Interactive Cookbook</title>
+<style>
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f1e9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #4B5320;
+    color: #f5f1e9;
+    padding: 1rem 2rem;
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  nav {
+    background-color: #78866B;
+    padding: 0.5rem 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  nav button {
+    background-color: #f5f1e9;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+  }
+
+  nav button:hover {
+    background-color: #dcd9ce;
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  nav button.active {
+    background-color: #dcd9ce;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  main {
+    padding: 2rem;
+    max-width: 900px;
+    margin: auto;
+  }
+
+  section {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  section.active {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h2 {
+    color: #4B5320;
+    border-bottom: 2px solid #78866B;
+    padding-bottom: 0.5rem;
+  }
+
+  h3 {
+    color: #556B2F;
+  }
+
+  ul {
+    margin-left: 1rem;
+  }
+
+  .ingredients, .method {
+    background-color: #e6e2d3;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .ingredients:hover, .method:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #4B5320;
+    color: #f5f1e9;
+    margin-top: 2rem;
+  }
+</style>
+</head>
+<body>
+
+<header>Rod's Interactive Cookbook</header>
+
+<nav id="recipeNav">
+  <button data-target="sausageRolls" class="active">Rod's Sausage Rolls</button>
+  <button data-target="rumpCap">Rump Cap Roast</button>
+  <button data-target="ricePudding">Rice Pudding</button>
+  <button data-target="cheeseTart">Cheese & Onion Tart</button>
+  <button data-target="blueberryDessert">Blueberry Dessert</button>
+  <button data-target="wineTrifle">Wine Trifle</button>
+  <button data-target="cremeCaramel">Crème Caramel</button>
+  <button data-target="blackberryConserve">Wild Blackberry Conserve</button>
+  <button data-target="southernChicken">Southern Roasted Chicken</button>
+  <button data-target="specialRice">Special Baked Rice</button>
+  <button data-target="bakedRiceCustard">Baked Rice Custard</button>
+  <button data-target="roastedVegetables">Roasted Vegetables</button>
+  <button data-target="beefBolognese">Beef Bolognese</button>
+  <button data-target="peaHamSoup">Pea & Ham Soup</button>
+  <button data-target="stickyRibs">Rod's Sticky Pork Ribs</button>
+  <button data-target="pruneTart">Prune Tart</button>
+</nav>
+
+<main>
+  <!-- 1. Sausage Rolls -->
+  <section id="sausageRolls" class="active">
+    <h2>Rod's Sausage Rolls</h2>
+    <div class="ingredients">
+      <h3>Ingredients</h3>
+      <ul>
+        <li>500 g beef mince</li>
+        <li>~300 g sausage meat</li>
+        <li>1 medium carrot (coarsely grated)</li>
+        <li>1 large onion (finely chopped)</li>
+        <li>Pinch of salt</li>
+        <li>Pinch of pepper</li>
+        <li>6 sheets puff pastry</li>
+        <li>Milk or egg wash (for brushing)</li>
+      </ul>
+    </div>
+    <div class="method">
+      <h3>Method</h3>
+      <p>Mix both meats in a bowl by hand then add carrot, onion, and seasoning. Mix well. Lay out the pastry sheets and cut each in half. Brush the bottom edge with milk/egg wash. Divide the filling into small orange-sized balls, squeeze each into an elongated shape, and place along the top edge of pastry. Roll carefully, ensuring pastry overlaps. Put each long roll aside and complete all rolls. Cut each roll into short or long sections. Preheat oven, fan-forced 190°C. Lay all rolls on large tray close together. Brush all with egg and milk mixture. Bake for 20-25 minutes or until brown. Serve hot with sauce.</p>
+    </div>
+  </section>
+
+  <!-- 2. Rump Cap Roast -->
+  <section id="rumpCap">
+    <h2>Rump Cap Roast</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1.5 kg rump cap roast</li><li>Olive oil</li><li>Salt, pepper</li><li>Herbs (rosemary, thyme optional)</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Preheat oven 220°C. Score fat, rub with olive oil, salt, pepper, herbs. Roast 15 min, then lower to 180°C. Roast 1–1.5h depending on size. Rest 15 min before slicing.</p></div>
+  </section>
+
+  <!-- 3. Rice Pudding -->
+  <section id="ricePudding">
+    <h2>Rice Pudding</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 cup rice</li><li>4 cups milk</li><li>½ cup sugar</li><li>1 tsp vanilla</li><li>Nutmeg to sprinkle</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Place rice, milk, sugar, vanilla in greased oven dish. Bake at 160°C, stir occasionally, until rice soft and pudding creamy. Sprinkle nutmeg before serving.</p></div>
+  </section>
+
+  <!-- 4. Cheese & Onion Tart -->
+  <section id="cheeseTart">
+    <h2>Cheese & Onion Tart</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>20 cm pie dish (greased)</li><li>130 g plain flour</li><li>Butter/margarine</li><li>Cold water</li><li>2–3 onions</li><li>100 g cheese</li><li>2 eggs</li><li>Milk/cream</li><li>Salt, pepper</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Make pastry with flour, butter, water. Roll out, line dish. Fry onions until soft, place in pastry shell. Beat eggs with milk/cream, season. Pour over onions. Top with cheese. Bake at 180°C until set and golden.</p></div>
+  </section>
+
+  <!-- 5. Blueberry Dessert -->
+  <section id="blueberryDessert">
+    <h2>Blueberry Dessert</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>2 cups blueberries</li><li>½ cup sugar</li><li>1 cup cream</li><li>1 tbsp lemon juice</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Mix berries, sugar, lemon juice. Chill. Whip cream, fold in gently. Serve layered in glasses.</p></div>
+  </section>
+
+  <!-- 6. Wine Trifle -->
+  <section id="wineTrifle">
+    <h2>Wine Trifle</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 sponge cake</li><li>½ cup sherry/wine</li><li>Custard</li><li>Whipped cream</li><li>Fruit & jelly</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Layer sponge in bowl, pour over wine. Add fruit, jelly, custard. Top with cream. Chill before serving.</p></div>
+  </section>
+
+  <!-- 7. Crème Caramel -->
+  <section id="cremeCaramel">
+    <h2>Crème Caramel</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 cup sugar (for caramel)</li><li>3 eggs</li><li>2 cups milk</li><li>½ cup sugar</li><li>1 tsp vanilla</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Caramelize sugar, pour into dish. Mix eggs, milk, sugar, vanilla. Pour over caramel. Bake in water bath at 160°C 40–45 min. Cool, chill, invert to serve.</p></div>
+  </section>
+
+  <!-- 8. Wild Blackberry Conserve -->
+  <section id="blackberryConserve">
+    <h2>Wild Blackberry Conserve</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>4 cups blackberries</li><li>3 cups sugar</li><li>Juice of 1 lemon</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Place berries, sugar, lemon juice in saucepan. Simmer until thickened. Pour into sterilized jars, seal.</p></div>
+  </section>
+
+  <!-- 9. Southern Roasted Chicken -->
+  <section id="southernChicken">
+    <h2>Southern Roasted Chicken</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 whole chicken</li><li>2 tbsp paprika</li><li>1 tbsp garlic powder</li><li>1 tbsp onion powder</li><li>1 tsp cayenne pepper</li><li>Salt, pepper</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Mix spices, rub over chicken. Roast 180°C for 1.5h until juices run clear.</p></div>
+  </section>
+
+  <!-- 10. Special Baked Rice -->
+  <section id="specialRice">
+    <h2>Special Baked Rice</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 cup rice</li><li>2 cups chicken stock</li><li>1 onion</li><li>1 tbsp butter</li><li>Salt, pepper</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Place rice, stock, onion, butter in casserole dish. Bake covered 180°C for 40–45 min until rice tender. Season and serve.</p></div>
+  </section>
+
+  <!-- 11. Baked Rice Custard -->
+  <section id="bakedRiceCustard">
+    <h2>Baked Rice Custard</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 cup cooked rice</li><li>2 eggs</li><li>2 cups milk</li><li>½ cup sugar</li><li>Nutmeg</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Mix rice, eggs, milk, sugar. Pour into dish. Sprinkle nutmeg. Bake at 160°C 40 min until set.</p></div>
+  </section>
+
+  <!-- 12. Roasted Vegetables -->
+  <section id="roastedVegetables">
+    <h2>Roasted Vegetables</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>Assorted vegetables (carrot, potato, pumpkin, etc.)</li><li>Olive oil</li><li>Salt, pepper</li><li>Herbs</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Chop vegetables, drizzle oil, season, roast 200°C 40 min until golden.</p></div>
+  </section>
+
+  <!-- 13. Beef Bolognese -->
+  <section id="beefBolognese">
+    <h2>Beef Bolognese</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>500 g beef mince</li><li>1 onion</li><li>2 sticks celery</li><li>2 cups roasted tomatoes</li><li>Fresh parsley</li><li>Salt, pepper</li><li>Pasta</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Heat oil, sauté onions and celery. Add beef, cook until browned. Stir in tomatoes, simmer 45 min–1h. Add parsley, salt, pepper. Serve with pasta.</p></div>
+  </section>
+
+  <!-- 14. Pea & Ham Soup -->
+  <section id="peaHamSoup">
+    <h2>Pea & Ham Soup</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 cup split peas</li><li>1 smoked ham hock</li><li>1 onion</li><li>1–2 carrots</li><li>Water</li><li>Salt, pepper</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Rinse peas. Place with ham hock, onion, carrots, water. Simmer 1–1.5h. Remove ham, dice, return meat. Season and serve.</p></div>
+  </section>
+
+  <!-- 15. Sticky Pork Ribs -->
+  <section id="stickyRibs">
+    <h2>Rod's Sticky Pork Ribs</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>1 rack pork ribs</li><li>2 tbsp honey</li><li>3 tbsp soy sauce</li><li>2 tsp garlic</li><li>1 tsp ginger powder</li><li>2 tbsp brown sugar</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Mix honey, soy, garlic, ginger, sugar. Brush over ribs. Wrap in foil, bake 1.5–2h at 180°C. Unwrap, brush more sauce, broil 5–10 min. Serve hot.</p></div>
+  </section>
+
+  <!-- 16. Prune Tart -->
+  <section id="pruneTart">
+    <h2>Prune Tart</h2>
+    <div class="ingredients"><h3>Ingredients</h3><ul><li>Pastry sheet</li><li>250 g pitted prunes</li><li>½ cup brown sugar</li><li>1 tsp cinnamon</li><li>2 eggs</li><li>2 tbsp cream</li><li>Butter</li></ul></div>
+    <div class="method"><h3>Method</h3><p>Preheat oven 180°C. Line tart pan with pastry. Mix prunes, sugar, cinnamon, eggs, cream. Pour into pastry. Bake 35–40 min until golden. Cool before serving.</p></div>
+  </section>
+</main>
+
+<footer>&copy; 2025 Rod's Cookbook</footer>
+
+<script>
+const buttons = document.querySelectorAll('nav button');
+const sections = document.querySelectorAll('main section');
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    const target = button.dataset.target;
+
+    // remove active state from all
+    sections.forEach(sec => {
+      sec.classList.remove('active');
+      sec.style.display = 'none';
+    });
+    buttons.forEach(btn => btn.classList.remove('active'));
+
+    // activate new
+    const activeSection = document.getElementById(target);
+    activeSection.style.display = 'block';
+    setTimeout(() => {
+      activeSection.classList.add('active');
+    }, 10);
+
+    button.classList.add('active');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+});
+</script>
+
+</body>
+</html>
