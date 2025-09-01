@@ -2,5 +2,5 @@
 layout: recipes
 title: recipes
 permalink: /recipes/
-order: 5
+order: 4
 ---
