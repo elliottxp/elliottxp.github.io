@@ -21,10 +21,11 @@ order: 5
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    scroll-behavior: smooth; /* smooth scrolling */
   }
 
   header {
-    background-color: #a8ad8d;
+    background-color: #cccebc;
     color: #f5f1e9;
     padding: 1rem 2rem;
     text-align: center;
@@ -32,7 +33,7 @@ order: 5
   }
 
   nav {
-    background-color: #78866B;
+    background-color: #adb9a2;
     padding: 0.5rem 2rem;
     display: flex;
     flex-wrap: wrap;
@@ -74,6 +75,7 @@ order: 5
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.5s ease, transform 0.5s ease;
+    scroll-margin-top: 80px; /* for header offset */
   }
 
   section.active {
@@ -112,7 +114,7 @@ order: 5
   footer {
     text-align: center;
     padding: 1rem;
-    background-color: #b6ba9d;
+    background-color: #a7a99c;
     color: #f5f1e9;
     margin-top: 2rem;
   }
@@ -750,34 +752,32 @@ order: 5
   </section>
 </main>
 
-<footer>&copy; 2025 Rod's Cookbook</footer>
+<footer>
+  <p>© 2025 Rod's Cookbook</p>
+</footer>
 
 <script>
-const buttons = document.querySelectorAll('nav button');
-const sections = document.querySelectorAll('main section');
+  const navButtons = document.querySelectorAll('#recipeNav button');
+  const sections = document.querySelectorAll('main section');
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const target = button.dataset.target;
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      // Remove active class from all buttons
+      navButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    // remove active state from all
-    sections.forEach(sec => {
-      sec.classList.remove('active');
-      sec.style.display = 'none';
+      // Hide all sections
+      sections.forEach(sec => sec.classList.remove('active'));
+
+      // Show target section
+      const targetId = btn.getAttribute('data-target');
+      const targetSection = document.getElementById(targetId);
+      targetSection.classList.add('active');
+
+      // Scroll smoothly to section
+      targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    // activate new
-    const activeSection = document.getElementById(target);
-    activeSection.style.display = 'block';
-    setTimeout(() => {
-      activeSection.classList.add('active');
-    }, 10);
-
-    button.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-});
 </script>
 
 </body>
