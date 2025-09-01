@@ -7,7 +7,7 @@
 </head>
 <body>
     <article>
-        <h1>A Trick for Finding Lost Stuff</h1>
+        <h1>If you call it, you find it</h1>
         <p>You know that weird thing I do when I lose something? Like, it's usually I misplace my keys or my phone, and I'll start walking around talking out loud to the inanimate object, saying "Mr keys, where are you?" or "Come on, phone, I know you're hiding, where are you!" And then, BAM, a few seconds later, I spot it right there in front of me. It happens all the time, and it feels like the Mindfreak.</p>
         <p>It just happened again with my earplug that I lost in my sleep last night—I was rummaging around the bed, getting frustrated, and as soon as I called out for it, there it was under the pillow, half-hidden in the pillowcase. How does this even work? I decided to look into it because it's too cool to just chalk up to luck, or being a Mindfreak.</p>
         <p>Turns out, there's actual science behind it. It's called "self-directed speech," where saying the thing's name out loud helps your brain focus better on finding it. <a href="https://pubmed.ncbi.nlm.nih.gov/22489646/">Gary Lupyan and Daniel Swingley</a> did experiments where people looked for stuff in pictures or on fake shelves, like finding a Coke bottle. When people repeated the name out loud, they found familiar things quicker—about 50 to 100 milliseconds faster—because it lights up a picture in your mind of what you're hunting for. But it only helps if you already know what it looks like, otherwise, it might slow you down a bit.</p>
