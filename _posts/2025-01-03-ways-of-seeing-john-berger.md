@@ -1,4 +1,4 @@
-## How John Berger Transformed the Way I Experience Art
+## John Berger Transformed the Way I Experience Art
 ### Ways of Seeing by John Burger
 
 🤖🚫 Note: No generative AI was used to create this content. This page is only intended for human consumption and is NOT allowed to be used for machine training including but not limited to LLMs.
