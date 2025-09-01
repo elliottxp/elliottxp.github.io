@@ -42,11 +42,11 @@ nav button {
   background-color: #f5f1e9;
   font-family: 'Optima', 'Open Sans', sans-serif;
   border: none;
-  padding: 0.5rem 1rem;
+  padding: 0.25rem 0.5rem;
   cursor: pointer;
   border-radius: 5px;
   transition: all 0.3s ease;
-  font-size: 0.9rem;
+  font-size: 0.7rem;
 }
 
 nav button:hover {
