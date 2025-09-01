@@ -3,6 +3,7 @@
 body {
   font-family: 'Optima', 'Open Sans', sans-serif;
   background-color: #FFEFB5; /* warm cream */
+  background:linear-gradient(#828282,#cacfbd);
   background-size: auto;
   color: #6c6969;
   margin: 0;
