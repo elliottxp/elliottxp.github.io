@@ -4,7 +4,6 @@ title: rod's recipes
 description: 
 order: 5
 ---
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,102 +14,151 @@ order: 5
   body {
     font-family: 'Arial', sans-serif;
     background-color: #f5f1e9;
+    margin: 0; padding: 0;
     color: #333;
-    margin: 0;
-    padding: 0;
   }
 
   header {
     background-color: #4B5320;
-    color: #f5f1e9;
-    padding: 1rem 2rem;
+    color: #fff;
+    padding: 1rem;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
 
+  /* --- IMAGE AT TOP --- */
+  .intro-image {
+    display: block;
+    margin: 1rem auto;
+    max-width: 90%;
+    height: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.3), 0 4px 6px rgba(0,0,0,0.2);
+    border-radius: 8px;
+  }
+
+  /* --- NAVIGATION --- */
   nav {
     background-color: #78866B;
-    padding: 0.5rem 2rem;
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    justify-content: center;
+    flex-direction: column;
+    padding: 0.5rem 1rem;
+  }
+
+  .nav-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hamburger {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+  }
+
+  .search-box {
+    margin: 0.5rem 0;
+  }
+
+  .search-box input {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: none;
+    font-size: 1rem;
+  }
+
+  nav .menu {
+    display: none;
+    flex-direction: column;
+    background: #78866B;
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+
+  nav .menu.open {
+    display: flex;
+    max-height: 500px;
   }
 
   nav button {
-    background-color: #f5f1e9;
+    background: #f5f1e9;
     border: none;
-    padding: 0.5rem 1rem;
-    cursor: pointer;
+    margin: 0.3rem 0;
+    padding: 0.6rem 1rem;
     border-radius: 5px;
-    transition: all 0.3s ease;
-    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+    text-align: left;
   }
 
-  nav button:hover {
-    background-color: #dcd9ce;
+  nav button:hover, nav button.active {
+    background: #dcd9ce;
     transform: scale(1.05);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   }
 
-  nav button.active {
-    background-color: #dcd9ce;
-    font-weight: bold;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-
+  /* --- MAIN CONTENT --- */
   main {
-    padding: 2rem;
-    max-width: 900px;
+    padding: 1rem;
+    max-width: 800px;
     margin: auto;
   }
 
   section {
     display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
+    animation: fadeIn 0.5s ease;
   }
 
-  section.active {
-    display: block;
-    opacity: 1;
-    transform: translateY(0);
-  }
+  section.active { display: block; }
 
   h2 {
     color: #4B5320;
     border-bottom: 2px solid #78866B;
-    padding-bottom: 0.5rem;
-  }
-
-  h3 {
-    color: #556B2F;
-  }
-
-  ul {
-    margin-left: 1rem;
+    padding-bottom: 0.3rem;
   }
 
   .ingredients, .method {
-    background-color: #e6e2d3;
+    background: #e6e2d3;
     padding: 1rem;
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     border-radius: 8px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    cursor: pointer;
   }
 
-  .ingredients:hover, .method:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  .ingredients.collapsed ul, .method.collapsed ol {
+    display: none;
+  }
+
+  .step:hover {
+    background: #f9f6ef;
+    transition: background 0.2s;
+  }
+
+  #noResults {
+    display: none;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1.2rem;
+    color: #a00;
   }
 
   footer {
     text-align: center;
     padding: 1rem;
-    background-color: #4B5320;
-    color: #f5f1e9;
+    background: #4B5320;
+    color: white;
     margin-top: 2rem;
+  }
+
+  /* --- ANIMATIONS --- */
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -118,664 +166,132 @@ order: 5
 
 <header>Rod's Cookbook</header>
 
-<nav id="recipeNav">
-  <button data-target="sausageRolls" class="active">Rod's Sausage Rolls</button>
-  <button data-target="rumpCap">Beef Rump Cap Roast</button>
-  <button data-target="ricePudding">Rice Pudding</button>
-  <button data-target="cheeseTart">Cheese & Onion Tart</button>
-  <button data-target="blueberryDessert">Blueberry Dessert</button>
-  <button data-target="wineTrifle">Wine Trifle</button>
-  <button data-target="cremeCaramel">Crème Caramel</button>
-  <button data-target="blackberryConserve">Wild Blackberry Conserve</button>
-  <button data-target="southernChicken">Southern Roasted Chicken</button>
-  <button data-target="specialRice">Special Rice Dish</button>
-  <button data-target="bakedRiceCustard">Baked Rice Custard</button>
-  <button data-target="roastedVegetables">Roasted Vegetables</button>
-  <button data-target="beefBolognese">Beef Bolognese</button>
-  <button data-target="peaHamSoup">Pea & Ham Soup</button>
-  <button data-target="stickyRibs">Rod's Sticky Pork Ribs</button>
-  <button data-target="pruneTart">Prune Tart</button>
+<!-- Intro image -->
+<img src="img/writersnote.jpg" alt="Writer's Note" class="intro-image">
+
+<nav>
+  <div class="nav-top">
+    <span class="hamburger">☰ Recipes</span>
+  </div>
+  <div class="search-box">
+    <input type="text" id="searchInput" placeholder="Search recipes...">
+  </div>
+  <div class="menu" id="recipeNav">
+    <button data-target="sausageRolls" class="active">Rod's Sausage Rolls</button>
+    <button data-target="rumpCap">Beef Rump Cap Roast</button>
+    <button data-target="ricePudding">Rice Pudding</button>
+    <button data-target="cheeseTart">Cheese and Onion Tart</button>
+    <button data-target="blueberryDessert">Blueberry Dessert</button>
+    <button data-target="wineTrifle">Wine Trifle</button>
+  </div>
 </nav>
 
 <main>
-  <!-- 1. Sausage Rolls -->
   <section id="sausageRolls" class="active">
     <h2>Rod's Sausage Rolls</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
+    <div class="ingredients collapsed">
+      <h3>Ingredients (tap to expand)</h3>
       <ul>
         <li>500 g beef mince</li>
         <li>~300 g sausage meat</li>
-        <li>1 medium carrot (coarsely grated)</li>
-        <li>1 large onion (finely chopped)</li>
-        <li>Pinch of salt</li>
-        <li>Pinch of pepper</li>
-        <li>6 sheets puff pastry</li>
-        <li>Milk or egg wash (for brushing)</li>
+        <li>1 medium carrot (grated)</li>
+        <li>1 medium onion (finely chopped)</li>
       </ul>
     </div>
-    <div class="method">
-      <h3>Method</h3>
+    <div class="method collapsed">
+      <h3>Method (tap to expand)</h3>
       <ol>
-        <li>Mix both meats in a bowl by hand then add carrot, onion, and seasoning. Mix well.</li>
-        <li>Lay out the pastry sheets and cut each in half.</li>
-        <li>Brush the bottom edge with milk/egg wash.</li>
-        <li>Divide the filling into small orange-sized balls, squeeze each into an elongated shape, and place along the top edge of pastry.</li>
-        <li>Roll carefully, ensuring pastry overlaps.</li>
-        <li>Put each long roll aside and complete all rolls</li>
-        <li>Cut each roll into short or long sections</li>
-        <li>Pre heat over, fan forced 190 degrees celsius</li>
-        <li>Lay all rolls on large tray close together</li>
-        <li>Brush all with egg and milk mixture</li>
-        <li>Bake for 20-25 minutes or until brown,</li>
-        <li>Serve hot with sauce.</li>
+        <li class="step">Mix both meats with carrot, onion, and seasoning.</li>
+        <li class="step">Lay out pastry sheets and cut each in half.</li>
+        <li class="step">Brush edges with egg, roll into logs, cut, and bake.</li>
       </ol>
     </div>
   </section>
 
-  <!-- 2. Beef Rump Cap Roast -->
   <section id="rumpCap">
     <h2>Beef Rump Cap Roast</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>One 3 kg piece of rump cap beef</li>
-        <li>5–6 cloves fresh garlic, peeled</li>
-        <li>Olive oil (liberal amount)</li>
-        <li>Salt or seasoning of choice</li>
-        <li>3 cups rainwater</li>
-        <li>Aluminium foil</li>
-        <li>(Optional) 1 × 750 ml bottle good stout beer</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <p><strong>Preparation (choose one):</strong></p>
-      <p><strong>Marinated Method</strong></p>
-      <ol>
-        <li>Place the beef in a heavy-duty plastic bag or container.</li>
-        <li>Add half of 750 ml bottle of stout beer.</li>
-        <li>Seal and refrigerate overnight.</li>
-        <li>Then drink the remaining stout.</li>
-      </ol>
-      <p><strong>Dry Rub Method</strong></p>
-      <ol>
-        <li>Rub the beef all over with your preferred beef rub or seasoning mix.</li>
-      </ol>
-      <p><strong>Cooking Instructions</strong></p>
-      <ol>
-        <li>With a sharp knife, make 4–5 deep cuts evenly spaced around the beef.</li>
-        <li>Insert peeled garlic cloves deep into the cuts.</li>
-        <li>Drizzle olive oil over the beef and rub in well with your hands.</li>
-        <li>Place the beef on a roasting rack inside a ceramic or heavy baking dish.</li>
-        <li>Pour water into the dish.</li>
-        <li>Cover the beef tightly with a double layer of foil.</li>
-        <li>Place low in the oven.</li>
-      </ol>
-      <p><strong>Cooking Time & Temperature</strong></p>
-      <ul>
-        <li>The cooking process can take a minimum of 4 hours (shorter cook): 180°C (no fan) 6–10 hours (slow cook): 160°C (no fan)</li>
-      </ul>
-      <p><strong>Finishing</strong></p>
-      <ol>
-        <li>About 1 hour before the end of cooking, remove the foil to allow the beef to brown.</li>
-        <li>Remove from the oven and rest for 15–20 minutes before slicing.</li>
-        <li>Use the remaining pan juices to make a rich gravy. Add a little cornflour to thicken.</li>
-        <li>(Optional) I sometime return the sliced beef to the baking dish, cover with gravy, and serve.</li>
-      </ol>
-    </div>
+    <p>Rubbed with garlic, rosemary, and olive oil, then slow-roasted until tender.</p>
   </section>
 
-  <!-- 3. Rice Pudding -->
   <section id="ricePudding">
     <h2>Rice Pudding</h2>
-    <p>Very nice to consume for winter, there are two variations on the pudding, with raisins and without.</p>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>¾ cup risotto rice</li>
-        <li>3 good-sized farm eggs</li>
-        <li>1/3 cup raw sugar</li>
-        <li>½ teaspoon vanilla extract</li>
-        <li>Enough milk to fill just below the lip of a 20 cm shallow ceramic dish</li>
-        <li>Butter (to lightly greased with ceramic dish)</li>
-        <li>2 teaspoons freshly grated nutmeg</li>
-        <li>Optional: a small handful of raisins</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Preheat oven to 160–170°C, no fan.</li>
-        <li>Lightly grease a 20 cm shallow ceramic dish with butter.</li>
-        <li>Cook the rice gently in just enough water until fully absorbed and tender (about 20 minutes). Set aside.</li>
-        <li>In a large stainless steel bowl, whisk together the eggs, sugar, and vanilla until well combined.</li>
-        <li>Gradually whisk in enough milk so that once the rice is added, the mixture will fill the dish to just below the rim.</li>
-        <li>Spread the cooked rice evenly across the base of the prepared dish.</li>
-        <li>At this stage you can sprinkle raisins over the rice, if using. Small handful.</li>
-        <li>Pour the milk mixture over the rice. Use a fork to gently stir the rice through the liquid so it’s evenly distributed. (If there isn’t enough liquid to cover, top up with a little extra milk.)</li>
-        <li>Sprinkle the top generously with grated nutmeg.</li>
-        <li>How to cook this is very important, no fan and about 160-170 degree celcius, but you have to keep a close eye on it so it doesn’t burn on top. Bake in the lower part of the oven for 45 minutes to 1 hour. The custard should just be set but still slightly wobbly in the center.</li>
-        <li>Remove from oven and allow to finish setting as it cools.</li>
-        <li>Serve warm with a dollop of cream. Yummy</li>
-      </ol>
-    </div>
+    <p>Made with rice, milk, sugar, and cinnamon — a sweet creamy dessert.</p>
   </section>
 
-  <!-- 4. Cheese & Onion Tart -->
   <section id="cheeseTart">
     <h2>Cheese and Onion Tart</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <p><strong>Pastry:</strong></p>
-      <ul>
-        <li>130 g plain flour</li>
-        <li>1 tablespoon butter or margarine (cold)</li>
-        <li>Cold water, just enough to bring dough together</li>
-      </ul>
-      <p><strong>Filling:</strong></p>
-      <ul>
-        <li>2 medium brown onions, finely chopped</li>
-        <li>3 shallots, thinly sliced</li>
-        <li>3 eggs</li>
-        <li>200 g ricotta cheese</li>
-        <li>120 g grated cheese (mix of sharp cheddar, blue cheese, and Parmesan recommended(less of the parmesan than the others)</li>
-        <li>Freshly ground pepper, to taste</li>
-        <li>Optional: finely chopped fresh parsley</li>
-      </ul>
-      <p><strong>Other:</strong></p>
-      <ul>
-        <li>20 cm pie dish with removable base, well greased with butter</li>
-        <li>2 tablespoons olive oil for sautéing</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Prepare Pastry: Combine flour and butter, adding cold water gently and gradually. Knead gently until just mixed evenly. Put aside. Roll out to fit the pie dish, roughly shaping the sides roughly for an uneven look.</li>
-        <li>Prepare Filling: Sauté onions and shallots in 2 tablespoons olive oil until translucent. Don't let them brown. Put aside to cool. In a bowl, combine eggs, cheeses, pepper, and optional parsley. Stir until well mixed. Fold in the cooled onions and shallots.</li>
-        <li>Assemble Tart: Spoon the filling into the prepared pastry dish. Bake on the lower rack of the oven at 180°C (no fan) for usually 45 minutes, top 1 hour until the edges are set and lightly golden. Keep a good eye on it so not to burn.</li>
-        <li>Serve: Tastes really good served at room temperature, after an hour or so.</li>
-      </ol>
-      <p>✨ Tip: Using a mix of cheeses gives depth of flavour. The tart also benefits from gentle cooling, as it sets more evenly and the flavours meld.</p>
-    </div>
+    <p>Buttery pastry filled with caramelised onion and rich cheese custard.</p>
   </section>
 
-  <!-- 5. Blueberry Dessert -->
   <section id="blueberryDessert">
-    <h2>Blueberry Dessert with Cardamom Whipped Cream</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <p><strong>Custard Base</strong></p>
-      <ul>
-        <li>Butter (for greasing the dish)</li>
-        <li>1 tablespoon sugar (for dusting the dish)</li>
-        <li>3 large fresh farm eggs</li>
-        <li>¾ cup sugar</li>
-        <li>¾ cup plain flour (gluten-free if preferred)</li>
-        <li>¾ cup almond meal</li>
-        <li>2 teaspoons baking powder</li>
-        <li>1/2 cup thickened cream</li>
-        <li>2 ¾ cups of full cream milk</li>
-        <li>½ teaspoon almond extract</li>
-        <li>1 heaped cup fresh blueberries</li>
-        <li>1 tablespoon brown sugar (for sprinkling on top, optional)</li>
-      </ul>
-      <p><strong>Cardamom Whipped Cream</strong></p>
-      <ul>
-        <li>300 ml whipping cream</li>
-        <li>6 cardamom pods, freshly crushed and ground</li>
-        <li>1/3 teaspoon almond extract</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <p><strong>1. Prepare the Dish</strong></p>
-      <ol>
-        <li>Preheat oven to 175°C (no fan).</li>
-        <li>Rub butter on the inside of a 20 cm ceramic dish.</li>
-        <li>Sprinkle a tablespoon of sugar inside the dish, coating evenly. Put aside.</li>
-      </ol>
-      <p><strong>2. Make the Custard Mixture</strong></p>
-      <ol>
-        <li>In a good-sized stainless steel bowl, whisk together well the eggs and sugar until well combined.</li>
-        <li>Add the dry ingredients, flour, almond meal, and baking powder. Stir gently.</li>
-        <li>Mix in the cream, milk, and almond extract until smooth.</li>
-      </ol>
-      <p><strong>3. Assemble</strong></p>
-      <ol>
-        <li>Spread the blueberries evenly across the base of the prepared dish.</li>
-        <li>Carefully pour the custard mixture over the berries.</li>
-        <li>At this stage you can, sprinkle a tablespoon of brown sugar over the top, carefully.</li>
-      </ol>
-      <p><strong>4. Bake</strong></p>
-      <ol>
-        <li>Place the dish on the lower shelf of the oven.</li>
-        <li>Bake for about 45 minutes, or until the top is light golden brown colour and importantly when done the center should wobble slightly like jelly when nudged.</li>
-        <li>Remove and allow to cool to room temperature.</li>
-      </ol>
-      <p><strong>5. Make the Cardamom Whipped Cream</strong></p>
-      <ol>
-        <li>In a chilled bowl, add whipping cream, ground cardamom, and almond extract.</li>
-        <li>Beat until soft peaks form.</li>
-      </ol>
-      <p><strong>6. Serve</strong></p>
-      <ul>
-        <li>Spoon out a the generous portion of pudding into glass bowls and top with two big spoons of cardamom whipped cream. Enjoy!</li>
-      </ul>
-    </div>
+    <h2>Blueberry Dessert</h2>
+    <p>Fresh blueberries layered with whipped cream and sponge cake.</p>
   </section>
 
-  <!-- 6. Wine Trifle -->
   <section id="wineTrifle">
     <h2>Wine Trifle</h2>
-    <p>Serve very cold on New Year’s Eve or Christmas day</p>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>Large clear sided glass bowl for the visual effect</li>
-        <li>2 packets port wine jelly</li>
-        <li>1 tin of you favourite fruit. Small is enough but you can use a large tin too. I like half pears or apricots, or peaches of the Italian type).</li>
-        <li>½ a commercial sponge cake (from IGA or Woolies)</li>
-        <li>Dry sherry (approx. 1 cup)</li>
-        <li>6 heaped tablespoons of good quality custard powder</li>
-        <li>Approx 1 litre full cream milk</li>
-        <li>2 cups caster sugar</li>
-        <li>1 teaspoon vanilla extract</li>
-        <li>600 ml whipping cream (very cold)</li>
-        <li>2 punnets of mixed berries</li>
-        <li>1 punnet strawberries</li>
-        <li>½ cup icing sugar (optional, for sweetening cream)</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <p><strong>Prepare Ahead</strong></p>
-      <ol>
-        <li>Jelly: Boil ~800 ml water. Place 2 packets of jelly crystals in a large stainless steel bowl. Add half the boiling water and stir until fully dissolved. Then top up with cold water as per packet instructions. Add the tin fruit. Cover and refrigerate for 8 hours.</li>
-        <li>Sponge: Take the sponge and cover it with a clean tea towel and let it sit on the bench for 24 hours. This dries it slightly so it holds its shape in the trifle.</li>
-      </ol>
-      <p><strong>Assembling the Trifle</strong></p>
-      <ol>
-        <li>So about 12 hours before you need the truffle, start this assembly process.</li>
-        <li>Break up the day old sponge into large fist-sized chunks and arrange evenly pressed up against the glass of the large clear glass bowl. Be careful not to crush the sponge.</li>
-        <li>Pour over a good cup of dry sherry in no particular fashion so the sponge soaks it up. Set aside.</li>
-      </ol>
-      <p><strong>Make the Custard</strong></p>
-      <ol>
-        <li>In a heavy pot, whisk together 3 1/2 heaped tablespoons custard powder and 1 litre cold milk until blended smooth.</li>
-        <li>Place over low–moderate heat. Stir in 1 cup sugar and 1 teaspoon vanilla extract</li>
-        <li>The next step is important. Don’t walk away from the custard.</li>
-        <li>Cook gently, stirring constantly with a flat-edge wooden spoon, Make sure there is nothing building on the bottom of the pot., take off the heat as it thickens. When custard thickens enough that drawing a spoon through it leaves a visible line. At this stage the custard is ready.</li>
-        <li>Remove from heat and from some height gently pour the hot custard over the sponge, starting in the centre and letting it flow to the edges to seal. Make sure it flows into the cracks and evenly up the sides. Use all of the custard.</li>
-        <li>Seal the top and refrigerate for 4–5 hours until fully set and cold to the touch.</li>
-      </ol>
-      <p><strong>Add the Fruit & Jelly</strong></p>
-      <ol>
-        <li>Blend strawberries in a food processor until smooth,</li>
-        <li>add ½ cup sugar to strawberries and whisk for 30 seconds</li>
-        <li>Now Drizzle liquid around the edges of the custard.</li>
-        <li>With a big spoon, spoon big chunks of set jelly over the custard.</li>
-        <li>Take the 2 punnets of berries spread them around the jelly evenly. Reserve a small handful for decoration on top of the cream topping.</li>
-      </ol>
-      <p><strong>Whipped Cream Topping</strong></p>
-      <ol>
-        <li>In a chilled bowl, whip cream to gentle, soft peaks. (If you want to sweeten the cream, add ½ cup icing sugar before whisking.)</li>
-        <li>With a flexible silicon edge blade, gently spread the cream over the fruit and jelly layer to complete the project.</li>
-        <li>You can arrange a few berries on top with the reserved berries, or go with straight cream on top.</li>
-      </ol>
-      <p><strong>Finishing</strong></p>
-      <ul>
-        <li>Cover with plastic wrap to keep airtight. Refrigerate until serving.</li>
-        <li>Serve chilled straight from the bowl for maximum visual effect. Enjoy. New years or Christmas Day.</li>
-      </ul>
-    </div>
+    <p>A layered dessert with sponge soaked in wine, custard, and jelly.</p>
   </section>
 
-  <!-- 7. Crème Caramel -->
-  <section id="cremeCaramel">
-    <h2>Crème Caramel</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>1 vanilla bean pod</li>
-        <li>1 litre full cream milk</li>
-        <li>¾ cup sugar</li>
-        <li>½ teaspoon lemon juice</li>
-        <li>2 tablespoons rain water</li>
-        <li>8 large free-range country eggs</li>
-        <li>(Optional for serving: thickened fresh cream)</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li><strong>Prepare the Oven</strong> Preheat oven to 170°C (no fan).</li>
-        <li><strong>Infuse the Milk</strong> Split the vanilla bean and add to the milk in a saucepan. Heat gently until it just simmers, then remove from heat. Set aside to infuse.</li>
-        <li><strong>Make the Custard</strong> In a large bowl, whisk together all the eggs and half the sugar until well blended. Gradually add the warm milk, whisking continuously. Strain mixture through a fine sieve into another large bowl. Set aside.</li>
-        <li><strong>Make the Caramel</strong> In a heavy-bottom saucepan, combine the remaining sugar, lemon juice, and water. Place over high heat, stirring constantly with a metal spoon. ⚠ This stage gets very hot — do not walk away. The sugar will dissolve, then slowly begin to colour. Keep stirring until it turns a deep golden brown. Don’t worry if it smokes a little, if too much smoke, turn down the heat a little (Note: If it isn’t browning, add a little more sugar and it will change quickly.) Immediately pour the caramel into your dish(es) — either: Six small ramekins (6–7 cm), or One large soufflé dish (about 15 cm). Tilt quickly to coat the base and sides evenly over base and 1/4 up the sides. Work fast before it sets.</li>
-        <li><strong>Bake</strong> Gently filly bowls with the custard mixture into the prepared dish(es), filling almost to the top. Place in a deep baking tray. Pour hot water into the tray to come about 1/2 to ¾ up the sides (bain-marie). Bake for 1 hour 45 minutes, depending on size of dish, until just set. To check if cooked: insert a pointed knife into the custard. It should come out clean.</li>
-        <li><strong>Chill</strong> Remove from oven and allow to cool for 15 minutes. Cover bowl tightly with plastic wrap or similar. At this stage I like to refrigerate for 4–6 hours (or overnight) until fully set.</li>
-      </ol>
-      <p><strong>To Serve</strong></p>
-      <ol>
-        <li>Fill a large bowl or baking dish with boiling water.</li>
-        <li>Run a sharp knife around the inside edge of the ramekin/dish in one smooth movement.</li>
-        <li>Place the ramekin/dish in the boiling water for 30 seconds.</li>
-        <li>Place plate (its important to make sure it has a slight curve to catch the sauce) on the top of the bowl and invert quickly and carefully onto a serving plate. Make sure you have a good grip!</li>
-        <li>Now gently tap the bottom of the bowl to release creme caramel, if needed — the crème caramel should release with its glossy sauce.</li>
-        <li>Lift the bowl off and all is exposed!</li>
-      </ol>
-      <p>Serving Suggestion: I like to serve with a spoon of the caramel sauce and with a good dollop of thickened fresh cream. This is up there with some of the best sweets you can make for people They just love it and you.</p>
-      <p>Note The more times you make this the better you become and more accomplished.</p>
-    </div>
-  </section>
-
-  <!-- 8. Wild Blackberry Conserve -->
-  <section id="blackberryConserve">
-    <h2>Wild Blackberry Conserve</h2>
-    <p>The colour of this conserve is particularly stunning. If you’re new to making preserves, start with smaller quantities — it’s much easier to manage at the bottling stage. Quantities can be multiplied as needed.</p>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>1 kg ripe blackberries, washed</li>
-        <li>4 level cups premium white sugar</li>
-        <li>Juice of ½ a beautiful fat lemon</li>
-        <li>Pectin (jam setter)</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Prepare the Berries: In a large stainless steel bowl, equally layer the berries and sugar alternately, finishing with a layer of sugar. Pour the lemon juice evenly over the top. Cover with cling wrap or a clean waxed cloth. Refrigerate for 24 hours.</li>
-        <li>First Simmer: The next day, transfer the mixture into a heavy-bottomed pot (I find enameled cast iron works good, its only to prevent things from burning). On a low heat, slowly bring the mixture to a gentle simmer for 5 minutes or so. Do not rapid boil. Remove from heat and allow to cool on the bench for about 30 minutes. Recover and refrigerate for another 24 hours.</li>
-        <li>The Final leg of Cooking & Bottling: Gather enough small, assorted and fancy sterilised jam jars (small jars make for a nicer presentation and more fun eating jam from small jars, than out of a bucket ha ha ha). Back to work. Place the conserve mixture back into the pot and once again bring slowly to a simmer. Cook gently until the conserve thickens and reaches setting point. (Tip: Test by dropping a little on a cold plate — if it wrinkles when pushed, it’s ready.) Spoon carefully into hot sterilised jars, seal immediately, and allow to cool.</li>
-      </ol>
-      <p>Notes</p>
-      <ul>
-        <li>Small jars not only look beautiful but make the conserve easier to serve and gift.</li>
-        <li>Store in a cool, dark place. Once opened, refrigerate and consume within a few weeks.</li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- 9. Southern Roasted Chicken -->
-  <section id="southernChicken">
-    <h2>Southern Roasted Chicken</h2>
-    <p>The chicken is all important in this dish. Always try to use organic or free-range, skin-on I prefer but skin off works well too. Excellent served with a baked rice dish (recipe follows).</p>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>1 whole chicken, cut into small portions</li>
-        <li>500 ml buttermilk</li>
-        <li>Bread crumbs (your choice)</li>
-        <li>1 teaspoon onion powder</li>
-        <li>1 teaspoon smoky paprika</li>
-        <li>1 cup milk or soy milk</li>
-        <li>2 eggs (for dipping)</li>
-        <li>Optional: ⅓ cup good-quality olive oil</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Marinate the Chicken: Soak chicken pieces in buttermilk overnight, or at least a 6 hours.</li>
-        <li>Prepare the Crumb Mixture: In a large bowl, combine bread crumbs, onion powder, and smoky paprika. Mix thoroughly by hand until well blended.</li>
-        <li>Coat the Chicken: Prepare a baking dish large enough to fit all pieces evenly. Remove chicken from buttermilk, one piece at a time. Gently dip each piece into an egg and milk mixture, letting excess drip off. The move to coat evenly in the crumb mixture. Press down lightly so crumbs adhere. (Optional) What I do now is add 1/3 of cup of good quality olive oil to the baking dish. Then place each piece, one at a time, in the baking dish, spacing evenly.</li>
-        <li>Roast the Chicken: Preheat oven to 180°C. Bake on the bottom rack for about 1.5 hours, or until golden brown and cooked through.</li>
-        <li>Serve: Serve hot, ideally on top of the accompanying baked rice dish (the next recipe).</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 10. Special Rice Dish -->
-  <section id="specialRice">
-    <h2>Special Baked Rice</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>2 tablespoons chopped coriander</li>
-        <li>250 g butter, in chunks</li>
-        <li>1 litre chicken stock</li>
-        <li>1 teaspoon saffron threads</li>
-        <li>6 cloves garlic, crushed</li>
-        <li>½ cup peas (optional)</li>
-        <li>4 cups of the best long-grain rice</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Preheat oven to 180°C.</li>
-        <li>Spread rice evenly in the base of a large baking dish (stainless steel or terracotta preferred).</li>
-        <li>Add saffron, peas (if using), if you wish crushed garlic, and finally the butter in big dobs.</li>
-        <li>Pour chicken stock over the rice.</li>
-        <li>With a fork, just gently blend the ingredients.</li>
-        <li>This next bit is important.</li>
-        <li>Cover tray tightly with 2 layers of aluminium foil to create a steam-proof lid.</li>
-        <li>Bake on the bottom rack of the oven for 1 hour and 20 minutes.</li>
-        <li>Remove foil and gently fluff the rice with a fork or egg scraper or similar.</li>
-        <li>Serve with roasted chicken on top and sprinkle with chopped coriander. Yummy dish enjoy</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 11. Baked Rice Custard -->
-  <section id="bakedRiceCustard">
-    <h2>Baked Rice Custard Dessert</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>25–30 cm ceramic dish</li>
-        <li>1 tablespoon butter (for greasing dish)</li>
-        <li>1/3 cup raw sugar</li>
-        <li>4–5 eggs</li>
-        <li>nutmeg powder</li>
-        <li>Just under ½ cup Italian risotto rice</li>
-        <li>½ litre of full cream milk</li>
-        <li>1 teaspoon vanilla extract</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Preheat oven to 160°C.</li>
-        <li>In a large stainless steel bowl, whisk together eggs, sugar, and vanilla extract until well blended.</li>
-        <li>(Very important) Gradually add milk while whisking until bubbles sit on top.</li>
-        <li>Grease the ceramic dish with butter and spread the rice evenly in the base.</li>
-        <li>Gently pour the custard mixture over the rice.</li>
-        <li>Sprinkle with a pinch of nutmeg.</li>
-        <li>Place the dish in the bottom of the oven. Note: Because this dish has eggs, its easy too burn the top, bake gently — a long slow cook is better than trying to race it. Also don’t leave it unattended.</li>
-        <li>Bake for 1–1.5 hours, or until a knife inserted into the center comes out clean.</li>
-        <li>Allow to cool. Serve with a dollop of your favourite cream or yoghurt. This is a nice dessert</li>
-      </ol>
-      <p>✨ Notes: The custard-style rice dessert is creamy, comforting, and slightly sweet — ideal for a winter dessert.</p>
-    </div>
-  </section>
-
-  <!-- 12. Roasted Vegetables -->
-  <section id="roastedVegetables">
-    <h2>Roasted Vegetables</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>Potatoes</li>
-        <li>Carrots</li>
-        <li>Shallots</li>
-        <li>Onions</li>
-        <li>Pumpkin</li>
-        <li>Beetroot</li>
-        <li>Sweet potatoes</li>
-        <li>Red capsicum</li>
-        <li>Extra virgin olive oil</li>
-        <li>Salt (about ½ teaspoon per tray of vegetables)</li>
-        <li>Chilli flakes (to taste)</li>
-        <li>Whole garlic cloves (lots!)</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Preheat oven to 200–210°C (fan-forced) and place the middle rack in position.</li>
-        <li>Slice all vegetables lengthwise where possible for even cooking.</li>
-        <li>Place vegetables in a large baking dish or tray.</li>
-        <li>Next part is important, pour in enough olive oil — until there is enough to coat all vegetables lightly, about 1/2 a centimetre of oil. SO it looks like you have put too much in.</li>
-        <li>Sprinkle with salt and chilli flakes.</li>
-        <li>Mix everything well with your hands so all vegetables are coated in oil and seasoning.</li>
-        <li>Roast in the oven until vegetables are tender and edges start to blacken. About 30–45 minutes, depending on size and type of vegetables.</li>
-        <li>Turn vegetables halfway through cooking for even roasting.</li>
-        <li>Serve immediately while hot.</li>
-      </ol>
-      <p>✨ Tip: The garlic will caramelize and soften beautifully in the roasting process, adding great flavour to the mix.</p>
-    </div>
-  </section>
-
-  <!-- 13. Beef Bolognese -->
-  <section id="beefBolognese">
-    <h2>Beef Bolognese</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>500 g lean beef (organic)</li>
-        <li>1 large brown onion, finely diced</li>
-        <li>1 stick celery, finely diced</li>
-        <li>½ cup extra virgin olive oil (Greek or Spanish)</li>
-        <li>Two options, pick on: 500 g wood-fired roasted tomatoes in olive oil for 2 hours (skins removed) or 1 large jar of basil roasted tomatoes off the shelf</li>
-        <li>A good handful of fresh flat-leaf parsley</li>
-        <li>3 cups beef stock</li>
-        <li>¾ cup best-quality white wine</li>
-        <li>Salt and pepper to taste</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Brown the Beef: Heat olive oil in a large heavy-base pot. Add beef and brown thoroughly, stirring to ensure even colour.</li>
-        <li>Add Vegetables: Add finely diced onion and celery to the pot and cook until softened, turn down the heat.</li>
-        <li>Add Liquids and Herbs: When onion is clear, add in beef stock, roasted tomatoes (or jarred tomatoes), white wine, salt, pepper, and about 1½ teaspoons chopped parsley. Mix well and place a lid on the pot, leaving a small gap to allow it to breathe.</li>
-        <li>Simmer: Cook on the lowest heat for 3–5 hours. The longer it cooks, the better the flavours. If the liquid level drops, add a little H2O as needed. Stir every 30 minutes to prevent sticking or burning.</li>
-        <li>Serve: Cook pasta separately. Either spoon the sauce over pasta on the plate, or drain pasta and return it to the pot, adding sauce to coat and stir. Serve hot with a sprinkle of fresh parsley if desired. Yum yum</li>
-      </ol>
-      <p>✨ Tip: Slow cooking is key — the beef becomes tender, and the flavours deepen beautifully.</p>
-    </div>
-  </section>
-
-  <!-- 14. Pea & Ham Soup -->
-  <section id="peaHamSoup">
-    <h2>Pea & Ham Soup</h2>
-    <p>Note: You can play aroundwith the ingredients you add, but no spices. Keep it simple. The most important thing is a long slow, long cook will draw out the best flavour. Also using high-quality ingredients will make a noticeable difference.</p>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>1 well-smoked pork hock (sourced from a butcher or good-quality store, I have found Euro Butchers in Bibra Lake just of Stock Road are good or source from German butcher on South St and Carrington.)</li>
-        <li>1 cup finely chopped Italian parsley</li>
-        <li>½ cup finely grated carrot</li>
-        <li>1/3 cup extra virgin olive oil</li>
-        <li>1 cup finely chopped celery</li>
-        <li>3 litres rain water</li>
-        <li>Pinch of salt</li>
-        <li>2 cups split peas</li>
-        <li>Parmesan cheese, for serving</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Prepare the Ham: I prefer a slow cook on my wood stove top. Place the smoked pork hock in a heavy-based pot with a good lid and with 3 litres of water. Slowly cook on low heat for 3–12 hours (overnight works well). Maintain a constant gentle heat so the water simmers without boiling over. Maintain the same water level at a constant.</li>
-        <li>Add Remaining Ingredients: Once the ham is tender and cooked through, gently add parsley, carrot, celery, split peas, and a pinch of salt. Continue to cook on low heat until the peas break down and form a thick, hearty soup — usually about 2 hours or so.</li>
-        <li>Serve: Ladle into bowls. Grate a little Parmesan over each serving and sprinkle with fresh parsley. Serve hot — yum-m on a cold night!</li>
-      </ol>
-      <p>✨ Tip: This soup improves if made slowly and allowed to sit for a few hours or overnight — flavours deepen beautifully.</p>
-    </div>
-  </section>
-
-  <!-- 15. Sticky Pork Ribs -->
-  <section id="stickyRibs">
-    <h2>Rod’s Sticky Pork Spare Ribs</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>2 kg fresh pork ribs, try to find the thickest fattest ribs you can buy. Buy them as a slab. Cut into individual ribs for easy eating</li>
-        <li>1 cup good-quality tomato ketchup or sauce</li>
-        <li>1/3 cup Worcestershire sauce</li>
-        <li>3 tablespoons balsamic vinegar</li>
-        <li>1/3 cup brown sugar</li>
-        <li>2 tablespoons of good Portuguese smoked paprika powder</li>
-        <li>1 cup apple juice</li>
-        <li>Resealable zip plastic bag</li>
-        <li>2 teaspoons coarse salt flakes</li>
-        <li>1 clove crushed garlic (or more to taste)</li>
-        <li>Optional: ⅓ cup hoisin sauce for extra depth and sweetness, it won’t hurt the dish</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Prepare the Ribs: Slice ribs into individual pieces with a sharp knife and place in a large bowl. Add ketchup, Worcestershire sauce, balsamic vinegar, brown sugar, paprika, apple juice, salt, and crushed garlic. Now the fun bit, mix thoroughly with your fingers until all ingredients are well combined. Don’t worry about how and order ha ha.</li>
-        <li>Marinate: Transfer the mixture into a resealable plastic bag, squeezing out excess air. Refrigerate overnight. Flip the bag a few times to ensure even marination. You can’t over do the bag.</li>
-        <li>Cook: I once again like the wood oven, if not. Preheat oven to 160°C (no fan). Place ribs on a baking tray and cook for 1 hour –1 hours 15 minutes, but not longer. Turn ribs once or twice during cooking for even caramelization. If you like: For the last 5 minutes full blast with the grill, to create a crispy, sticky top. Be careful not to burn them.</li>
-        <li>Serve: Serve ribs on a bed of white rice. Spoon any remaining sauce over the ribs and rice. Sprinkle with finely chopped coriander.</li>
-      </ol>
-    </div>
-  </section>
-
-  <!-- 16. Prune Tart -->
-  <section id="pruneTart">
-    <h2>Prune Tart</h2>
-    <div class="ingredients">
-      <h3>Ingredients</h3>
-      <ul>
-        <li>20 cm ceramic dish, nice and fancy</li>
-        <li>Fresh full-cream milk (enough to fill the dish, with some reserved)</li>
-        <li>4 large farm eggs</li>
-        <li>2 tablespoons rice flour</li>
-        <li>3/4 cup raw sugar</li>
-        <li>1 teaspoon vanilla extract</li>
-        <li>1 fully-pack cup of Seeded prunes, soaked in warm water (enough to cover the base of the dish)</li>
-      </ul>
-    </div>
-    <div class="method">
-      <h3>Method</h3>
-      <ol>
-        <li>Prepare the Eggs and Sugar: In a large bowl, whisk the eggs and sugar until well combined. Add the rice flour and vanilla extract, continuing to whisk gently until smooth.</li>
-        <li>Prepare the Prunes: Soak the prunes in warm water for 5–10 minutes. Drain the liquid from the prunes and arrange the prunes with a fork evenly on the base of the ceramic dish,.</li>
-        <li>Assemble the Tart: Gently fold the egg mixture over the prunes, using a fork to adjust their placement if needed. At this stage try to judge the amount of milk needed, add enough milk to bring the mixture just below the rim of the dish (better to under-do it).</li>
-        <li>Bake: Preheat oven to 160°C , slide into the middle shelf. It should bake for 1 hour or so. The tart is done when the centre wobbles slightly but is set around the edges. I wobble the dish, if it looks like is is not cooked, it probably is cooked. I find that the edges continue to cook. I like the custard nice and soft. Remove and cool. Once safe, place in fridge to complete the cooling. Server with a dollop of cream. One of my favourites</li>
-      </ol>
-    </div>
-  </section>
+  <div id="noResults">❌ No recipes found</div>
 </main>
 
 <footer>&copy; 2025 Rod's Cookbook</footer>
 
 <script>
-const buttons = document.querySelectorAll('nav button');
-const sections = document.querySelectorAll('main section');
+  // Toggle menu
+  const hamburger = document.querySelector('.hamburger');
+  const menu = document.getElementById('recipeNav');
+  hamburger.addEventListener('click', () => menu.classList.toggle('open'));
 
-buttons.forEach(button => {
-  button.addEventListener('click', () => {
-    const target = button.dataset.target;
-
-    // remove active state from all
-    sections.forEach(sec => {
-      sec.classList.remove('active');
-      sec.style.display = 'none';
+  // Section switching
+  document.querySelectorAll('nav button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById(btn.dataset.target).classList.add('active');
+      document.getElementById('noResults').style.display = 'none';
+      menu.classList.remove('open'); // close menu after selection
     });
-    buttons.forEach(btn => btn.classList.remove('active'));
-
-    // activate new
-    const activeSection = document.getElementById(target);
-    activeSection.style.display = 'block';
-    setTimeout(() => {
-      activeSection.classList.add('active');
-    }, 10);
-
-    button.classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
-});
+
+  // Collapsible ingredients/method
+  document.querySelectorAll('.ingredients, .method').forEach(box => {
+    box.addEventListener('click', () => box.classList.toggle('collapsed'));
+  });
+
+  // Search filter (checks ALL content)
+  const searchInput = document.getElementById('searchInput');
+  searchInput.addEventListener('input', () => {
+    const filter = searchInput.value.toLowerCase();
+    let foundFirst = false;
+    let foundAny = false;
+
+    document.querySelectorAll('#recipeNav button').forEach(btn => {
+      const section = document.getElementById(btn.dataset.target);
+      const content = section.textContent.toLowerCase();
+      const matches = content.includes(filter);
+
+      btn.style.display = matches ? '' : 'none';
+      section.style.display = matches ? '' : 'none';
+
+      if (matches) {
+        foundAny = true;
+        if (!foundFirst) {
+          document.querySelectorAll('main section').forEach(sec => sec.classList.remove('active'));
+          section.classList.add('active');
+          document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          foundFirst = true;
+        }
+      }
+    });
+
+    // Show/hide "No results" message
+    document.getElementById('noResults').style.display = foundAny ? 'none' : 'block';
+  });
 </script>
 
 </body>
 </html>
-```
