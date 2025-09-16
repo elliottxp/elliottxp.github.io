@@ -19,7 +19,6 @@ order: 2
     --sub: #bdbdbd;
     --glass: rgba(255,255,255,0.03);
   }
-
   html,body{
     height:100%;
     margin:0;
@@ -27,8 +26,6 @@ order: 2
     font-family: 'Optima', 'Open Sans', sans-serif;
     color:var(--text);
   }
-
-  /* Container responsive */
   .player-wrap{
     width: 100%;
     max-width: 520px;
@@ -39,7 +36,6 @@ order: 2
     background: linear-gradient(#333,#272727);
     user-select: none;
   }
-
   .titlebar{
     height: 36px;
     display:flex;
@@ -49,38 +45,34 @@ order: 2
     background: linear-gradient(#1b1b1b,#141414);
     border-bottom: 1px solid rgba(255,255,255,0.03);
   }
-  .title-left{display:flex;align-items:center;gap:8px;}
   .logo-box{
     width:28px;height:20px;border-radius:3px;background:var(--accent);
     display:flex;align-items:center;justify-content:center;
     font-weight:700;color:#111;font-size:12px;
   }
   .title{font-weight:600;font-size:14px;letter-spacing:0.4px;}
-  .title-sub{color:var(--sub);font-size:12px;margin-left:6px}
-
   .main{
     display:flex;
     padding: 18px;
     gap: 18px;
     align-items:center;
-    flex-wrap: wrap; /* allow stacking on mobile */
+    flex-wrap: wrap;
   }
-
+  /* === Visualiser box === */
   .left{
     flex: 0 0 140px;
     height: 140px;
-    background: linear-gradient(120deg,#1e1e1e,#2a2a2a);
+    background: #111;
     border-radius:4px;
-    box-shadow: inset 0 2px 6px rgba(0,0,0,0.6);
     display:flex;
     align-items:center;
     justify-content:center;
-    color:var(--sub);
-    font-size:12px;
-    text-align:center;
-    padding:6px;
+    overflow:hidden;
   }
-
+  canvas#visualiser{
+    width:100%;
+    height:100%;
+  }
   .controls{
     flex:1;
     display:flex;
@@ -88,27 +80,18 @@ order: 2
     gap:12px;
     min-width: 200px;
   }
-
   .track-info{display:flex;flex-direction:column;gap:4px;}
   .track-title{font-weight:700;font-size:16px}
   .track-artist{font-size:13px;color:var(--sub)}
-
-  .buttons{
-    display:flex;
-    gap:8px;
-    align-items:center;
-    flex-wrap: wrap;
-  }
-
+  .buttons{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
   .btn{
-    width:44px;height:36px;border-radius:4px;border:none;
+    width:52px;height:44px;border-radius:6px;border:none;
     background:var(--panel);color:var(--text);cursor:pointer;
     display:flex;align-items:center;justify-content:center;
-    font-size:18px;box-shadow:0 2px 0 rgba(0,0,0,0.6);
+    font-size:20px;box-shadow:0 2px 0 rgba(0,0,0,0.6);
   }
   .btn:active{transform:translateY(1px)}
   .btn:disabled{opacity:0.45;cursor:default}
-
   .progress-wrap{display:flex;align-items:center;gap:10px;flex-wrap: wrap;}
   .time{width:54px;font-size:12px;color:var(--sub);text-align:center;}
   .progress{
@@ -120,10 +103,8 @@ order: 2
     background:linear-gradient(90deg,var(--accent),#ff8b4a);
     border-radius:6px
   }
-
   .vol{display:flex;align-items:center;gap:8px;}
-  .vol input[type=range]{width:80px}
-
+  .vol input[type=range]{width:100px}
   .playlist{
     border-top:1px solid rgba(255,255,255,0.03);
     background: linear-gradient(#202020,#141414);
@@ -143,16 +124,14 @@ order: 2
     background:linear-gradient(90deg,var(--accent),#ff8b4a);
     color:#111;font-weight:700
   }
-
   .small{font-size:11px;color:var(--sub);text-align:right;padding:6px 10px}
-
   /* Responsive tweaks */
   @media (max-width: 600px){
     .main{flex-direction:column;align-items:stretch;}
     .left{width:100%;max-width:300px;margin:0 auto;}
     .controls{width:100%;}
     .buttons{justify-content:space-between;}
-    .vol input[type=range]{width:100px;}
+    .vol input[type=range]{width:120px;}
   }
 </style>
 </head>
@@ -160,15 +139,12 @@ order: 2
 
 <div class="player-wrap" role="application" aria-label="Mini Winamp SoundCloud Player">
   <div class="titlebar">
-    <div class="title-left">
-      <div class="logo-box"></div>
-      <div><div class="title">Audio Player</div></div>
-    </div>
-    <div style="flex:1"></div>
+    <div class="logo-box"></div>
+    <div class="title">Audio Player</div>
   </div>
 
   <div class="main">
-    <div class="left" id="left-art">Now playing<br><span style="font-size:11px;color:var(--sub)"></span></div>
+    <div class="left"><canvas id="visualiser"></canvas></div>
     <div class="controls">
       <div class="track-info">
         <div id="title" class="track-title">—</div>
@@ -192,8 +168,8 @@ order: 2
     </div>
   </div>
 
-  <div class="playlist" aria-label="Playlist"><div class="plist" id="plist"></div></div>
-  <div class="small">Click the track, then press the play button</div>
+  <div class="playlist"><div class="plist" id="plist"></div></div>
+  <div class="small">Click the track, then press play</div>
 </div>
 
 <iframe id="scPlayer" style="display:none" allow="autoplay"
@@ -218,12 +194,12 @@ let isPlaying = false;
 let duration = 0;
 let progressTimer = null;
 
+/* DOM elements */
 const titleEl = document.getElementById('title');
 const artistEl = document.getElementById('artist');
 const curtimeEl = document.getElementById('curtime');
 const durtimeEl = document.getElementById('durtime');
 const barEl = document.getElementById('bar');
-
 const playBtn = document.getElementById('play');
 const prevBtn = document.getElementById('prev');
 const nextBtn = document.getElementById('next');
@@ -231,6 +207,7 @@ const volRange = document.getElementById('volRange');
 const plistEl = document.getElementById('plist');
 const progressWrap = document.getElementById('progress');
 
+/* Playlist UI */
 playlist.forEach((t, i) => {
   const el = document.createElement('div');
   el.className = 'pitem';
@@ -240,6 +217,7 @@ playlist.forEach((t, i) => {
   plistEl.appendChild(el);
 });
 
+/* Helpers */
 function secToTime(s){
   if (!isFinite(s)) return '0:00';
   s = Math.floor(s/1000);
@@ -252,6 +230,8 @@ function setActiveList(){
     el.classList.toggle('active', idx === currentIndex);
   });
 }
+
+/* Controls */
 function playIndex(i){
   if (i < 0 || i >= playlist.length) return;
   currentIndex = i;
@@ -284,6 +264,8 @@ progressWrap.addEventListener('click', (e) => {
   const seekMs = Math.floor(pct * duration);
   widget.seekTo(seekMs);
 });
+
+/* SoundCloud Events */
 widget.bind(SC.Widget.Events.READY, () => {
   widget.setVolume(Number(volRange.value));
 });
@@ -291,6 +273,7 @@ widget.bind(SC.Widget.Events.PLAY, () => {
   isPlaying = true;
   playBtn.textContent = '⏸';
   startProgressTimer();
+  startVisualiser();
   widget.getCurrentSound((sound) => {
     if (sound && sound.title) titleEl.textContent = sound.title;
     if (sound && sound.user && sound.user.username) artistEl.textContent = sound.user.username;
@@ -304,8 +287,11 @@ widget.bind(SC.Widget.Events.PAUSE, () => {
   isPlaying = false;
   playBtn.textContent = '▶️';
   stopProgressTimer();
+  stopVisualiser();
 });
 widget.bind(SC.Widget.Events.FINISH, () => { nextBtn.click(); });
+
+/* Progress timer */
 function startProgressTimer(){
   stopProgressTimer();
   progressTimer = setInterval(() => {
@@ -318,6 +304,33 @@ function startProgressTimer(){
   }, 250);
 }
 function stopProgressTimer(){ if (progressTimer) { clearInterval(progressTimer); progressTimer = null; } }
+
+/* ===== VISUALISER (fake animation, since SC widget doesn't expose audio data) ===== */
+const canvas = document.getElementById('visualiser');
+const ctx = canvas.getContext('2d');
+let visTimer = null;
+
+function drawBars(){
+  const w = canvas.width = canvas.offsetWidth;
+  const h = canvas.height = canvas.offsetHeight;
+  ctx.clearRect(0,0,w,h);
+  const bars = 32;
+  for (let i=0;i<bars;i++){
+    const barW = w / bars - 2;
+    const barH = Math.random() * h * 0.8;
+    ctx.fillStyle = `hsl(${20+i*5},90%,60%)`;
+    ctx.fillRect(i*(barW+2), h-barH, barW, barH);
+  }
+}
+function startVisualiser(){
+  if (visTimer) return;
+  visTimer = setInterval(drawBars, 120);
+}
+function stopVisualiser(){
+  if (visTimer){ clearInterval(visTimer); visTimer=null; }
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+
 (function init(){ setActiveList(); })();
 </script>
 </body>
