@@ -14,7 +14,7 @@ order: 2
   :root{
     --bg: #222;
     --panel: #2f2f2f;
-    --accent: #ff5500;
+    --accent: #baa094;
     --text: #e9e9e9;
     --sub: #bdbdbd;
     --glass: rgba(255,255,255,0.03);
@@ -58,11 +58,10 @@ order: 2
     align-items:center;
     flex-wrap: wrap;
   }
-  /* === Visualiser box === */
   .left{
     flex: 0 0 140px;
     height: 140px;
-    background: #111;
+    background: #000;
     border-radius:4px;
     display:flex;
     align-items:center;
@@ -72,6 +71,8 @@ order: 2
   canvas#visualiser{
     width:100%;
     height:100%;
+    display:block;
+    background:#000;
   }
   .controls{
     flex:1;
@@ -125,7 +126,6 @@ order: 2
     color:#111;font-weight:700
   }
   .small{font-size:11px;color:var(--sub);text-align:right;padding:6px 10px}
-  /* Responsive tweaks */
   @media (max-width: 600px){
     .main{flex-direction:column;align-items:stretch;}
     .left{width:100%;max-width:300px;margin:0 auto;}
@@ -137,7 +137,7 @@ order: 2
 </head>
 <body>
 
-<div class="player-wrap" role="application" aria-label="Mini Winamp SoundCloud Player">
+<div class="player-wrap">
   <div class="titlebar">
     <div class="logo-box"></div>
     <div class="title">Audio Player</div>
@@ -151,9 +151,9 @@ order: 2
         <div id="artist" class="track-artist">live405</div>
       </div>
       <div class="buttons">
-        <button class="btn" id="prev" title="Previous">⏮</button>
-        <button class="btn" id="play" title="Play/Pause">▶️</button>
-        <button class="btn" id="next" title="Next">⏭</button>
+        <button class="btn" id="prev">⏮</button>
+        <button class="btn" id="play">▶️</button>
+        <button class="btn" id="next">⏭</button>
         <div style="flex:1"></div>
         <div class="vol">
           <div style="font-size:12px;color:var(--sub)">Vol</div>
@@ -177,14 +177,12 @@ order: 2
 
 <script src="https://w.soundcloud.com/player/api.js"></script>
 <script>
-/* ====== CONFIG: track IDs ====== */
 const playlist = [
   { id: '1730760735', label: 'Track 1' },
   { id: '832025014',  label: 'Track 2' },
   { id: '820638109',  label: 'Track 3' },
   { id: '1323860767', label: 'Track 4' }
 ];
-/* ====== End CONFIG ====== */
 
 const iframe = document.getElementById('scPlayer');
 const widget = SC.Widget(iframe);
@@ -194,7 +192,6 @@ let isPlaying = false;
 let duration = 0;
 let progressTimer = null;
 
-/* DOM elements */
 const titleEl = document.getElementById('title');
 const artistEl = document.getElementById('artist');
 const curtimeEl = document.getElementById('curtime');
@@ -207,7 +204,6 @@ const volRange = document.getElementById('volRange');
 const plistEl = document.getElementById('plist');
 const progressWrap = document.getElementById('progress');
 
-/* Playlist UI */
 playlist.forEach((t, i) => {
   const el = document.createElement('div');
   el.className = 'pitem';
@@ -217,7 +213,6 @@ playlist.forEach((t, i) => {
   plistEl.appendChild(el);
 });
 
-/* Helpers */
 function secToTime(s){
   if (!isFinite(s)) return '0:00';
   s = Math.floor(s/1000);
@@ -230,8 +225,6 @@ function setActiveList(){
     el.classList.toggle('active', idx === currentIndex);
   });
 }
-
-/* Controls */
 function playIndex(i){
   if (i < 0 || i >= playlist.length) return;
   currentIndex = i;
@@ -241,6 +234,7 @@ function playIndex(i){
   artistEl.textContent = 'live405';
   setActiveList();
 }
+
 playBtn.addEventListener('click', () => {
   if (currentIndex === -1){ playIndex(0); return; }
   widget.isPaused((paused) => { if (paused) widget.play(); else widget.pause(); });
@@ -265,7 +259,6 @@ progressWrap.addEventListener('click', (e) => {
   widget.seekTo(seekMs);
 });
 
-/* SoundCloud Events */
 widget.bind(SC.Widget.Events.READY, () => {
   widget.setVolume(Number(volRange.value));
 });
@@ -291,7 +284,6 @@ widget.bind(SC.Widget.Events.PAUSE, () => {
 });
 widget.bind(SC.Widget.Events.FINISH, () => { nextBtn.click(); });
 
-/* Progress timer */
 function startProgressTimer(){
   stopProgressTimer();
   progressTimer = setInterval(() => {
@@ -305,26 +297,39 @@ function startProgressTimer(){
 }
 function stopProgressTimer(){ if (progressTimer) { clearInterval(progressTimer); progressTimer = null; } }
 
-/* ===== VISUALISER (fake animation, since SC widget doesn't expose audio data) ===== */
+/* === WMP-style Visualiser === */
 const canvas = document.getElementById('visualiser');
 const ctx = canvas.getContext('2d');
 let visTimer = null;
 
-function drawBars(){
+function drawWMP(){
   const w = canvas.width = canvas.offsetWidth;
   const h = canvas.height = canvas.offsetHeight;
-  ctx.clearRect(0,0,w,h);
-  const bars = 32;
+  ctx.fillStyle = 'rgba(0,0,0,0.25)';
+  ctx.fillRect(0,0,w,h);
+
+  const centerX = w/2;
+  const centerY = h/2;
+  const radius = Math.min(w,h)/4;
+  const bars = 64;
+
   for (let i=0;i<bars;i++){
-    const barW = w / bars - 2;
-    const barH = Math.random() * h * 0.8;
-    ctx.fillStyle = `hsl(${20+i*5},90%,60%)`;
-    ctx.fillRect(i*(barW+2), h-barH, barW, barH);
+    const angle = (i / bars) * Math.PI * 2;
+    const len = radius + Math.random()* (h/3);
+    const x = centerX + Math.cos(angle) * len;
+    const y = centerY + Math.sin(angle) * len;
+    const hue = (i*6 + Date.now()/30) % 360;
+    ctx.strokeStyle = `hsl(${hue},100%,60%)`;
+    ctx.beginPath();
+    ctx.moveTo(centerX, centerY);
+    ctx.lineTo(x, y);
+    ctx.stroke();
   }
 }
+
 function startVisualiser(){
   if (visTimer) return;
-  visTimer = setInterval(drawBars, 120);
+  visTimer = setInterval(drawWMP, 60);
 }
 function stopVisualiser(){
   if (visTimer){ clearInterval(visTimer); visTimer=null; }
