@@ -3,7 +3,6 @@ layout: post
 title: The Green-box
 date: 2025-09-14
 tags:
-  - Green-box
   - Wellbeing
 ---
 
