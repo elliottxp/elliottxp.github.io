@@ -1,3 +1,11 @@
+---
+layout: post
+title: John Berger Transformed the Way I Experience Art
+date: 2025-01-03
+tags:
+  - Art Theory
+  - John Berger
+---
 ## John Berger Transformed the Way I Experience Art
 ### Ways of Seeing by John Burger
 
