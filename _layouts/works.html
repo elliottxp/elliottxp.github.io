@@ -59,25 +59,66 @@ order: 1
   <!-- Modal structure -->
   <div id="myModal" class="modal">
     <span class="close" onclick="closeModal()">&times;</span>
-    <img class="modal-content" id="img01">
+
+    <img id="modalImage" class="modal-content" style="display:none;">
+
+    <video
+        id="modalVideo"
+        class="modal-content"
+        controls
+        autoplay
+        loop
+        muted
+        style="display:none;">
+    </video>
+
     <div id="caption"></div>
-  </div>
+</div>
 
   <!-- JavaScript for modal functionality -->
   <script>
-    function openModal(img) {
-      var modal = document.getElementById("myModal");
-      var modalImg = document.getElementById("img01");
-      var captionText = document.getElementById("caption");
-      modal.style.display = "block";
-      modalImg.src = img.src;
-      captionText.innerHTML = img.alt;
+    function openModal(element) {
+
+    const modal = document.getElementById("myModal");
+
+    const modalImage = document.getElementById("modalImage");
+
+    const modalVideo = document.getElementById("modalVideo");
+
+    const caption = document.getElementById("caption");
+
+    modal.style.display = "block";
+
+    if (element.tagName === "IMG") {
+
+        modalImage.style.display = "block";
+        modalVideo.style.display = "none";
+
+        modalImage.src = element.src;
+
+    } else if (element.tagName === "VIDEO") {
+
+        modalVideo.style.display = "block";
+        modalImage.style.display = "none";
+
+        modalVideo.src = element.querySelector("source").src;
+        modalVideo.load();
+        modalVideo.play();
+
     }
-    
-    function closeModal() {
-      var modal = document.getElementById("myModal");
-      modal.style.display = "none";
-    }
+
+    caption.innerHTML = element.alt || element.title;
+}
+
+function closeModal() {
+
+    document.getElementById("myModal").style.display = "none";
+
+    const video = document.getElementById("modalVideo");
+
+    video.pause();
+
+}
   </script>
 </body>
 </html>
