@@ -35,5 +35,3 @@ It felt productive because I was thinking? But I’m not sure thinking has got m
 <p>My old notes remind me of a version of myself who believed success came from finding or waiting for the perfect opportunity to come along. But now I think success comes from picking an imperfect one and seeing it through and becoming really good at doing that one thing.</p>
         <hr>
     </article>
-</body>
-</html>

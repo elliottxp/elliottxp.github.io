@@ -20,5 +20,3 @@ tags:
         <p>I wanted to share this idea with others, so I created the green-box idea generator at the <a href="https://www.green-box.app" target="_blank">green-box app</a> webpage</p>
         <p>My aim is to help you create happier habits through these small activities. The use of our green-box was a small change that makes a big difference in our wellbeing</p>
     </article>
-</body>
-</html>

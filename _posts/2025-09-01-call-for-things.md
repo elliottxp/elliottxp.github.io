@@ -24,5 +24,3 @@ tags:
         <p>Another thought jsut popped in my head, is this the same thing that Jim Carrey did writing himself that <a href="https://youtu.be/P_Wovx6tRnY?si=RI8trX1uRqPGqjXl">$10 million check</a>? Or is it different?</p>
         <hr>
     </article>
-</body>
-</html>
