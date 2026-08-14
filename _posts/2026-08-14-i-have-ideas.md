@@ -13,7 +13,7 @@ tags:
     <link rel="stylesheet" href="override.css">
 </head>
 <body>
-        <h1>I have ideas</h1>
+        <h1>Just commit to one</h1>
         <p>I've had a note on my phone that has a bunch of business ideas and improvements for things that bug me.</p>
         <p>Improved slippers. DIY drink kits. Compostable packaging. Dog products. Picnic gear. Yoga studios. Payment apps. Sporting goods. Freeze-dried coffee. Smart towels. Electric jerry cans. Marketplaces. And cheese made from donkey's milk, idk..</p>
         <p>Some of the  ideas are terrible. Some are probably impossible, for me. A few might actually be ok. The annoying part is that none of them have ever become anything.</p>
