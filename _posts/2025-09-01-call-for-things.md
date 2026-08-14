@@ -22,5 +22,4 @@ tags:
         <p>Of course, part of it might be me just remembering the times it works and forgetting when it doesn't (confirmation bias) and I know I do a bunch of that. But the studies show it's a real thing.</p>
         <p>Anyway, next time I lose something, I'll probably yell for them again. Whether it helps or not, it's a habit now. But at least I know now that it might help.</p>
         <p>Another thought jsut popped in my head, is this the same thing that Jim Carrey did writing himself that <a href="https://youtu.be/P_Wovx6tRnY?si=RI8trX1uRqPGqjXl">$10 million check</a>? Or is it different?</p>
-        <hr>
     </article>
