@@ -13,7 +13,6 @@ tags:
     <link rel="stylesheet" href="override.css">
 </head>
 <body>
-    <article>
         <h1>If you call it, you find it</h1>
         <p>You know that weird thing I do when I lose something? Like, it's usually I misplace my keys or my phone, and I'll start walking around talking out loud to the inanimate object, saying "Mr keys, where are you?" or "Come on, phone, I know you're hiding, where are you!" And then, BAM, a few seconds later, I spot it right there in front of me. It happens all the time in my family.
         <p>It just happened again with one of my earplugs that I lost in my sleep last night, I was searching for it in the bed, getting frustrated, and as soon as I called out for it, there it was under the pillow, half hidden in the pillowcase. How does this even work? I decided to look into it because it's works too often to just be luck.</p>

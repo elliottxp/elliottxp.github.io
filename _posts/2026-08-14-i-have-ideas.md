@@ -13,7 +13,6 @@ tags:
     <link rel="stylesheet" href="override.css">
 </head>
 <body>
-    <article>
         <h1>I have ideas</h1>
         <p>I've had a note on my phone that has a bunch of business ideas and improvements for things that bug me.</p>
         <p>Improved slippers. DIY drink kits. Compostable packaging. Dog products. Picnic gear. Yoga studios. Payment apps. Sporting goods. Freeze-dried coffee. Smart towels. Electric jerry cans. Marketplaces. And cheese made from donkey's milk, idk..</p>
@@ -24,5 +23,3 @@ tags:
         <p>My notebook became an outdated list of idea that only made it as far as my notes app, with some problems that have sat there so long someone else has solved them.</p>
         <p>I don’t think my ideas are bad, but I do think it’s bad that I didn’t start learning from just running with them.</p>
         <p>My old notes remind me of a version of myself who believed success came from finding or waiting for the perfect opportunity to come along. But now I think success comes from picking an imperfect one and seeing it through and becoming really good at doing that one thing.</p>
-        <hr>
-    </article>
