@@ -1,7 +1,7 @@
 ---
 layout: post
 title: I Have Ideas
-date: 2025-09-01
+date: 2026-08-14
 tags:
   - Habits
 ---
