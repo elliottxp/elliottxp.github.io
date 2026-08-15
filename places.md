@@ -1,6 +1,6 @@
 ---
 layout: places
 title: places
-permalink: <a href="https://maps.elliottxp.com" target="_blank" rel="noopener noreferrer">places</a>
+permalink: /places/
 order: 5
 ---
