@@ -1,6 +1,6 @@
 ---
 layout: places
 title: places
-permalink: https://places.elliottxp.com
+permalink: /places/
 order: 5
 ---
